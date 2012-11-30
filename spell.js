@@ -1,3 +1,5 @@
+
+
 var word = ["dog","cat","fish","frog","spider","bourgeois"];
 
       
@@ -11,6 +13,7 @@ var i = 0;
 $(document).ready(function(){
 
     $('p').append(word[i]);
+    $('h1').append(word[i]);
 
 
 
@@ -27,8 +30,8 @@ $(document).keypress(function(e) {
     	
     	if (spell.value===word[i]) {
     		i = i+1;
-    		$('p').empty();
-			$('p').append(word[i]);
+			$('p').text(word[i]);
+            $('h1').text(word[i]);
             $('#spellbox').animate({backgroundColor: '#5bd642'}).delay(40).animate({backgroundColor: '#ffffff'});
 
 			document.getElementById("spellbox").value = "";
@@ -45,3 +48,28 @@ $(document).keypress(function(e) {
 });
 
 
+
+
+
+
+/*var input = $('input'),
+    label = $('span');
+
+input.bind('keydown keypress', function() {
+    setTimeout(function() {
+        label.text(input.val());
+        
+        
+        var spell = document.getElementById('spellbox');
+        
+        if (spell.value!=="") {
+            $('p').animate({color: '#ffffff'});
+            
+            
+        } else { $('p').animate({color: '#000000'})
+                
+                }        
+        
+    }, 0);
+});​
+*/

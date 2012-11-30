@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,8 +9,8 @@
     </head>
     <body>
         
-        <h1></h1>
-        
+        <h1>word</h1>
+        <p>Spell the word </p>
         <input type="text" id="spellbox" value="" />
     
         
@@ -26,13 +25,15 @@
         var spell = document.getElementById('spellbox');
         
         if (spell.value!=="") {
-            $('h1').empty();            
-        }  else {
-            $('h1').text(word[i]);
-        }     
+            $('h1').empty();
+            
+            
+        } else { $('h1').append("dfdsfsdf");
+                
+                }        
         
     }, 0);
-});</script>
+});​</script>
         
         
     </body>
