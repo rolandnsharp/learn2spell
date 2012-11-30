@@ -10,7 +10,7 @@
     </head>
     <body>
         
-        <h1></h1>
+        <h2></h2>
         
         <input type="text" id="spellbox" value="" />
     
@@ -26,9 +26,9 @@
         var spell = document.getElementById('spellbox');
         
         if (spell.value!=="") {
-            $('h1').empty();            
+            $('h2').empty();            
         }  else {
-            $('h1').text(word[i]);
+            $('h2').text(word[i]);
         }     
         
     }, 0);

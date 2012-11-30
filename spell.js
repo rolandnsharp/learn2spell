@@ -12,8 +12,7 @@ var i = 0;
 
 $(document).ready(function(){
 
-    $('p').append(word[i]);
-    $('h1').append(word[i]);
+    $('h2').append(word[i]);
 
 
 
@@ -30,8 +29,7 @@ $(document).keypress(function(e) {
     	
     	if (spell.value===word[i]) {
     		i = i+1;
-			$('p').text(word[i]);
-            $('h1').text(word[i]);
+            $('h2').text(word[i]);
             $('#spellbox').animate({backgroundColor: '#5bd642'}).delay(40).animate({backgroundColor: '#ffffff'});
 
 			document.getElementById("spellbox").value = "";
