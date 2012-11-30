@@ -1,8 +1,7 @@
 
 var word = ["dog","cat","fish","frog","spider","bourgeois"];
 //var word = ["dog","cat"];
-var lastEl = word.length-1;  // loop not working can delete
-console.log(lastEl);         // console.log works
+var lastEl = word.length-1;          
 var i = 0;
 var x = 0;
 var factor = 0.5;
@@ -33,8 +32,8 @@ $(document).keypress(function(e) {
 
             if (x%1===0) {
                 i = (i+1);
-                if (lastEl < i) {         // loop not working can delete  
-                i=0;                    // loop not working can delete
+                if (lastEl < i) {          
+                i=0;                    
             } 
             }
 
