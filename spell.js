@@ -28,13 +28,14 @@ $(document).keypress(function(e) {
     	if (spell.value===word[i]) {
     		
             x=x+factor;
-            if (lastEl < i) {         // loop not working can delete  
-                i=0;                    // loop not working can delete
-            } 
+            
 
 
             if (x%1===0) {
                 i = (i+1);
+                if (lastEl < i) {         // loop not working can delete  
+                i=0;                    // loop not working can delete
+            } 
             }
 
             $('h2').text(word[i]);
