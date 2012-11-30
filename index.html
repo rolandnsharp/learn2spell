@@ -13,7 +13,11 @@
         <h2></h2>
         
         <input type="text" id="spellbox" value="" />
-    
+        <h3>Number of repeats</h3>
+        <input type="text" id="factorbox" value="" />
+        <button onclick="factorX ();" >Submit</button>
+
+
         
         <script type="text/javascript">var input = $('input'),
         label = $('span');
@@ -25,7 +29,7 @@
         
         var spell = document.getElementById('spellbox');
         
-        if (spell.value!=="") {
+        if (spell.value!=="" || x%1!==0) {
             $('h2').empty();            
         }  else {
             $('h2').text(word[i]);

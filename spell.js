@@ -8,22 +8,13 @@ var x = 0;
 var factor = 0.25;
 
 
-
-
 $(document).ready(function(){
 
     $('h2').append(word[i]);
 
 
 
-
-
-
-
 $(document).keypress(function(e) {
-
-
-
     if(e.which == 13) {
     	var spell = document.getElementById('spellbox');
     	
