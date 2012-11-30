@@ -9,6 +9,10 @@ var factor = 0.5;
 
 
 $(document).ready(function(){
+    $('h4').mouseover(function(){   // not sure if ill keep this just use the backspace method
+        $('h4').text(word[i]);      // needs fixing
+    });
+    
 
     $('h2').append(word[i]);
 
