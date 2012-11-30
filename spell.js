@@ -1,8 +1,8 @@
 
-
 var word = ["dog","cat","fish","frog","spider","bourgeois"];
-
-      
+//var word = ["dog","cat"];
+var lastEl = word.length-1;  // loop not working can delete
+console.log(lastEl);         // console.log works
 var i = 0;
 var x = 0;
 var factor = 0.5;
@@ -15,14 +15,23 @@ $(document).ready(function(){
 
 
 $(document).keypress(function(e) {
+ var spell = document.getElementById('spellbox');   
+
     if(e.which == 13) {
-    	var spell = document.getElementById('spellbox');
+    	
+         
     	
     	if (spell.value===word[i]) {
     		
             x=x+factor;
+            if (lastEl < i) {         // loop not working can delete  
+                i=0;                    // loop not working can delete
+            } 
+
+
             if (x%1===0) {
-                i = (i+1);}
+                i = (i+1);
+            }
 
             $('h2').text(word[i]);
             $('#spellbox').animate({backgroundColor: '#5bd642'}).delay(40).animate({backgroundColor: '#ffffff'});
@@ -35,6 +44,8 @@ $(document).keypress(function(e) {
 
 
 
+    } else if (e.which == 8 && spell.value==="") {  //same here . e.which 8 not working
+        $('h2').text(word[i]); 
     }
 
 
@@ -42,30 +53,3 @@ $(document).keypress(function(e) {
 
 
 });
-
-
-
-
-
-
-/*var input = $('input'),
-    label = $('span');
-
-input.bind('keydown keypress', function() {
-    setTimeout(function() {
-        label.text(input.val());
-        
-        
-        var spell = document.getElementById('spellbox');
-        
-        if (spell.value!=="") {
-            $('p').animate({color: '#ffffff'});
-            
-            
-        } else { $('p').animate({color: '#000000'})
-                
-                }        
-        
-    }, 0);
-});​
-*/
