@@ -5,7 +5,7 @@ var word = ["dog","cat","fish","frog","spider","bourgeois"];
       
 var i = 0;
 var x = 0;
-var factor = 0.25;
+var factor = 1;
 
 
 $(document).ready(function(){
