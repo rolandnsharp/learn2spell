@@ -4,7 +4,9 @@ var word = ["dog","cat","fish","frog","spider","bourgeois"];
 var lastEl = word.length-1;          
 var i = 0;
 var x = 0;
-var factor = 0.5;
+var iterations = 2;
+var factor = 1/iterations;
+
 
 $(document).ready(function(){
     $('h4').mouseover(function(){   // not sure if ill keep this just use the backspace method
