@@ -17,11 +17,11 @@ $(document).ready(function(){
 //////////////////////////////////////////////////  detect empty textbox
 
 
-        var input = $('input'),
-        label = $('span');
+var input = $('input'),
+label = $('span');
 $(document).keypress(function(e) {
     input.bind('keydown keypress', function() {
-    setTimeout(function() {
+        setTimeout(function() {
         label.text(input.val());
         
         
@@ -46,20 +46,16 @@ $(document).keypress(function(e) {
  var spell = document.getElementById('spellbox');   
 
     if(e.which == 13) {
-    	
-         
-    	
+    	            	
     	if (spell.value===word[i]) {
     		
             x=x+factor;
             
-
-
             if (x%1===0) {
                 i = (i+1);
                 if (lastEl < i) {          
                 i=0;                    
-            } 
+                } 
             }
 
             $('h2').text(word[i]);
@@ -70,8 +66,6 @@ $(document).keypress(function(e) {
 			 } else {
                 $('#spellbox').animate({backgroundColor: '#e01432'}).delay(40).animate({backgroundColor: '#ffffff'});
                     }
-
-
 
     } else if (e.which == 8 && spell.value==="") {  //same here . e.which 8 not working
         $('h2').text(word[i]); 
