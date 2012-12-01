@@ -6,7 +6,6 @@ var i = 0;
 var x = 0;
 var factor = 0.5;
 
-
 $(document).ready(function(){
     $('h4').mouseover(function(){   // not sure if ill keep this just use the backspace method
         $('h4').text(word[i]);      // needs fixing
@@ -15,6 +14,32 @@ $(document).ready(function(){
 
     $('h2').append(word[i]);
 
+//////////////////////////////////////////////////  detect empty textbox
+
+
+        var input = $('input'),
+        label = $('span');
+$(document).keypress(function(e) {
+    input.bind('keydown keypress', function() {
+    setTimeout(function() {
+        label.text(input.val());
+        
+        
+        var spell = document.getElementById('spellbox');
+        
+        if (spell.value==="" && x%1===0) {             
+            $('h2').text(word[i]);          
+        }  else if (e.which == 8 && spell.value==="") {     //e.which == 8 not working (reveal word when backspace
+            $('h2').text(word[i]);                          // empty #spellbox. Eventult make it reveal on backspace 
+        }  else {                                           // of last charactor.
+            $('h2').empty(); 
+        }   
+        
+    }, 0);
+});
+});
+
+//////////////////////////////////////////////////////
 
 
 $(document).keypress(function(e) {
