@@ -1,14 +1,53 @@
 
-var word = ["dog","cat","fish","frog","spider","bourgeois"];
-//var word = ["dog","cat"];
-var lastEl = word.length-1;          
+//var word = ["dog","cat","fish","frog","spider","bourgeois"];
+var word = ["dog","cat"];
+
+
+
+
+
+
+
+
+
+
+        
 var i = 0;
 var x = 0;
 var iterations = 2;
 var factor = 1/iterations;
 
 
-$(document).ready(function(){
+
+$(document).ready(function () {
+    
+$('#listInput').keypress(function(e) {
+ var spellItem = document.getElementById('listInput');   
+
+    
+
+
+    if(e.which == 13) {
+        
+        word[word.length]=spellItem.value;
+        console.log(word);
+        $('div ul').append("<li></li>");
+        $("div ul li:nth-child(" + (word.length) + ")").append(word[word.length-1]);
+                                    
+    } 
+
+});
+
+});
+
+
+
+
+
+
+
+
+$(document).ready(function(){   
     $('h4').mouseover(function(){   // not sure if ill keep this just use the backspace method
         $('h4').text(word[i]);      // needs fixing
     });
@@ -21,7 +60,7 @@ $(document).ready(function(){
 
 var input = $('input'),
 label = $('span');
-$(document).keypress(function(e) {
+$('#spellbox').keypress(function(e) {
     input.bind('keydown keypress', function() {
         setTimeout(function() {
         label.text(input.val());
@@ -44,7 +83,7 @@ $(document).keypress(function(e) {
 //////////////////////////////////////////////////////
 
 
-$(document).keypress(function(e) {
+$('#spellbox').keypress(function(e) {   
  var spell = document.getElementById('spellbox');   
 
     if(e.which == 13) {
@@ -55,7 +94,7 @@ $(document).keypress(function(e) {
             
             if (x%1===0) {
                 i = (i+1);
-                if (lastEl < i) {          
+                if (word.length-1 < i) {          
                 i=0;                    
                 } 
             }
@@ -78,3 +117,9 @@ $(document).keypress(function(e) {
 
 
 });
+
+////////////////////////////////////////
+
+
+
+
