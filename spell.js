@@ -10,19 +10,20 @@ var iterations = 1;
 
 
 $(document).ready(function () {   
-$('#noi').text(iterations);
-$("#plusOne").click(function() {
-  iterations = iterations +1;
-  console.log(iterations);
-  $('#noi').text(iterations);
+    $('#noi').text(iterations);
+    $("#plusOne").click(function() {
+    iterations = iterations +1;
+    $('#noi').text(iterations);
+    var x = 0;
 });
-$("#minusOne").click(function() {
-    if (iterations<=2){
-        iterations = 2;
-    }
-  iterations = iterations -1;
-  console.log(iterations);
-  $('#noi').text(iterations);
+    $("#minusOne").click(function() {
+        if (iterations<=2){
+            iterations = 2;
+            var x = 0;
+        }
+    iterations = iterations -1;
+    $('#noi').text(iterations);
+    var x = 0;
 });
 
 
@@ -71,7 +72,7 @@ $('#spellbox').keypress(function(e) {
         
         var spell = document.getElementById('spellbox');
         
-        if (spell.value==="" && x%1===0) {             
+        if (spell.value==="" && x%iterations===0) {             
             $('h2').text(word[i]);          
         }  else if (e.which == 8 && spell.value==="") {     //e.which == 8 not working (reveal word when backspace
             $('h2').text(word[i]);                          // empty #spellbox. Eventult make it reveal on backspace 
@@ -93,9 +94,9 @@ $('#spellbox').keypress(function(e) {
     	            	
     	if (spell.value===word[i]) {
     		
-            x=x+(1/iterations);
+            x=x+1;
             
-            if (x%1===0) {
+            if (x%iterations===0) {
                 i = (i+1);
                 if (word.length-1 < i) {          
                 i=0;                    
