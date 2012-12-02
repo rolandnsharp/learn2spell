@@ -1,26 +1,29 @@
 
 //var word = ["dog","cat","fish","frog","spider","bourgeois"];
-var word = ["dog","cat"];
-
-
-
-
-
-
-
-
-
-
-        
+var word = ["dog","cat"];        
 var i = 0;
 var x = 0;
-var iterations = 2;
-var factor = 1/iterations;
+var iterations = 1;
 
 
 
-$(document).ready(function () {
-    
+
+
+$(document).ready(function () {   
+$('#noi').text(iterations);
+$("#plusOne").click(function() {
+  iterations = iterations +1;
+  console.log(iterations);
+  $('#noi').text(iterations);
+});
+$("#minusOne").click(function() {
+  iterations = iterations -1;
+  console.log(iterations);
+  $('#noi').text(iterations);
+});
+
+
+
 $('#listInput').keypress(function(e) {
  var spellItem = document.getElementById('listInput');   
 
@@ -33,6 +36,8 @@ $('#listInput').keypress(function(e) {
         console.log(word);
         $('div ul').append("<li></li>");
         $("div ul li:nth-child(" + (word.length) + ")").append(word[word.length-1]);
+        
+
                                     
     } 
 
@@ -41,13 +46,8 @@ $('#listInput').keypress(function(e) {
 });
 
 
-
-
-
-
-
-
 $(document).ready(function(){   
+
     $('h4').mouseover(function(){   // not sure if ill keep this just use the backspace method
         $('h4').text(word[i]);      // needs fixing
     });
@@ -90,7 +90,7 @@ $('#spellbox').keypress(function(e) {
     	            	
     	if (spell.value===word[i]) {
     		
-            x=x+factor;
+            x=x+(1/iterations);
             
             if (x%1===0) {
                 i = (i+1);
