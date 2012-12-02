@@ -17,6 +17,9 @@ $("#plusOne").click(function() {
   $('#noi').text(iterations);
 });
 $("#minusOne").click(function() {
+    if (iterations<=2){
+        iterations = 2;
+    }
   iterations = iterations -1;
   console.log(iterations);
   $('#noi').text(iterations);
