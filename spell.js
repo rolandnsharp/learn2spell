@@ -25,9 +25,14 @@ $(document).ready(function () {
     $('#noi').text(iterations);
     var x = 0;
 });
+///////////////////
+for ( var z = 0; z < word.length; z=z+1 ){
+  
+    $('.spellList').append("<li></li>");
+    $(".spellList li:nth-child(" + (z+1) + ")").append(word[z]+"<input class=\"XButton\" type=\"button\" value=\"X\"/>" );
 
-
-
+    }
+///////////////////////
 $('#listInput').keypress(function(e) {
  var spellItem = document.getElementById('listInput');   
 
@@ -38,8 +43,8 @@ $('#listInput').keypress(function(e) {
         
         word[word.length]=spellItem.value;
         console.log(word);
-        $('div ul').append("<li></li>");
-        $("div ul li:nth-child(" + (word.length) + ")").append(word[word.length-1]+"<input class=\"XButton\" type=\"button\" value=\"X\"/>");
+        $('.spellList').append("<li></li>");
+        $(".spellList li:nth-child(" + (word.length) + ")").append(word[word.length-1]+"<input class=\"XButton\" type=\"button\" value=\"X\"/>");
         document.getElementById("listInput").value = "";
         
 

@@ -11,6 +11,20 @@
 
     </head>
     <body>
+
+    <div class="navbar navbar-inverse">
+  <div class="navbar-inner">
+    <a class="brand" href="#">Learn2Spell.net</a>
+    <ul class="nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </div>
+</div>    
+
+
+
     <div class="container">
         <h1>Learn2Spell.net</h1>
         <div class="row">
@@ -35,25 +49,11 @@
         </div>
     
 
-
-<script type="text/javascript">
-$(document).ready(function () {
-for ( var z = 0; z < word.length; z=z+1 ){
-  
-    $('div ul').append("<li></li>");
-    $("div ul li:nth-child(" + (z+1) + ")").append(word[z]+"<input class=\"XButton\" type=\"button\" value=\"X\"/>" );
-
-    }
-});
-
-</script>
-
-
 <div>
 <h3>Add to word list</h3> 
 <input type="text" id="listInput" value="" />   
 
-<ul>
+<ul class="spellList">
     
 
 
