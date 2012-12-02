@@ -39,7 +39,8 @@ $('#listInput').keypress(function(e) {
         word[word.length]=spellItem.value;
         console.log(word);
         $('div ul').append("<li></li>");
-        $("div ul li:nth-child(" + (word.length) + ")").append(word[word.length-1]);
+        $("div ul li:nth-child(" + (word.length) + ")").append(word[word.length-1]+"<input class=\"XButton\" type=\"button\" value=\"X\"/>");
+        document.getElementById("listInput").value = "";
         
 
                                     
