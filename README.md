@@ -1,2 +1,2 @@
-http://rolandnsharp.github.com/learntospell/
-=========================
+learn2spell.net
+===============
