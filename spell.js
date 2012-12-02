@@ -74,7 +74,7 @@ $('#spellbox').keypress(function(e) {
     input.bind('keydown keypress', function() {
         setTimeout(function() {
         label.text(input.val());
-        
+        $('h2').empty();
         
         var spell = document.getElementById('spellbox');
         
