@@ -29,7 +29,7 @@ $(document).ready(function () {
 for ( var z = 0; z < word.length; z=z+1 ){
   
     $('.spellList').append("<li></li>");
-    $(".spellList li:nth-child(" + (z+1) + ")").append(word[z]+"<input class=\"XButton\" type=\"button\" value=\"X\"/>" );
+    $(".spellList li:nth-child(" + (z+1) + ")").append(word[z]+" "+"<i class=\"icon-remove\"></i>" );
 
     }
 ///////////////////////
@@ -44,7 +44,7 @@ $('#listInput').keypress(function(e) {
         word[word.length]=spellItem.value;
         console.log(word);
         $('.spellList').append("<li></li>");
-        $(".spellList li:nth-child(" + (word.length) + ")").append(word[word.length-1]+"<input class=\"XButton\" type=\"button\" value=\"X\"/>");
+        $(".spellList li:nth-child(" + (word.length) + ")").append(word[word.length-1]+" "+"<i class=\"icon-remove\"></i>");
         document.getElementById("listInput").value = "";
         
 
@@ -74,7 +74,7 @@ $('#spellbox').keypress(function(e) {
     input.bind('keydown keypress', function() {
         setTimeout(function() {
         label.text(input.val());
-        $('h2').empty();
+        
         
         var spell = document.getElementById('spellbox');
         
