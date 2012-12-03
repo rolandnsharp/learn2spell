@@ -9,6 +9,25 @@
         <script src='jquery.animate-colors-min.js'></script>
         <script type='text/javascript' src='spell.js'></script>
 
+
+
+        <script type="text/javascript">
+
+        var deleteLI = function (XX) {
+        word.splice(XX-1, 1);
+        $('.spellList').empty();   
+            for ( var z = 0; z < word.length; z=z+1 ){
+            $('.spellList').append("<li></li>");
+            $(".spellList li:nth-child(" + (z+1) + ")").append("<a class=\"btn btn-danger\" ondblclick=\"deleteLI(" + (z+1) + ")\">"+word[z]+"<i class=\"icon-remove\"></i></a>" );
+            }
+        };
+
+        </script>
+
+
+
+
+
     </head>
     <body>
 
@@ -54,6 +73,7 @@
 <h3>Add to word list</h3> 
 <input type="text" id="listInput" value="" />   
 
+
 <ul class="spellList">
     
 
@@ -61,11 +81,18 @@
 </ul>
 
 
+
 </div>
 
 
 
 
+
+
+
+<div>
+<ul class="myList"></ul>
+</div>
 
 
 

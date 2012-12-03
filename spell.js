@@ -25,14 +25,24 @@ $(document).ready(function () {
     $('#noi').text(iterations);
     var x = 0;
 });
+
+var deleteLI = function (XX) {
+    alert (XX);
+};
+
+
 ///////////////////
+var runArray = function (){
+$('.spellList').empty();   
 for ( var z = 0; z < word.length; z=z+1 ){
-  
+    
     $('.spellList').append("<li></li>");
-    $(".spellList li:nth-child(" + (z+1) + ")").append(word[z]+" "+"<i class=\"icon-remove\"></i>" );
+    $(".spellList li:nth-child(" + (z+1) + ")").append("<a class=\"btn btn-danger\" ondblclick=\"deleteLI(" + (z+1) + ")\">"+word[z]+"<i class=\"icon-remove\"></i></a>" );
 
     }
-///////////////////////
+}; 
+runArray();   
+/////////////////////// <a class="btn" onClick="#"><i class=\"icon-remove\"></i></a> onclick=\"deleteLI()\"
 $('#listInput').keypress(function(e) {
  var spellItem = document.getElementById('listInput');   
 
@@ -43,15 +53,37 @@ $('#listInput').keypress(function(e) {
         
         word[word.length]=spellItem.value;
         console.log(word);
-        $('.spellList').append("<li></li>");
-        $(".spellList li:nth-child(" + (word.length) + ")").append(word[word.length-1]+" "+"<i class=\"icon-remove\"></i>");
+        //$('.spellList').append("<li></li>");
+        //$(".spellList li:nth-child(" + (word.length) + ")").append(word[word.length-1]+" "+"<i class=\"icon-remove\"></i>");
         document.getElementById("listInput").value = "";
+        runArray();
         
 
                                     
     } 
 
 });
+
+
+
+$('.icon-remove').dblclick(function() {
+    var litem = $j(this).remove();
+
+    
+    word.splice(1,2);
+  });
+
+
+$('#deleteID1').dblclick(function() {
+  alert('Handler for .dblclick() called.');
+  word.splice(1,2);
+  runArray();
+});
+
+
+
+
+
 
 });
 
