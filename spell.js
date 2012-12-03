@@ -23,6 +23,13 @@ $(document).ready(function () {
     var x = 0;
 });
 
+/////////////////////////////////////// hide show list
+$("#hideButton").click(function() {
+  $('.spellList').toggle();    ///////////////////////////// toggle is causing an error where hide(); is not.
+});
+
+
+
 ///////////////////
 var runArray = function (){
 $('.spellList').empty();   
