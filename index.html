@@ -9,10 +9,7 @@
         <script src='jquery.animate-colors-min.js'></script>
         <script type='text/javascript' src='spell.js'></script>
 
-
-
         <script type="text/javascript">
-
         var deleteLI = function (XX) {
         word.splice(XX-1, 1);
         $('.spellList').empty();   
@@ -21,17 +18,11 @@
             $(".spellList li:nth-child(" + (z+1) + ")").append("<a class=\"btn btn-danger btn-block\" onclick=\"deleteLI(" + (z+1) + ")\">"+word[z]+""+" "+"<i class=\"icon-remove\"></i></a>" );
             }
         };
-
-        </script>
-
-
-
-
+         </script>
 
     </head>
     <body>
-
-    <div class="navbar navbar-inverse">
+<div class="navbar navbar-inverse">
   <div class="navbar-inner">
     <a class="brand" href="#">Learn2Spell.net</a>
     <ul class="nav">
@@ -44,8 +35,12 @@
 </div>    
 
 
-<div class="span3">
-<h1>Learn2Spell.net</h1>  
+
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span2">
+      <!--Sidebar content-->
+      <h1>Learn2Spell.net</h1>  
 <br />
 <br /> 
 <h3>Number of repeats</h3><h3 id="noi"></h3>
@@ -54,43 +49,34 @@
         <input id="minusOne" type="button" value="-1"/> 
 
         <input id="plusOne" type="button" value="+1"/> 
-    
+ <div class="span10">   
 <h3>Add to word list</h3>
+
 <input type="text" id="listInput" value="" />   
 
+<button class="btn btn-block btn-primary" onclick="" type="button">Hide List</button>
+<br />
 <ul class="spellList">
     
 </ul>
-
 </div>
 
-
-
-    <div class="container">
-        
+    </div>
+    <div class="span10 ">
+      <!--Body content-->
         <div class="row">
-            <div class="span6">
-        
+            <div class="span6 offset3">
 
-            </div>
-            <div class="span6">
-        <h3>Spelling test</h3>
+        <h3>Spelling Drill</h3>
         <h4>Show</h4>
         <h2 style="position:absolute;"></h2>
         <input type="text" id="spellbox" value="" />
-
-        
     </div>
         </div>
-        </div>
 
-    
-
-
-
-
-
-
+    </div>
+  </div>
+</div>
 
     </body>
     </html>
