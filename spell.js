@@ -6,9 +6,6 @@ var x = 0;
 var iterations = 1;
 
 
-
-
-
 $(document).ready(function () {   
     $('#noi').text(iterations);
     $("#plusOne").click(function() {
@@ -25,11 +22,6 @@ $(document).ready(function () {
     $('#noi').text(iterations);
     var x = 0;
 });
-
-var deleteLI = function (XX) {
-    alert (XX);
-};
-
 
 ///////////////////
 var runArray = function (){
@@ -79,10 +71,6 @@ $('#deleteID1').dblclick(function() {
   word.splice(1,2);
   runArray();
 });
-
-
-
-
 
 
 });
@@ -159,9 +147,3 @@ $('#spellbox').keypress(function(e) {
 
 
 });
-
-////////////////////////////////////////
-
-
-
-
