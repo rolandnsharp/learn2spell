@@ -1,12 +1,11 @@
 #spellbox {
-	font-size-size:100px;
-	line-height:30px;
+	font-size-size:155%;
+	line-height:45px;
 	margin-top: 90px;
 	background-color: transparent; 
-border-style: solid; 
-border-width: 0px 0px 2px 0px; 
-border-color: black;
-
+	border-style: solid; 
+	border-width: 0px 0px 1px 0px; 
+	border-color: black;
     outline: none;
 
 }
@@ -15,4 +14,14 @@ border-color: black;
 ul
 {
     list-style-type: none;
+}
+
+#dictionary {
+	border: 1px solid #4C3C1B;
+	padding: 7px;
+	height: 200px;
+	width: 600px;
+	margin-right: 20px;
+	margin-top: -200px;
+	border-radius: 7px;
 }

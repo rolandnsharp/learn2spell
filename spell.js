@@ -50,24 +50,29 @@ for ( var z = 0; z < word.length; z=z+1 ){
 }; 
 runArray();   
 /////////////////////// <a class="btn" onClick="#"><i class=\"icon-remove\"></i></a> onclick=\"deleteLI()\"
+$('#enterListButton').click(function(){
+var spellItem = document.getElementById('listInput'); 
+    word[word.length]=spellItem.value;
+        console.log(word);
+        document.getElementById("listInput").value = "";
+        runArray();
+        $('.spellList').show();
+        $('h2').text(word[i]); 
+});
+
 $('#listInput').keypress(function(e) {
  var spellItem = document.getElementById('listInput');   
-
-    
 
 
     if(e.which == 13) {
         
         word[word.length]=spellItem.value;
         console.log(word);
-        //$('.spellList').append("<li></li>");
-        //$(".spellList li:nth-child(" + (word.length) + ")").append(word[word.length-1]+" "+"<i class=\"icon-remove\"></i>");
         document.getElementById("listInput").value = "";
         runArray();
         $('.spellList').show();
         $('h2').text(word[i]); 
         
-
                                     
     } 
 
