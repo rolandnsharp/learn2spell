@@ -75,31 +75,14 @@ $('#listInput').keypress(function(e) {
 
 
 
-$('.icon-remove').dblclick(function() {
-    var litem = $j(this).remove();
-
-    
-    word.splice(1,2);
-  });
-
-
-$('#deleteID1').dblclick(function() {
-  alert('Handler for .dblclick() called.');
-  word.splice(1,2);
-  runArray();
-});
-
-
 });
 
 
 $(document).ready(function(){   
 
     $('#showWordButton').click(function(){   // not sure if ill keep this just use the backspace method
-        $('#showWordBox').toggle(function(){
-        $('#showWordBox').text(word[i]);
-            // needs fixing
-    });
+        $('h2').text(word[i]);
+             
     });
     
 
