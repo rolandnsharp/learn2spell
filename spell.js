@@ -65,7 +65,7 @@ $('#listInput').keypress(function(e) {
         document.getElementById("listInput").value = "";
         runArray();
         $('.spellList').show();
-        $('h2').text("Spell: "+word[i]); 
+        $('h2').text(word[i]); 
         
 
                                     
