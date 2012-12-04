@@ -10,14 +10,7 @@
         <script type='text/javascript' src='spell.js'></script>
 
         <script type="text/javascript">
-        var deleteLI = function (XX) {
-        word.splice(XX-1, 1);
-        $('.spellList').empty();   
-            for ( var z = 0; z < word.length; z=z+1 ){
-            $('.spellList').append("<li></li>");
-            $(".spellList li:nth-child(" + (z+1) + ")").append("<a class=\"btn btn-danger btn-block\" onclick=\"deleteLI(" + (z+1) + ")\">"+word[z]+""+" "+"<i class=\"icon-remove\"></i></a>" );
-            }
-        };
+        
          </script>
 
     </head>
@@ -77,10 +70,12 @@
     </div>
     <div class="span10 ">
       <!--Body content-->
-        <div class="row">
+        <div class="hero-unit">
+        <div  class="row">
             <div class="span6 offset3">
 
         <h1>Spelling Drill</h1>
+        <br />
         <div class="input-prepend input-append">
             <button id="showWordButton" class="btn btn-info" type="button">Show Word</button>
             <span id="showWordBox" class="add-on"></span>
@@ -88,7 +83,12 @@
 
         <h2 style="position:absolute;"></h2>
         <input type="text" id="spellbox" value="" />
-    </div>
+        </div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
         </div>
 
     </div>

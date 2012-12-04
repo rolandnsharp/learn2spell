@@ -4,6 +4,14 @@ var word = ["dog","cat"];
 var i = 0;
 var x = 0;
 var iterations = 1;
+var deleteLI = function (XX) {
+        word.splice(XX-1, 1);
+        $('.spellList').empty();   
+            for ( var z = 0; z < word.length; z=z+1 ){
+            $('.spellList').append("<li></li>");
+            $(".spellList li:nth-child(" + (z+1) + ")").append("<a class=\"btn btn-danger btn-block\" onclick=\"deleteLI(" + (z+1) + ")\">"+word[z]+""+" "+"<i class=\"icon-remove\"></i></a>" );
+            }
+        };
 
 
 $(document).ready(function () {   
