@@ -85,18 +85,18 @@ $('#deleteID1').dblclick(function() {
 
 $(document).ready(function(){   
 
-    $('h4').mouseover(function(){   // not sure if ill keep this just use the backspace method
-        $('h4').text(word[i]);      // needs fixing
+    $('#showWordButton').click(function(){   // not sure if ill keep this just use the backspace method
+        $('#showWordBox').text(word[i]);      // needs fixing
     });
     
 
-    $('h2').append(word[i]);
+    
 
 //////////////////////////////////////////////////  detect empty textbox
 
 
-var input = $('input'),
-label = $('span');
+var input = $('#spellbox'),
+label = $('#inputHiddenSpan');
 $('#spellbox').keypress(function(e) {
     input.bind('keydown keypress', function() {
         setTimeout(function() {
@@ -106,11 +106,15 @@ $('#spellbox').keypress(function(e) {
         var spell = document.getElementById('spellbox');
         
         if (spell.value==="" && x%iterations===0) {             
-            $('h2').text(word[i]);          
+            $('h2').text("Spell: "+word[i]);          
         }  else if (e.which == 8 && spell.value==="") {     //e.which == 8 not working (reveal word when backspace
-            $('h2').text(word[i]);                          // empty #spellbox. Eventult make it reveal on backspace 
+            $('h2').text("Spell: "+word[i]);                          // empty #spellbox. Eventult make it reveal on backspace 
+        }  else if (spell.value==="" && x%iterations!==0) {
+            $('h2').text("Spell it again!");
         }  else {                                           // of last charactor.
             $('h2').empty(); 
+            $('#showWordBox').empty();
+
         }   
         
     }, 0);
@@ -118,7 +122,7 @@ $('#spellbox').keypress(function(e) {
 });
 
 //////////////////////////////////////////////////////
-
+$('h2').text("Spell: "+word[i]);
 
 $('#spellbox').keypress(function(e) {   
  var spell = document.getElementById('spellbox');   
@@ -136,17 +140,18 @@ $('#spellbox').keypress(function(e) {
                 } 
             }
 
-            $('h2').text(word[i]);
+            $('h2').text("Spell: "+word[i]);
             $('#spellbox').animate({backgroundColor: '#5bd642'}).delay(40).animate({backgroundColor: '#ffffff'});
 
 			document.getElementById("spellbox").value = "";
+            $('#showWordBox').empty();
 			
 			 } else {
                 $('#spellbox').animate({backgroundColor: '#e01432'}).delay(40).animate({backgroundColor: '#ffffff'});
                     }
 
     } else if (e.which == 8 && spell.value==="") {  //same here . e.which 8 not working
-        $('h2').text(word[i]); 
+        $('h2').text("Spell: "+word[i]); 
     }
 
 

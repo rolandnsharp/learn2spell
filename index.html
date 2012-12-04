@@ -43,18 +43,31 @@
       <h1>Learn2Spell.net</h1>  
 <br />
 <br /> 
-<h3>Number of repeats</h3><h3 id="noi"></h3>
+<h3>Number of repeats</h3>
+      <p>
+        <h3 ></h3>
         
-        <br />
-        <input id="minusOne" type="button" value="-1"/> 
+      </p>
 
-        <input id="plusOne" type="button" value="+1"/> 
+<div class="input-prepend input-append">
+  <span class="add-on">Level</span>
+   <span id="noi" class="add-on"></span>
+  <button id="minusOne" class="btn" type="button">-1</button>
+  <button id="plusOne" class="btn" type="button">+1</button>
+</div>
+
+
+
+
+
+
+
  <div class="span10">   
 <h3>Add to word list</h3>
 
 <input type="text" id="listInput" value="" />   
 
-<button id="hideButton" class="btn btn-block btn-primary" type="button">Show/Hide List</button>
+<button id="hideButton" class="btn btn-block btn btn-info" type="button">Show/Hide List</button>
 <br />
 <ul class="spellList">
     
@@ -68,7 +81,11 @@
             <div class="span6 offset3">
 
         <h3>Spelling Drill</h3>
-        <h4>Show</h4>
+        <div class="input-prepend input-append">
+            <button id="showWordButton" class="btn btn-info" type="button">Show Word</button>
+            <span id="showWordBox" class="add-on"></span>
+        </div>
+
         <h2 style="position:absolute;"></h2>
         <input type="text" id="spellbox" value="" />
     </div>
@@ -77,6 +94,17 @@
     </div>
   </div>
 </div>
+
+
+
+
+<span id="inputHiddenSpan" class="add-on"></span>
+
+
+
+
+
+
 
     </body>
     </html>
