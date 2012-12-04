@@ -1,0 +1,21 @@
+{
+  "name": "Learn 2 Spell",
+  "description": "Learn spelling, touch typing and, vocabulary",
+  "version": "1.0",  
+  "manifest_version": 2,
+  "app": {
+    "urls": [
+      "*://learn2spell.net/"
+    ],
+    "launch": {
+      "web_url": "http://learn2spell.net/"
+    }
+  },
+  "icons": {
+    "128": "icon.png"
+  },
+  "permissions": [
+    "unlimitedStorage",
+    "notifications"
+  ]
+}

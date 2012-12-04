@@ -14,6 +14,11 @@ var deleteLI = function (XX) {
         };
 
 
+$(document).ready(function(){                                /////////// dictionary 
+        $("div #define").text("define: "+word[i]);
+});
+
+
 $(document).ready(function () {   
     $('#noi').text(iterations);
     $("#plusOne").click(function() {
@@ -61,7 +66,7 @@ var spellItem = document.getElementById('listInput');
 });
 
 $('#listInput').keypress(function(e) {
- var spellItem = document.getElementById('listInput');   
+ var spellItem = document.getElementById('listInput');   ///////////////// same function as enterlistbutton
 
 
     if(e.which == 13) {
@@ -77,7 +82,6 @@ $('#listInput').keypress(function(e) {
     } 
 
 });
-
 
 
 });
