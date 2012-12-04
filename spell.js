@@ -3,7 +3,7 @@
 var word = ["dog","cat"];        
 var i = 0;
 var x = 0;
-var iterations = 1;
+var iterations = 3;
 var deleteLI = function (XX) {
         word.splice(XX-1, 1);
         $('.spellList').empty();   
