@@ -1,6 +1,6 @@
 
 //var word = ["dog","cat","fish","frog","spider","bourgeois"];
-var word = ["dog","cat"];        
+var word = ["speaker","cat"];        
 var i = 0;
 var x = 0;
 var iterations = 3;
@@ -44,18 +44,18 @@ defineFunction();
 
 /////////////////////////////////////// hide show list
 $("#hideButton").click(function() {
-  $('.spellList').toggle();    ///////////////////////////// toggle is causing an error where hide(); is not.
+  $('.wordlist-container').toggle();    ///////////////////////////// toggle is causing an error where hide(); is not.
 });
 
 
 
 ///////////////////
 var runArray = function (){
-$('.spellList').empty();   
+    $(".wordlist-table tbody").empty();
+
 for ( var z = 0; z < word.length; z=z+1 ){
     
-    $('.spellList').append("<li></li>");
-    $(".spellList li:nth-child(" + (z+1) + ")").append("<div class='btn-group'><button class='btn'>"+word[z]+"</button><a class=\"btn btn-danger \" onclick=\"deleteLI(" + (z+1) + ")\">"+" "+"<i class=\"icon-remove\"></i></a></div>" );
+    $(".wordlist-table tbody").append("<tr><td>"+word[z]+"</td><td>...</td></tr>" );
 
     }
 }; 
@@ -99,7 +99,7 @@ $(document).ready(function(){
         $('h2').text(word[i]);
              
     });
-    
+    $('#spellbox').focus();
 
 //////////////////////////////////////////////////  detect empty textbox
 
@@ -127,7 +127,7 @@ $('#spellbox').keypress(function(e) {
             $('h2').text(word[i]);}
         }  else {                                           // of last charactor.
             $('h2').empty(); 
-            $('.spellList').hide();
+            $('.wordlist-container').hide();    ///////////////////////////// toggle is causing an error where hide(); is not.
             $('#showWordBox').text(word[i]);
             if (document.getElementById("check1").checked===true) {
             $('h2').text(word[i]);}

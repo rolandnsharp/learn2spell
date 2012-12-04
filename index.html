@@ -1,39 +1,50 @@
-
 <!DOCTYPE html>
 <html>
+    
     <head>
-        <title>Learn to Spell</title>
-        <link rel='stylesheet' type='text/css' href='spell.css'/>
+        <title>
+            Learn to Spell
+        </title>
+        <link rel='stylesheet' type='text/css' href='spell.css' />
         <link rel='stylesheet' type='text/css' href="bootstrap.min.css" />
-        <script src='jquery-1.8.3.min.js'></script>
-        <script src='jquery.animate-colors-min.js'></script>
-        <script type='text/javascript' src='spell.js'></script>
-
-
+        <script src='jquery-1.8.3.min.js'>
+                
+        </script>
+        <script src='jquery.animate-colors-min.js'>
+                
+        </script>
+        <script type='text/javascript' src='spell.js'>
+                
+        </script>
     </head>
+    
     <body>
-<div class="navbar">
-  <div class="navbar-inner">
-    <a class="brand" href="/">Learn2Spell</a>
-    <ul class="nav">
-      <li class="active"><a href="/">Home</a></li>
-      <li><a href="/chrome">Chrome Extention</a></li>
-      <li><a href="/about">About</a></li>
-      <li><a href="/contact">Contact</a></li>
-    </ul>
-  </div>
-</div>    
+        <div class="navbar">
+            <div class="navbar-inner">
+        <div class="container" style="width: 940px;">
+                <a class="brand" href="/index.html">Learn2Spell</a>
+                <ul class="nav">
+                    <li class="active">
+                        <a href="/index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="/about.html">About</a>
+                    </li>
+                </ul>
+        </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row" style="margin-top: 40px;">
+                <div class="span12 ">
+                    <!--Body content-->
+                            <div style="float: right;">
+                              <!--
+                                <button id="showWordButton" class="btn btn-info" type="button">
+                                    Show Word
+                                </button>
+                              -->
 
-
-
-<div class="container-fluid">
-  <div class="row-fluid">
-    <div class="span2">
-<h3>Number of repeats</h3>
-      <p>
-        <h3 ></h3>
-        
-      </p>
 
 <div class="input-prepend input-append">
   <span class="add-on">Level</span>
@@ -44,65 +55,54 @@
 <input id="check1" type="checkbox"> Force Show Word
 
 
- <div class="span10">   
-<h3>Add to word list</h3>
-
-<div class="input-append">
-  <input placeholder="Enter your word." type="text" id="listInput" value="" /> 
-  <button id="enterListButton" class="btn" type="button"><i class="icon-ok"></i></button>
-</div>
+                            </div>
 
 
-  
 
-<button id="hideButton" class="btn btn-block btn btn-info" type="button">Show/Hide List</button>
-<br />
-<ul class="spellList">
-    
-</ul>
-</div>
+                            <h2 style="position:absolute;">
+                            </h2>
 
-    </div>
-    <div class="span10 ">
-      <!--Body content-->
 
-        <div class="">
-          
-        <div  class="row">
-            <div class="span6 offset2">
 
-        <h1>Spelling Drills</h1>
 
-        <br />
-        <div>
-            <button id="showWordButton" class="btn btn-info" type="button">Show Word</button>
-            
-        </div>
-
-        <h2 style="position:absolute;"></h2>
-        <input id="spellbox" placeHolder="Spell your word." />
-        <!--
-        <div id="dictionary" class="offset8"><h5 id="define">word</h2><p>jlj kj kljkl jklj kjkl jk jkl jlk </p></div>
+                            <input id="spellbox" placeHolder="Type here" />
+                            <!-- <div id="dictionary" class="offset8"><h5 id="define">word</h2><p>jlj kj kljkl jklj kjkl jk jkl jlk </p></div>
         -->
-        </div>
+                </div>
+            </div>
+            <br />
+       <button id="hideButton" class="btn btn-block btn btn-info" type="button" style="margin-top: 50px;">
+                        Show/Hide List
+                    </button>
+                    <div class="wordlist-container" style="display: none;" >
+            <h3>Word List</h3>
+                    <div class="input-append">
+                        <input placeholder="Add a word..." type="text" id="listInput" value=""
+                        />
+                        <button id="enterListButton" class="btn" type="button">
+                            <i class="icon-ok">
+                            </i>
+                        </button>
+                    </div>
+            <table class="table wordlist-table">
+              <thead>
+                <tr>
+                  <th>Word</th>
+                  <th>Definition</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
 
         </div>
 
-        <br />
-        </div>
-
-    </div>
-  </div>
-</div>
 
 
-
-
-
-
-
-<span style="display: none;" id="inputHiddenSpan" class="add-on"></span>
-
-
+            </div>
+        <span style="display: none;" id="inputHiddenSpan" class="add-on">
+        </span>
     </body>
-    </html>
+
+</html>
