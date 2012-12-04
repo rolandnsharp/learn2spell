@@ -56,6 +56,7 @@ $('#listInput').keypress(function(e) {
         //$(".spellList li:nth-child(" + (word.length) + ")").append(word[word.length-1]+" "+"<i class=\"icon-remove\"></i>");
         document.getElementById("listInput").value = "";
         runArray();
+        $('.spellList').show();
         
 
                                     
