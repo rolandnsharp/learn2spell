@@ -96,7 +96,10 @@ $('#deleteID1').dblclick(function() {
 $(document).ready(function(){   
 
     $('#showWordButton').click(function(){   // not sure if ill keep this just use the backspace method
-        $('#showWordBox').text(word[i]);      // needs fixing
+        $('#showWordBox').toggle(function(){
+        $('#showWordBox').text(word[i]);
+            // needs fixing
+    });
     });
     
 
@@ -116,15 +119,24 @@ $('#spellbox').keypress(function(e) {
         var spell = document.getElementById('spellbox');
         
         if (spell.value==="" && x%iterations===0) {             
-            $('h2').text("Spell: "+word[i]);          
+            $('h2').text(word[i]);
+            if(document.getElementById("check1").checked===true){
+            $('h2').text(word[i]); }         
         }  else if (e.which == 8 && spell.value==="") {     //e.which == 8 not working (reveal word when backspace
-            $('h2').text("Spell: "+word[i]);                          // empty #spellbox. Eventult make it reveal on backspace 
+            $('h2').text(word[i]);
+            if (document.getElementById("check1").checked===true){
+            $('h2').text(word[i]);}                          // empty #spellbox. Eventult make it reveal on backspace 
         }  else if (spell.value==="" && x%iterations!==0) {
             $('h2').text("Spell it again!");
+            if (document.getElementById("check1").checked===true){
+            $('h2').text(word[i]);}
         }  else {                                           // of last charactor.
             $('h2').empty(); 
-            $('#showWordBox').empty();
             $('.spellList').hide();
+            $('#showWordBox').text(word[i]);
+            if (document.getElementById("check1").checked===true) {
+            $('h2').text(word[i]);}
+
 
         }   
         
@@ -133,7 +145,7 @@ $('#spellbox').keypress(function(e) {
 });
 
 //////////////////////////////////////////////////////
-$('h2').text("Spell: "+word[i]);
+$('h2').text(word[i]);
 
 $('#spellbox').keypress(function(e) {   
  var spell = document.getElementById('spellbox');   
@@ -151,18 +163,22 @@ $('#spellbox').keypress(function(e) {
                 } 
             }
 
-            $('h2').text("Spell: "+word[i]);
+            $('h2').text(word[i]);
+            if (document.getElementById("check1").checked===true){
+            $('h2').text(word[i]);}
             $('#spellbox').animate({backgroundColor: '#5bd642'}).delay(40).animate({backgroundColor: '#ffffff'});
 
 			document.getElementById("spellbox").value = "";
-            $('#showWordBox').empty();
 			$('.spellList').hide();
 			 } else {
                 $('#spellbox').animate({backgroundColor: '#e01432'}).delay(40).animate({backgroundColor: '#ffffff'});
                     }
 
     } else if (e.which == 8 && spell.value==="") {  //same here . e.which 8 not working
-        $('h2').text("Spell: "+word[i]); 
+        $('h2').text(word[i]); 
+        $('#showWordBox').text(word[i]);
+        if (document.getElementById("check1").checked===true){
+        $('h2').text(word[i]);}
     }
 
 
