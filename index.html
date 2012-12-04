@@ -54,7 +54,13 @@
  <div class="span10">   
 <h3>Add to word list</h3>
 
-<input type="text" id="listInput" value="" />   
+<div class="input-append">
+  <input placeholder="Enter your word." type="text" id="listInput" value="" /> 
+  <button class="btn" type="button"><i class="icon-ok"></i></button>
+</div>
+
+
+  
 
 <button id="hideButton" class="btn btn-block btn btn-info" type="button">Show/Hide List</button>
 <br />
@@ -78,7 +84,7 @@
         </div>
 
         <h2 style="position:absolute;"></h2>
-        <input type="text" id="spellbox" value="" />
+        <input id="spellbox" value="" />
         </div>
         </div>
         <br />

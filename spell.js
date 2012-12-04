@@ -86,8 +86,6 @@ $(document).ready(function(){
     });
     
 
-    
-
 //////////////////////////////////////////////////  detect empty textbox
 
 
@@ -154,7 +152,7 @@ $('#spellbox').keypress(function(e) {
 			document.getElementById("spellbox").value = "";
 			$('.spellList').hide();
 			 } else {
-                $('#spellbox').animate({backgroundColor: '#e01432'}).delay(40).animate({backgroundColor: '#ffffff'});
+                $('#spellbox').animate({backgroundColor: '#e01432'}).delay(40).animate({backgroundColor: '#ffffff'});  // $(".class").animate({"background-color":"red"},40).animate({"background-color":"transparent"},40);
                     }
 
     } else if (e.which == 8 && spell.value==="") {  //same here . e.which 8 not working
