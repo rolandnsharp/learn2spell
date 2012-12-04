@@ -14,9 +14,11 @@ var deleteLI = function (XX) {
         };
 
 
-$(document).ready(function(){                                /////////// dictionary 
+var defineFunction = function (){                    ///////////////////////////////////// dictionary 
         $("div #define").text("define: "+word[i]);
-});
+};
+
+defineFunction();
 
 
 $(document).ready(function () {   
@@ -35,6 +37,10 @@ $(document).ready(function () {
     $('#noi').text(iterations);
     var x = 0;
 });
+
+
+
+defineFunction();
 
 /////////////////////////////////////// hide show list
 $("#hideButton").click(function() {
@@ -105,7 +111,6 @@ $('#spellbox').keypress(function(e) {
         setTimeout(function() {
         label.text(input.val());
         
-        
         var spell = document.getElementById('spellbox');
         
         if (spell.value==="" && x%iterations===0) {             
@@ -137,9 +142,10 @@ $('#spellbox').keypress(function(e) {
 //////////////////////////////////////////////////////
 $('h2').text(word[i]);
 
+
 $('#spellbox').keypress(function(e) {   
  var spell = document.getElementById('spellbox');   
-
+ defineFunction();
     if(e.which == 13) {
     	            	
     	if (spell.value===word[i]) {
