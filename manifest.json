@@ -4,11 +4,8 @@
   "version": "1.0",  
   "manifest_version": 2,
   "app": {
-    "urls": [
-      "*://learn2spell.net/"
-    ],
     "launch": {
-      "web_url": "http://learn2spell.net/"
+      "local_path": "index.html"
     }
   },
   "icons": {

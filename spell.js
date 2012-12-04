@@ -55,7 +55,7 @@ $('.spellList').empty();
 for ( var z = 0; z < word.length; z=z+1 ){
     
     $('.spellList').append("<li></li>");
-    $(".spellList li:nth-child(" + (z+1) + ")").append("<a class=\"btn btn-danger btn-block\" onclick=\"deleteLI(" + (z+1) + ")\">"+word[z]+""+" "+"<i class=\"icon-remove\"></i></a>" );
+    $(".spellList li:nth-child(" + (z+1) + ")").append("<div class='btn-group'><button class='btn'>"+word[z]+"</button><a class=\"btn btn-danger \" onclick=\"deleteLI(" + (z+1) + ")\">"+" "+"<i class=\"icon-remove\"></i></a></div>" );
 
     }
 }; 
