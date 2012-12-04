@@ -114,6 +114,7 @@ $('#spellbox').keypress(function(e) {
         }  else {                                           // of last charactor.
             $('h2').empty(); 
             $('#showWordBox').empty();
+            $('.spellList').hide();
 
         }   
         
@@ -145,7 +146,7 @@ $('#spellbox').keypress(function(e) {
 
 			document.getElementById("spellbox").value = "";
             $('#showWordBox').empty();
-			
+			$('.spellList').hide();
 			 } else {
                 $('#spellbox').animate({backgroundColor: '#e01432'}).delay(40).animate({backgroundColor: '#ffffff'});
                     }
