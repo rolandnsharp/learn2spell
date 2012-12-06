@@ -4,13 +4,22 @@ var word = ["speaker","cat"];
 var i = 0;
 var x = 0;
 var iterations = 3;
+var runArray = function (){
+    $(".wordlist-table tbody").empty();
+
+for ( var z = 0; z < word.length; z=z+1 ){
+    
+    $(".wordlist-table tbody").append("<tr><td>"+word[z]+"<i onclick=\"deleteLI(" + (z+1) + ")\" class=\"icon-remove\"></i>"+"</td><td>...</td></tr>" );
+
+    }
+}; 
+
+
+
 var deleteLI = function (XX) {
         word.splice(XX-1, 1);
-        $('.spellList').empty();   
-            for ( var z = 0; z < word.length; z=z+1 ){
-            $('.spellList').append("<li></li>");
-            $(".spellList li:nth-child(" + (z+1) + ")").append("<a class=\"btn btn-danger btn-block\" onclick=\"deleteLI(" + (z+1) + ")\">"+word[z]+""+" "+"<i class=\"icon-remove\"></i></a>" );
-            }
+        runArray(); 
+        
         };
 
 
@@ -50,15 +59,7 @@ $("#hideButton").click(function() {
 
 
 ///////////////////
-var runArray = function (){
-    $(".wordlist-table tbody").empty();
 
-for ( var z = 0; z < word.length; z=z+1 ){
-    
-    $(".wordlist-table tbody").append("<tr><td>"+word[z]+"</td><td>...</td></tr>" );
-
-    }
-}; 
 runArray();   
 /////////////////////// <a class="btn" onClick="#"><i class=\"icon-remove\"></i></a> onclick=\"deleteLI()\"
 $('#enterListButton').click(function(){
@@ -138,7 +139,8 @@ $('#spellbox').keypress(function(e) {
 });
 
 //////////////////////////////////////////////////////
-$('h2').text(word[i]);
+
+$('h2').text("Remember the word "+word[i]+" and spell it "+iterations+" times.");
 
 
 $('#spellbox').keypress(function(e) {   
