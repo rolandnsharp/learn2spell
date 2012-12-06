@@ -115,12 +115,10 @@ $('#spellbox').keypress(function(e) {
         
         if (spell.value==="" && x%iterations===0) {             
             $('h2').text(word[i]);
-            if(document.getElementById("check1").checked===true){
-            $('h2').text(word[i]); }         
+                    
         }  else if (e.which == 8 && spell.value==="") {     //e.which == 8 not working (reveal word when backspace
             $('h2').text(word[i]);
-            if (document.getElementById("check1").checked===true){
-            $('h2').text(word[i]);}                          // empty #spellbox. Eventult make it reveal on backspace 
+                                     // empty #spellbox. Eventult make it reveal on backspace 
         }  else if (spell.value==="" && x%iterations!==0) {
             $('h2').text("Spell it again!");
             if (document.getElementById("check1").checked===true){
@@ -128,7 +126,7 @@ $('#spellbox').keypress(function(e) {
         }  else {                                           // of last charactor.
             $('h2').empty(); 
             $('.wordlist-container').hide();    ///////////////////////////// toggle is causing an error where hide(); is not.
-            $('#showWordBox').text(word[i]);
+            
             if (document.getElementById("check1").checked===true) {
             $('h2').text(word[i]);}
 
@@ -172,7 +170,7 @@ $('#spellbox').keypress(function(e) {
 
     } else if (e.which == 8 && spell.value==="") {  //same here . e.which 8 not working
         $('h2').text(word[i]); 
-        $('#showWordBox').text(word[i]);
+        
         if (document.getElementById("check1").checked===true){
         $('h2').text(word[i]);}
     }
