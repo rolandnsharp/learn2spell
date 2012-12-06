@@ -7,12 +7,24 @@ var iterations = 3;
 var runArray = function (){
     $(".wordlist-table tbody").empty();
 
-for ( var z = 0; z < word.length; z=z+1 ){
+for ( var z = i; z < word.length; z=z+1 ){
+
     
     $(".wordlist-table tbody").append("<tr><td>"+word[z]+"</td><td>...</td><td>"+"<i onclick=\"deleteLI(" + (z+1) + ")\" class=\"icon-remove\"></i>"+"</td></tr>" );
 
     }
-}; 
+ 
+for ( var z = 0; z < i; z=z+1 ){
+
+    
+    $(".wordlist-table tbody").append("<tr><td>"+word[z]+"</td><td>...</td><td>"+"<i onclick=\"deleteLI(" + (z+1) + ")\" class=\"icon-remove\"></i>"+"</td></tr>" );
+
+    }
+
+
+
+
+};
 
 
 
@@ -46,7 +58,6 @@ $(document).ready(function () {
     $('#noi').text(iterations);
     var x = 0;
 });
-
 
 
 defineFunction();
@@ -163,11 +174,13 @@ $('#spellbox').keypress(function(e) {
             if (document.getElementById("check1").checked===true){
             $('h2').text(word[i]);}
             $('#spellbox').animate({backgroundColor: '#5bd642'}).delay(40).animate({backgroundColor: '#ffffff'});
+            runArray(); 
 
 			document.getElementById("spellbox").value = "";
 			$('.spellList').hide();
 			 } else {
                 $('#spellbox').animate({backgroundColor: '#e01432'}).delay(40).animate({backgroundColor: '#ffffff'});  // $(".class").animate({"background-color":"red"},40).animate({"background-color":"transparent"},40);
+                    runArray(); 
                     }
 
     } else if (e.which == 8 && spell.value==="") {  //same here . e.which 8 not working
