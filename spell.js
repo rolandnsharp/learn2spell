@@ -6,6 +6,7 @@ var x = 0;
 var iterations = 3;
 
 var runArray = function (){
+    ('h2').text(word[i]);
     $(".wordlist-table tbody").empty();
 
 for ( var z = i; z < word.length; z=z+1 ){
@@ -22,7 +23,7 @@ for ( var z = 0; z < i; z=z+1 ){
 
     }
 
-
+//('h2').text(word[i]);
 
 
 };
