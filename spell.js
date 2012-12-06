@@ -9,7 +9,7 @@ var runArray = function (){
 
 for ( var z = 0; z < word.length; z=z+1 ){
     
-    $(".wordlist-table tbody").append("<tr><td>"+word[z]+"<i onclick=\"deleteLI(" + (z+1) + ")\" class=\"icon-remove\"></i>"+"</td><td>...</td></tr>" );
+    $(".wordlist-table tbody").append("<tr><td>"+word[z]+"</td><td>...</td><td>"+"<i onclick=\"deleteLI(" + (z+1) + ")\" class=\"icon-remove\"></i>"+"</td></tr>" );
 
     }
 }; 
