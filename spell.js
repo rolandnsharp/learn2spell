@@ -4,6 +4,7 @@ var word = ["speaker","cat"];
 var i = 0;
 var x = 0;
 var iterations = 3;
+
 var runArray = function (){
     $(".wordlist-table tbody").empty();
 
@@ -164,6 +165,7 @@ $('#spellbox').keypress(function(e) {
             x=x+1;
             
             if (x%iterations===0) {
+                alert('press enter and continue to the next word');
                 i = (i+1);
                 if (word.length-1 < i) {          
                 i=0;                    
