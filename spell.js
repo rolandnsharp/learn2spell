@@ -151,7 +151,7 @@ $('#spellbox').keypress(function(e) {
 
 //////////////////////////////////////////////////////
 
-$('h2').text("Remember the word "+word[i]+" and spell it "+iterations+" times.");
+$('h2').text(word[i]);
 
 
 $('#spellbox').keypress(function(e) {   
