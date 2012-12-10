@@ -1,6 +1,6 @@
 
 //var word = ["dog","cat","fish","frog","spider","bourgeois"];
-var word = ["speaker","cat"];   
+//var word = ["speaker","cat"];   
 
 
 var i = 0;
@@ -9,9 +9,9 @@ var iterations = 3;
 
 
 var wordObject = [
-    { wordO: 'peanut', definition:'The oval seed of a South American plant, eaten as a snack or used for making oil or animal feed.' }
-    , { wordO: 'piano', definition:'A large keyboard musical instrument with a wooden case enclosing a soundboard and metal strings, which are struck by hammers when the...' }
-    , { wordO: 'cigarette', definition:'A thin cylinder of finely cut tobacco rolled in paper for smoking.' }
+    { word: 'peanut', definition:'The oval seed of a South American plant, eaten as a snack or used for making oil or animal feed.' }
+    , { word: 'piano', definition:'A large keyboard musical instrument with a wooden case enclosing a soundboard and metal strings, which are struck by hammers when the...' }
+    , { word: 'cigarette', definition:'A thin cylinder of finely cut tobacco rolled in paper for smoking.' }
 ];
 
 console.log(wordObject.length);
@@ -25,14 +25,14 @@ var runArray = function (){
 for ( var z = i; z < wordObject.length; z=z+1 ){
 
     
-    $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].wordO+"</td><td>"+wordObject[z].definition+"</td><td>"+"<i onclick=\"deleteLI(" + (z+1) + ")\" class=\"icon-remove\"></i>"+"</td></tr>" );
+    $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td>"+wordObject[z].definition+"</td><td>"+"<i onclick=\"deleteLI(" + (z+1) + ")\" class=\"icon-remove\"></i>"+"</td></tr>" );
 
     }
  
 for ( var z = 0; z < i; z=z+1 ){
 
     
-    $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].wordO+"</td><td>"+wordObject[z].definition+"</td><td>"+"<i onclick=\"deleteLI(" + (z+1) + ")\" class=\"icon-remove\"></i>"+"</td></tr>" );
+    $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td>"+wordObject[z].definition+"</td><td>"+"<i onclick=\"deleteLI(" + (z+1) + ")\" class=\"icon-remove\"></i>"+"</td></tr>" );
 
     }
 
@@ -46,13 +46,13 @@ for ( var z = 0; z < i; z=z+1 ){
 var deleteLI = function (XX) {
         wordObject.splice(XX-1, 1);
         runArray(); 
-        $('h2').text(wordObject[i].wordO);
+        $('h2').text(wordObject[i].word);
         
         };
 
 
 var defineFunction = function (){                    ///////////////////////////////////// dictionary 
-        $("div #define").text("define: "+wordObject[i].wordO);
+        $("div #define").text("define: "+wordObject[i].word);
 };
 
 defineFunction();
@@ -91,12 +91,12 @@ runArray();
 /////////////////////// <a class="btn" onClick="#"><i class=\"icon-remove\"></i></a> onclick=\"deleteLI()\"
 $('#enterListButton').click(function(){
 var spellItem = document.getElementById('listInput'); 
-    wordObject[wordObject.length]= { wordO: spellItem.value, definition: "...double click to edit..." };
+    wordObject[wordObject.length]= { word: spellItem.value, definition: "...double click to edit..." };
         console.log(wordObject);///////////////////////////////////////////////////////
         document.getElementById("listInput").value = "";
         runArray();
         $('.spellList').show();
-        $('h2').text(wordObject[i].wordO); 
+        $('h2').text(wordObject[i].word); 
 });
 
 $('#listInput').keypress(function(e) {
@@ -105,12 +105,12 @@ $('#listInput').keypress(function(e) {
 
     if(e.which == 13) {
         
-        wordObject[wordObject.length]= { wordO: spellItem.value, definition: "...double click to edit..." };
+        wordObject[wordObject.length]= { word: spellItem.value, definition: "...double click to edit..." };
         console.log(wordObject);
         document.getElementById("listInput").value = "";
         runArray();
         $('.spellList').show();
-        $('h2').text(wordObject[i].wordO); 
+        $('h2').text(wordObject[i].word); 
         
                                     
     } 
@@ -124,7 +124,7 @@ $('#listInput').keypress(function(e) {
 $(document).ready(function(){   
 
     $('#showWordButton').click(function(){   // not sure if ill keep this just use the backspace method
-        $('h2').text(wordObject[i].wordO);
+        $('h2').text(wordObject[i].word);
              
     });
     $('#spellbox').focus();
@@ -142,21 +142,21 @@ $('#spellbox').keypress(function(e) {
         var spell = document.getElementById('spellbox');
         
         if (spell.value==="" && x%iterations===0) {             
-            $('h2').text(wordObject[i].wordO);
+            $('h2').text(wordObject[i].word);
                     
         }  else if (e.which == 8 && spell.value==="") {     //e.which == 8 not working (reveal word when backspace
-            $('h2').text(wordObject[i].wordO);
+            $('h2').text(wordObject[i].word);
                                      // empty #spellbox. Eventult make it reveal on backspace 
         }  else if (spell.value==="" && x%iterations!==0) {
             $('h2').text("Spell it again!");
             if (document.getElementById("check1").checked===true){
-            $('h2').text(wordObject[i].wordO);}
+            $('h2').text(wordObject[i].word);}
         }  else {                                           // of last charactor.
             $('h2').empty(); 
             $('.wordlist-container').hide();    ///////////////////////////// toggle is causing an error where hide(); is not.
             
             if (document.getElementById("check1").checked===true) {
-            $('h2').text(wordObject[i].wordO);}
+            $('h2').text(wordObject[i].word);}
 
 
         }   
@@ -167,7 +167,7 @@ $('#spellbox').keypress(function(e) {
 
 //////////////////////////////////////////////////////
 
-$('h2').text(wordObject[i].wordO);
+$('h2').text(wordObject[i].word);
 
 
 $('#spellbox').keypress(function(e) {   
@@ -175,7 +175,7 @@ $('#spellbox').keypress(function(e) {
  defineFunction();
     if(e.which == 13) {
     	            	
-    	if (spell.value===wordObject[i].wordO) {
+    	if (spell.value===wordObject[i].word) {
     		
             x=x+1;
             
@@ -187,9 +187,9 @@ $('#spellbox').keypress(function(e) {
                 } 
             }
 
-            $('h2').text(wordObject[i].wordO);
+            $('h2').text(wordObject[i].word);
             if (document.getElementById("check1").checked===true){
-            $('h2').text(wordObject[i].wordO);}
+            $('h2').text(wordObject[i].word);}
             $('#spellbox').animate({backgroundColor: '#5bd642'}).delay(40).animate({backgroundColor: '#ffffff'});
             runArray(); 
 
@@ -201,10 +201,10 @@ $('#spellbox').keypress(function(e) {
                     }
 
     } else if (e.which == 8 && spell.value==="") {  //same here . e.which 8 not working
-        $('h2').text(wordObject[i].wordO); 
+        $('h2').text(wordObject[i].word); 
         
         if (document.getElementById("check1").checked===true){
-        $('h2').text(wordObject[i].wordO);}
+        $('h2').text(wordObject[i].word);}
     }
 
 
