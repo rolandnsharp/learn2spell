@@ -1,8 +1,3 @@
-
-//var word = ["dog","cat","fish","frog","spider","bourgeois"];
-//var word = ["speaker","cat"];   
-
-
 var i = 0;
 var x = 0;
 var iterations = 1;
@@ -34,6 +29,7 @@ for ( var z = 0; z < i; z=z+1 ){
     
     $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td>"+wordObject[z].definition+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "'  class=\"icon-remove\"></i>"+"</td></tr>" );
     defineFunction();
+    
     }
 
 //('h2').text(word[i]);
@@ -63,9 +59,14 @@ defineFunction();
 
 
 $(document).ready(function () {   
+    
 
-
-
+    chrome.storage.sync.get("myValue", //// load saved data. 
+    function(val) {
+    wordObject=val.myValue;
+    runArray();
+  }
+);
 
 
 
@@ -95,26 +96,7 @@ $("#hideButton").click(function() {
   $('.wordlist-container').toggle();    ///////////////////////////// toggle is causing an error where hide(); is not.
 });
 /////////////////////////////////////////////////////////////////////////////local storage
-$("#saveButton").click(function(){
-    alert("list saved");
-    
-    chrome.storage.sync.set({"myValue": wordObject});
-});
 
-$("#loadButton").click(function(){
- 
-    chrome.storage.sync.get("myValue", 
-  function(val) {
-    wordObject=val.myValue;
-    runArray();
-  }
-);
-
-});
-
-
-
-///////////////////
 
 runArray();  
 ////////////////////////////// edit button
@@ -124,6 +106,7 @@ $('#defBtn').click(function(){
 var defItem = defTextArea.value;
     console.log(defItem);
     wordObject[i]= { word: wordObject[i].word, definition: defItem };
+    chrome.storage.sync.set({"myValue": wordObject}); /////save
         /////////////////////////////////////////////////////
         
         runArray();
@@ -152,6 +135,7 @@ var spellItem = document.getElementById('listInput');
 
         $('.spellList').show();
         $('h2').text(wordObject[i].word); 
+        chrome.storage.sync.set({"myValue": wordObject}); //////// save
 });
 
 $('#listInput').keypress(function(e) {
@@ -166,7 +150,7 @@ $('#listInput').keypress(function(e) {
         runArray();
         $('.spellList').show();
         $('h2').text(wordObject[i].word); 
-        
+        chrome.storage.sync.set({"myValue": wordObject}); /////save
                                     
     } 
 
