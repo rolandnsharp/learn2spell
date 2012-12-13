@@ -14,13 +14,11 @@ var wordObject = [
     , { word: 'cigarette', definition:'A thin cylinder of finely cut tobacco rolled in paper for smoking.' }
 ];
 
-console.log(wordObject[0]);
-
 
 
 
 var runArray = function (){
-    defineFunction();
+    
     $(".wordlist-table tbody").empty();
 
 
@@ -28,14 +26,14 @@ for ( var z = i; z < wordObject.length; z=z+1 ){
 
     
     $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td>"+wordObject[z].definition+"</td><td>"+"<i onclick=\"deleteLI(" + (z+1) + ")\" class=\"icon-remove\"></i>"+"</td></tr>" );
-
+    defineFunction();
     }
  
 for ( var z = 0; z < i; z=z+1 ){
 
     
     $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td>"+wordObject[z].definition+"</td><td>"+"<i onclick=\"deleteLI(" + (z+1) + ")\" class=\"icon-remove\"></i>"+"</td></tr>" );
-
+    defineFunction();
     }
 
 //('h2').text(word[i]);
@@ -48,8 +46,11 @@ for ( var z = 0; z < i; z=z+1 ){
 var deleteLI = function (XX) {
         wordObject.splice(XX-1, 1);
         runArray(); 
+        if (wordObject.length <= 0){
+
+        } else {
         $('h2').text(wordObject[i].word);
-        
+        }
         };
 
 
@@ -202,8 +203,8 @@ $('#spellbox').keypress(function(e) {
             if (x%iterations===0) {
                 //alert('press enter and continue to the next word');///////////////////////// alert off
                 i = (i+1);
-                defineFunction();
-                if (wordObject.length-1 < i) {          
+                
+                if (wordObject.length <= i) {          
                 i=0;    
                 defineFunction();                
                 } 
