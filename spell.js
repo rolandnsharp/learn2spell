@@ -86,6 +86,25 @@ defineFunction();
 $("#hideButton").click(function() {
   $('.wordlist-container').toggle();    ///////////////////////////// toggle is causing an error where hide(); is not.
 });
+////////////////////////
+$("#saveButton").click(function(){
+    alert("kjl");
+    
+    chrome.storage.sync.set({"myValue": wordObject});
+});
+
+$("#loadButton").click(function(){
+    alert("kjl");
+    //getit=chrome.storage.sync.get.();
+    
+
+    chrome.storage.sync.get("myValue", 
+  function(val) {
+    console.log(val.myValue[1].word);
+  }
+);
+
+});
 
 
 
