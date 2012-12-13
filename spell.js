@@ -3,12 +3,21 @@ var x = 0;
 var iterations = 1;
 
 
+
 var wordObject = [
     { word: 'peanut', definition:'The oval seed of a South American plant, eaten as a snack or used for making oil or animal feed.' }
     , { word: 'piano', definition:'A large keyboard musical instrument with a wooden case enclosing a soundboard and metal strings, which are struck by hammers when the...' }
     , { word: 'cigarette', definition:'A thin cylinder of finely cut tobacco rolled in paper for smoking.' }
 ];
 
+var loadFunction = function(){
+    chrome.storage.sync.get("myValue", //// load saved data. 
+    function(val) {
+    wordObject=val.myValue;
+    runArray();
+  });
+ }; 
+loadFunction();
 
 
 
@@ -20,14 +29,14 @@ var runArray = function (){
 for ( var z = i; z < wordObject.length; z=z+1 ){
 
     
-    $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td>"+wordObject[z].definition+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "'    class=\"icon-remove\"></i>"+"</td></tr>" );
+    $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td data-id='" + (z+1) + "'>"+wordObject[z].definition+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "'    class=\"icon-remove\"></i>"+"</td></tr>" );
     defineFunction();
     }
  
 for ( var z = 0; z < i; z=z+1 ){
 
     
-    $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td>"+wordObject[z].definition+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "'  class=\"icon-remove\"></i>"+"</td></tr>" );
+    $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td data-id='" + (z+1) + "'>"+wordObject[z].definition+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "'  class=\"icon-remove\"></i>"+"</td></tr>" );
     defineFunction();
     
     }
@@ -50,6 +59,19 @@ var deleteLI = function (XX) {
         };
 
 
+var editLI = function (TT){
+var defItem = prompt("edit definition");
+    console.log(defItem);
+    console.log(TT);
+    wordObject[TT-1]= { word: wordObject[TT-1].word, definition: defItem };
+    chrome.storage.sync.set({"myValue": wordObject}); /////save
+        /////////////////////////////////////////////////////
+        
+        runArray();
+
+};
+
+
 var defineFunction = function (){                    ///////////////////////////////////// dictionary 
         $("#defTextArea").text(wordObject[i].definition);
 };
@@ -60,13 +82,7 @@ defineFunction();
 
 $(document).ready(function () {   
     
-
-    chrome.storage.sync.get("myValue", //// load saved data. 
-    function(val) {
-    wordObject=val.myValue;
-    runArray();
-  }
-);
+loadFunction();
 
 
 
@@ -120,8 +136,14 @@ var defItem = defTextArea.value;
 $('body').on('click',  ".icon-remove", function (ev) {
     var clicked=$(ev.currentTarget);
   deleteLI(clicked.attr("data-id"));
+  chrome.storage.sync.set({"myValue": wordObject}); //////// save
 });
 
+$('body').on('dblclick',  "td", function (ev) {
+    var clicked=$(ev.currentTarget);
+    editLI(clicked.attr("data-id"));
+  chrome.storage.sync.set({"myValue": wordObject}); //////// save
+});
 
 
 
