@@ -13,6 +13,7 @@
     "16": "icon.png"
   },
   "permissions": [
+    "storage",
     "unlimitedStorage",
     "notifications"
   ]

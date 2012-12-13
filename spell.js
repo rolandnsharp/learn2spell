@@ -5,7 +5,7 @@
 
 var i = 0;
 var x = 0;
-var iterations = 3;
+var iterations = 1;
 
 
 var wordObject = [
@@ -14,13 +14,15 @@ var wordObject = [
     , { word: 'cigarette', definition:'A thin cylinder of finely cut tobacco rolled in paper for smoking.' }
 ];
 
-console.log(wordObject.length);
+console.log(wordObject[0]);
+
 
 
 
 var runArray = function (){
-    //('h2').text(word[i]);
+    defineFunction();
     $(".wordlist-table tbody").empty();
+
 
 for ( var z = i; z < wordObject.length; z=z+1 ){
 
@@ -52,10 +54,11 @@ var deleteLI = function (XX) {
 
 
 var defineFunction = function (){                    ///////////////////////////////////// dictionary 
-        $("div #define").text("define: "+wordObject[i].word);
+        $("#defTextArea").text(wordObject[i].definition);
 };
 
 defineFunction();
+
 
 
 $(document).ready(function () {   
@@ -87,14 +90,31 @@ $("#hideButton").click(function() {
 
 ///////////////////
 
-runArray();   
+runArray();  
+////////////////////////////// edit button
+
+
+$('#defBtn').click(function(){
+var defItem = defTextArea.value;
+    console.log(defItem);
+    wordObject[i]= { word: wordObject[i].word, definition: defItem };
+        /////////////////////////////////////////////////////
+        
+        runArray();
+
+        
+        
+});
+
+
 /////////////////////// <a class="btn" onClick="#"><i class=\"icon-remove\"></i></a> onclick=\"deleteLI()\"
 $('#enterListButton').click(function(){
 var spellItem = document.getElementById('listInput'); 
-    wordObject[wordObject.length]= { word: spellItem.value, definition: "...double click to edit..." };
+    wordObject[wordObject.length]= { word: spellItem.value, definition: "...definition..." };
         console.log(wordObject);///////////////////////////////////////////////////////
         document.getElementById("listInput").value = "";
         runArray();
+
         $('.spellList').show();
         $('h2').text(wordObject[i].word); 
 });
@@ -105,7 +125,7 @@ $('#listInput').keypress(function(e) {
 
     if(e.which == 13) {
         
-        wordObject[wordObject.length]= { word: spellItem.value, definition: "...double click to edit..." };
+        wordObject[wordObject.length]= { word: spellItem.value, definition: "...definition..." };
         console.log(wordObject);
         document.getElementById("listInput").value = "";
         runArray();
@@ -153,7 +173,7 @@ $('#spellbox').keypress(function(e) {
             $('h2').text(wordObject[i].word);}
         }  else {                                           // of last charactor.
             $('h2').empty(); 
-            $('.wordlist-container').hide();    ///////////////////////////// toggle is causing an error where hide(); is not.
+            //$('.wordlist-container').hide();    ///////////////////////////// toggle is causing an error where hide(); is not.
             
             if (document.getElementById("check1").checked===true) {
             $('h2').text(wordObject[i].word);}
@@ -180,10 +200,12 @@ $('#spellbox').keypress(function(e) {
             x=x+1;
             
             if (x%iterations===0) {
-                alert('press enter and continue to the next word');
+                //alert('press enter and continue to the next word');///////////////////////// alert off
                 i = (i+1);
+                defineFunction();
                 if (wordObject.length-1 < i) {          
-                i=0;                    
+                i=0;    
+                defineFunction();                
                 } 
             }
 
@@ -194,7 +216,7 @@ $('#spellbox').keypress(function(e) {
             runArray(); 
 
 			document.getElementById("spellbox").value = "";
-			$('.spellList').hide();
+			//$('.spellList').hide();
 			 } else {
                 $('#spellbox').animate({backgroundColor: '#e01432'}).delay(40).animate({backgroundColor: '#ffffff'});  // $(".class").animate({"background-color":"red"},40).animate({"background-color":"transparent"},40);
                     runArray(); 
