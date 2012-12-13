@@ -25,14 +25,14 @@ var runArray = function (){
 for ( var z = i; z < wordObject.length; z=z+1 ){
 
     
-    $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td>"+wordObject[z].definition+"</td><td>"+"<i onclick=\"deleteLI(" + (z+1) + ")\" class=\"icon-remove\"></i>"+"</td></tr>" );
+    $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td>"+wordObject[z].definition+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" class=\"icon-remove\"></i>"+"</td></tr>" );
     defineFunction();
     }
  
 for ( var z = 0; z < i; z=z+1 ){
 
     
-    $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td>"+wordObject[z].definition+"</td><td>"+"<i onclick=\"deleteLI(" + (z+1) + ")\" class=\"icon-remove\"></i>"+"</td></tr>" );
+    $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td>"+wordObject[z].definition+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" class=\"icon-remove\"></i>"+"</td></tr>" );
     defineFunction();
     }
 
@@ -63,6 +63,14 @@ defineFunction();
 
 
 $(document).ready(function () {   
+
+
+
+
+
+
+
+
     $('#noi').text(iterations);
     $("#plusOne").click(function() {
     iterations = iterations +1;
@@ -88,7 +96,7 @@ $("#hideButton").click(function() {
 });
 /////////////////////////////////////////////////////////////////////////////local storage
 $("#saveButton").click(function(){
-    alert("kjl");
+    alert("list saved");
     
     chrome.storage.sync.set({"myValue": wordObject});
 });
@@ -122,6 +130,47 @@ var defItem = defTextArea.value;
 
         
         
+});
+//////////////////////////////////////////////// FIX THISSSSSSSSSSSSSSSSSSSSS!!!!!!!111!!!!11!!!!!11!!!!111!!!!1
+
+$('#deleteLI1').click(function(){
+    deleteLI(1);
+});
+
+$('#deleteLI2').click(function(){
+    deleteLI(2);
+});
+
+$('#deleteLI3').click(function(){
+    deleteLI(3);
+});
+
+$('#deleteLI4').click(function(){
+    deleteLI(4);
+});
+
+$('#deleteLI5').click(function(){
+    deleteLI(5);
+});
+
+$('#deleteLI6').click(function(){
+    deleteLI(6);
+});
+
+$('#deleteLI7').click(function(){
+    deleteLI(7);
+});
+
+$('#deleteLI8').click(function(){
+    deleteLI(8);
+});
+
+$('#deleteLI9').click(function(){
+    deleteLI(9);
+});
+
+$('#deleteLI10').click(function(){
+    deleteLI(10);
 });
 
 
