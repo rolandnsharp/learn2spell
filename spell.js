@@ -2,8 +2,6 @@ var i = 0;
 var x = 0;
 var iterations = 1;
 
-
-
 var wordObject = [
     { word: 'peanut', definition:'The oval seed of a South American plant, eaten as a snack or used for making oil or animal feed.' }
     , { word: 'piano', definition:'A large keyboard musical instrument with a wooden case enclosing a soundboard and metal strings, which are struck by hammers when the...' }
@@ -22,6 +20,7 @@ loadFunction();
 
 
 var runArray = function (){
+    $('h2').text(wordObject[i].word);
     
     $(".wordlist-table tbody").empty();
 
@@ -40,8 +39,6 @@ for ( var z = 0; z < i; z=z+1 ){
     defineFunction();
     
     }
-
-//('h2').text(word[i]);
 
 
 };
@@ -111,26 +108,11 @@ defineFunction();
 $("#hideButton").click(function() {
   $('.wordlist-container').toggle();    ///////////////////////////// toggle is causing an error where hide(); is not.
 });
-/////////////////////////////////////////////////////////////////////////////local storage
+
 
 
 runArray();  
-////////////////////////////// edit button
 
-
-$('#defBtn').click(function(){
-var defItem = defTextArea.value;
-    console.log(defItem);
-    wordObject[i]= { word: wordObject[i].word, definition: defItem };
-    chrome.storage.sync.set({"myValue": wordObject}); /////save
-        /////////////////////////////////////////////////////
-        
-        runArray();
-
-        
-        
-});
-//////////////////////////////////////////////// FIX THISSSSSSSSSSSSSSSSSSSSS!!!!!!!111!!!!11!!!!!11!!!!111!!!!1
 
 
 $('body').on('click',  ".icon-remove", function (ev) {
@@ -219,7 +201,6 @@ $('#spellbox').keypress(function(e) {
             if (document.getElementById("check1").checked===true) {
             $('h2').text(wordObject[i].word);}
 
-
         }   
         
     }, 0);
@@ -227,9 +208,6 @@ $('#spellbox').keypress(function(e) {
 });
 
 //////////////////////////////////////////////////////
-
-$('h2').text(wordObject[i].word);
-
 
 $('#spellbox').keypress(function(e) {   
  var spell = document.getElementById('spellbox');   
