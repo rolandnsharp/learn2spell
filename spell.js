@@ -20,7 +20,11 @@ loadFunction();
 
 
 var runArray = function (){
-    $('h2').text(wordObject[i].word);
+    if (wordObject.length<=0) {
+        $('h2').text("");
+    } else {  
+        $('h2').text(wordObject[i].word);
+        };
     
     $(".wordlist-table tbody").empty();
 
