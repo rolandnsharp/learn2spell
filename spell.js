@@ -28,15 +28,15 @@ var loadFunction = function(){
 loadFunction();
 ////////////////right click menu
 
-
-chrome.contextMenus.create({title: " %s ", 
+chrome.contextMenus.removeAll();
+chrome.contextMenus.create({title: "Learn 2 Spell '%s' ", 
                              contexts:["selection"], 
                               onclick: function(info){ 
                                 wordObject[wordObject.length]= { word: info.selectionText, definition: " 'add definition' " };
                                 runArray();
                                 chrome.storage.sync.set({"myValue": wordObject});
-                                chrome.contextMenus.removeAll();
-                                location.reload(); /////////// refreshes page ! probably not good
+                                //chrome.contextMenus.removeAll();
+                                //location.reload(); /////////// refreshes page ! probably not good
                                  }
 });
 
