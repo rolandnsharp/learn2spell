@@ -9,6 +9,7 @@ var wordObject = [
 ];
 
 var loadFunction = function(){
+    //chrome.storage.sync.set({"myValue": wordObject}); activate this to get the program running. The emply storage will throw an error 
     chrome.storage.sync.get("myValue", //// load saved data. 
     function(val) {
     wordObject=val.myValue;
