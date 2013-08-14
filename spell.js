@@ -27,21 +27,18 @@ var loadFunction = function(){
  }; 
 loadFunction();
 ////////////////right click menu
-chrome.contextMenus.create({title: "Learn 2 Spell '%s' ", 
+
+
+chrome.contextMenus.create({title: " %s ", 
                              contexts:["selection"], 
                               onclick: function(info){ 
-                                wordObject[wordObject.length]= { word: info.selectionText, definition: "...definition..." };
-                                console.log(wordObject);
+                                wordObject[wordObject.length]= { word: info.selectionText, definition: " 'add definition' " };
                                 runArray();
+                                chrome.storage.sync.set({"myValue": wordObject});
+                                chrome.contextMenus.removeAll();
+                                location.reload(); /////////// refreshes page ! probably not good
                                  }
 });
-
-
-//var spellItem = document.getElementById('listInput'); 
-  // wordObject[wordObject.length]= { word: spellItem.value, definition: "...definition..." };
-   //    console.log(wordObject);///////////////////////////////////////////////////////
-  //     document.getElementById("listInput").value = "";
-  //     runArray();
 
 
 
@@ -110,6 +107,10 @@ defineFunction();
 
 $(document).ready(function () {   
     
+
+
+
+
 loadFunction();
 
 
