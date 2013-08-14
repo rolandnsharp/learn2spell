@@ -1,7 +1,4 @@
-chrome.contextMenus.create({title: "Learn 2 Spell '%s' ", 
-                             contexts:["selection"], 
-                              onclick: function(info, tab){ sendSearch(info.selectionText); }
-});
+
 
 
 var i = 0;
@@ -29,9 +26,26 @@ var loadFunction = function(){
   });
  }; 
 loadFunction();
+////////////////right click menu
+chrome.contextMenus.create({title: "Learn 2 Spell '%s' ", 
+                             contexts:["selection"], 
+                              onclick: function(info){ 
+                                wordObject[wordObject.length]= { word: info.selectionText, definition: "...definition..." };
+                                console.log(wordObject);
+                                runArray();
+                                 }
+});
+
+
+//var spellItem = document.getElementById('listInput'); 
+  // wordObject[wordObject.length]= { word: spellItem.value, definition: "...definition..." };
+   //    console.log(wordObject);///////////////////////////////////////////////////////
+  //     document.getElementById("listInput").value = "";
+  //     runArray();
 
 
 
+///////////////
 var runArray = function (){
     if (wordObject.length<=0) {
         $('h2').text("");
