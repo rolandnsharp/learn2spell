@@ -1,7 +1,7 @@
 {
   "name": "Learn 2 Spell",
   "description": "Learn spelling, touch typing and, vocabulary",
-  "version": "1.1",  
+  "version": "1.3",  
   "manifest_version": 2,
   "app": {
     "launch": {
@@ -13,6 +13,7 @@
     "16": "icon.png"
   },
   "permissions": [
+    "contextMenus",
     "storage",
     "unlimitedStorage",
     "notifications"

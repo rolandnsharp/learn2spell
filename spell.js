@@ -1,3 +1,9 @@
+chrome.contextMenus.create({title: "Learn 2 Spell '%s' ", 
+                             contexts:["selection"], 
+                              onclick: function(info, tab){ sendSearch(info.selectionText); }
+});
+
+
 var i = 0;
 var x = 0;
 var iterations = 1;
