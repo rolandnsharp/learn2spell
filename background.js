@@ -4,9 +4,8 @@ var x = 0;
 var iterations = 1;
 
 var wordObjectB = [
-    { word: 'peanut', definition:'The oval seed of a South American plant, eaten as a snack or used for making oil or animal feed.' }
-    , { word: 'piano', definition:'A large keyboard musical instrument with a wooden case enclosing a soundboard and metal strings, which are struck by hammers when the...' }
-    , { word: 'cigarette', definition:'A thin cylinder of finely cut tobacco rolled in paper for smoking.' }
+    { word: 'test', definition:'test definition' }
+    
 ];
 
 /*var loadFunction = function(){

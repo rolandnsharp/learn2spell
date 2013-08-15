@@ -138,8 +138,8 @@ defineFunction();
 
 /////////////////////////////////////// hide show list
 $("#hideButton").click(function() {
-var selection = chrome.extension.getBackgroundPage().wordObjectB;
- console.log(selection); 
+var wordObjectB = chrome.extension.getBackgroundPage().wordObjectB;
+ console.log(wordObjectB); 
  chrome.extension.getBackgroundPage().wordObjectB=[
     { word: 'test', definition:'test deffinition' } ];
  chrome.extension.getBackgroundPage().runArrayB();
