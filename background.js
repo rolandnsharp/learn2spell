@@ -9,21 +9,21 @@ var wordObjectB = [
     , { word: 'cigarette', definition:'A thin cylinder of finely cut tobacco rolled in paper for smoking.' }
 ];
 
-var loadFunction = function(){
+/*var loadFunction = function(){
     //chrome.storage.sync.set({"myValue": wordObjectB}); activate this to get the program running. The emply storage will throw an error 
     chrome.storage.sync.get("myValueB", //// load saved data. 
     function(val) {
     if (val.myValueB === undefined){
         chrome.storage.sync.set({"myValueB": wordObjectB});
-        runArray();
+        runArrayB();
     } else {
     wordObjectB=val.myValueB;
-    runArray();
+    runArrayB();
     }   
     
   });
  }; 
-loadFunction();
+loadFunction();*/
 ////////////////right click menu
 
 
@@ -32,9 +32,9 @@ chrome.contextMenus.create({title: "Learn 2 Spell '%s' ",
                              contexts:["selection"], 
                               onclick: function(info){ 
                                 wordObjectB[wordObjectB.length]= { word: info.selectionText, definition: " 'add definition' " };
-                                runArray();
-                                chrome.storage.sync.set({"myValueB": wordObjectB});
-                                console.log(wordObjectB);
+                                runArrayB();
+                                //chrome.storage.sync.set({"myValueB": wordObjectB});
+                               // console.log(wordObjectB);
                                 //chrome.contextMenus.removeAll();
                                 //location.reload(); /////////// refreshes page ! probably not good
                                  }
@@ -42,7 +42,7 @@ chrome.contextMenus.create({title: "Learn 2 Spell '%s' ",
 
 ///////////////
 
-var runArray = function (){
+var runArrayB = function (){
     if (wordObjectB.length<=0) {
         $('h2').text("");
     } else {  
@@ -74,7 +74,7 @@ for ( var z = 0; z < i; z=z+1 ){
 
 var deleteLI = function (XX) {
         wordObjectB.splice(XX-1, 1);
-        runArray(); 
+        runArrayB(); 
         if (wordObjectB.length <= 0){
 
         } else {
@@ -91,7 +91,7 @@ var defItem = prompt("edit definition");
     chrome.storage.sync.set({"myValueB": wordObjectB}); /////save
         /////////////////////////////////////////////////////
         
-        runArray();
+        runArrayB();
 
 };
 
@@ -110,7 +110,7 @@ $(document).ready(function () {
 
 
 
-loadFunction();
+//loadFunction();
 
 
 
@@ -142,7 +142,7 @@ $("#hideButton").click(function() {
 
 
 
-runArray();  
+runArrayB();  
 
 
 
@@ -166,7 +166,7 @@ var spellItem = document.getElementById('listInput');
     wordObjectB[wordObjectB.length]= { word: spellItem.value, definition: "...definition..." };
         console.log(wordObjectB);///////////////////////////////////////////////////////
         document.getElementById("listInput").value = "";
-        runArray();
+        runArrayB();
 
         $('.spellList').show();
         $('h2').text(wordObjectB[i].word); 
@@ -182,7 +182,7 @@ $('#listInput').keypress(function(e) {
         wordObjectB[wordObjectB.length]= { word: spellItem.value, definition: "...definition..." };
         console.log(wordObjectB);
         document.getElementById("listInput").value = "";
-        runArray();
+        runArrayB();
         $('.spellList').show();
         $('h2').text(wordObjectB[i].word); 
         chrome.storage.sync.set({"myValueB": wordObjectB}); /////save
@@ -263,13 +263,13 @@ $('#spellbox').keypress(function(e) {
             if (document.getElementById("check1").checked===true){
             $('h2').text(wordObjectB[i].word);}
             $('#spellbox').animate({backgroundColor: '#5bd642'}).delay(40).animate({backgroundColor: '#ffffff'});
-            runArray(); 
+            runArrayB(); 
 
             document.getElementById("spellbox").value = "";
             //$('.spellList').hide();
              } else {
                 $('#spellbox').animate({backgroundColor: '#e01432'}).delay(40).animate({backgroundColor: '#ffffff'});  // $(".class").animate({"background-color":"red"},40).animate({"background-color":"transparent"},40);
-                    runArray(); 
+                    runArrayB(); 
                     }
 
     } else if (e.which == 8 && spell.value==="") {  //same here . e.which 8 not working

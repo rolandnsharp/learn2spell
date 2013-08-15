@@ -26,8 +26,8 @@ var loadFunction = function(){
  }; 
 loadFunction();
 ////////////////right click menu
-/*
 
+/*
 chrome.contextMenus.removeAll();
 chrome.contextMenus.create({title: "Learn 2 Spell '%s' ", 
                              contexts:["selection"], 
@@ -138,8 +138,12 @@ defineFunction();
 
 /////////////////////////////////////// hide show list
 $("#hideButton").click(function() {
-
- var selection = chrome.extension.getBackgroundPage().wordObjectB;
+var selection = chrome.extension.getBackgroundPage().wordObjectB;
+ console.log(selection); 
+ chrome.extension.getBackgroundPage().wordObjectB=[
+    { word: 'test', definition:'test deffinition' } ];
+ chrome.extension.getBackgroundPage().runArrayB();
+  var selection = chrome.extension.getBackgroundPage().wordObjectB;
  console.log(selection); 
   $('.wordlist-container').toggle();    ///////////////////////////// toggle is causing an error where hide(); is not.
 });
