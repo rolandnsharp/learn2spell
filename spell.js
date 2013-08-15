@@ -138,6 +138,10 @@ defineFunction();
 
 /////////////////////////////////////// hide show list
 $("#hideButton").click(function() {
+  $('.wordlist-container').toggle();    ///////////////////////////// toggle is causing an error where hide(); is not.
+});
+
+$("#refreshButton").click(function() {
 var wordObjectB = chrome.extension.getBackgroundPage().wordObjectB;
  console.log(wordObjectB); 
  chrome.extension.getBackgroundPage().wordObjectB=[
@@ -145,10 +149,8 @@ var wordObjectB = chrome.extension.getBackgroundPage().wordObjectB;
  chrome.extension.getBackgroundPage().runArrayB();
   var selection = chrome.extension.getBackgroundPage().wordObjectB;
  console.log(selection); 
-  $('.wordlist-container').toggle();    ///////////////////////////// toggle is causing an error where hide(); is not.
+  
 });
-
-
 
 runArray();  
 
