@@ -1,8 +1,8 @@
-var peace = function(){
-    console.log("peace");
-};
+//var backToFront = function(){
+ //   var WOB = chrome.extension.getBackgroundPage().backSelect;
+//console.log(WOB);
+//};
 
-var pp = "pp";
 
 var i = 0;
 var x = 0;
@@ -148,14 +148,25 @@ $("#hideButton").click(function() {
 $("#refreshButton").click(function() {
 var WOB = chrome.extension.getBackgroundPage().wordObjectB;
 console.log(WOB);
-wordObject[wordObject.length]=WOB[WOB.length-1]
+
+
+while (WOB.length > 1)
+  {
+  wordObject[wordObject.length]= WOB[WOB.length-1];
+  WOB.splice(WOB.length-1);
+  }
+
+//wordObject[wordObject.length]= WOB[WOB.length-1];
 console.log(wordObject);
+
+runArray();
+chrome.storage.sync.set({"myValue": wordObject});///save
 
  chrome.extension.getBackgroundPage().wordObjectB=[
     { word: 'test', definition:'test deffinition' } ];
- chrome.extension.getBackgroundPage().runArrayB();
+ //chrome.extension.getBackgroundPage().runArrayB();
   var selection = chrome.extension.getBackgroundPage().wordObjectB;
- console.log(selection); 
+ //console.log(selection); 
   
 
 

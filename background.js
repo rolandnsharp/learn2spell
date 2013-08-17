@@ -24,20 +24,20 @@ var wordObjectB = [
  }; 
 loadFunction();*/
 ////////////////right click menu
-
+var backSelect = "empty"
 
 chrome.contextMenus.removeAll();
 chrome.contextMenus.create({title: "Learn 2 Spell '%s' ", 
                              contexts:["selection"], 
                               onclick: function(info){ 
-                                wordObjectB[wordObjectB.length]= { word: info.selectionText, definition: " 'add definition' " };
-                                runArrayB();
+                                wordObjectB[wordObjectB.length] = { word: info.selectionText, definition: " 'add definition' " };
+                                console.log(wordObjectB);
                                 ///chrome.extension.getViews = function() { console.log("hello");};
                                // var view = chrome.extension.getViews({"type":"tab", "windowId": tab.windowId));
                                // console.log(view);
 
-                                var tabs = chrome.extension.getViews({type: "tab"});
-                                tabs[0].peace();
+                               // var tabs = chrome.extension.getViews({type: "tab"});
+                               // tabs[0].backToFront();                                        sending function. 
                                
                                
                                 //chrome.storage.sync.set({"myValueB": wordObjectB});
@@ -49,7 +49,7 @@ chrome.contextMenus.create({title: "Learn 2 Spell '%s' ",
 
 ///////////////
 
-var runArrayB = function (){
+/*var runArrayB = function (){
     if (wordObjectB.length<=0) {
         $('h2').text("");
     } else {  
@@ -291,3 +291,4 @@ $('#spellbox').keypress(function(e) {
 
 
 });
+*/
