@@ -328,7 +328,12 @@ function showPage(page,text) {
   $('#wikiInfo').html(text);
   $('#sourceurl').attr('href',sourceurl);
   $('#licenseinfo').show();
- 
+  $('.audiofile').hide();
+  $('.toc').hide();
+  $('.NavContent').hide();
+  $('#Pronunciation').hide();
+
+  $('.thumbinner').hide();
   // now you can modify content of #wikiInfo as you like
   $('#wikiInfo').find('a:not(.references a):not(.extiw):not([href^="#"])').attr('href',
     function() { return baseURL + $(this).attr('href');
