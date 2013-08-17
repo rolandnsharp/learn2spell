@@ -32,6 +32,14 @@ chrome.contextMenus.create({title: "Learn 2 Spell '%s' ",
                               onclick: function(info){ 
                                 wordObjectB[wordObjectB.length]= { word: info.selectionText, definition: " 'add definition' " };
                                 runArrayB();
+                                ///chrome.extension.getViews = function() { console.log("hello");};
+                               // var view = chrome.extension.getViews({"type":"tab", "windowId": tab.windowId));
+                               // console.log(view);
+
+                                var tabs = chrome.extension.getViews({type: "tab"});
+                                tabs[0].peace();
+                               
+                               
                                 //chrome.storage.sync.set({"myValueB": wordObjectB});
                                // console.log(wordObjectB);
                                 //chrome.contextMenus.removeAll();

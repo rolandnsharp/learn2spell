@@ -1,4 +1,8 @@
+var peace = function(){
+    console.log("peace");
+};
 
+var pp = "pp";
 
 var i = 0;
 var x = 0;
@@ -142,14 +146,22 @@ $("#hideButton").click(function() {
 });
 
 $("#refreshButton").click(function() {
-var wordObjectB = chrome.extension.getBackgroundPage().wordObjectB;
- console.log(wordObjectB); 
+var WOB = chrome.extension.getBackgroundPage().wordObjectB;
+console.log(WOB);
+wordObject[wordObject.length]=WOB[WOB.length-1]
+console.log(wordObject);
+
  chrome.extension.getBackgroundPage().wordObjectB=[
     { word: 'test', definition:'test deffinition' } ];
  chrome.extension.getBackgroundPage().runArrayB();
   var selection = chrome.extension.getBackgroundPage().wordObjectB;
  console.log(selection); 
   
+
+
+
+
+
 });
 
 runArray();  
