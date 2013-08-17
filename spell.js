@@ -1,9 +1,3 @@
-//var backToFront = function(){
- //   var WOB = chrome.extension.getBackgroundPage().backSelect;
-//console.log(WOB);
-//};
-
-
 var i = 0;
 var x = 0;
 var iterations = 1;
@@ -29,23 +23,33 @@ var loadFunction = function(){
   });
  }; 
 loadFunction();
-////////////////right click menu
 
-/*
-chrome.contextMenus.removeAll();
-chrome.contextMenus.create({title: "Learn 2 Spell '%s' ", 
-                             contexts:["selection"], 
-                              onclick: function(info){ 
-                                wordObject[wordObject.length]= { word: info.selectionText, definition: " 'add definition' " };
-                                runArray();
-                                chrome.storage.sync.set({"myValue": wordObject});
-                                console.log(wordObject);
-                                //chrome.contextMenus.removeAll();
-                                //location.reload(); /////////// refreshes page ! probably not good
-                                 }
-});
-*/
-///////////////
+var loadBackgroundList = function (){
+var WOB = chrome.extension.getBackgroundPage().wordObjectB;
+console.log(WOB);
+
+
+while (WOB.length > 1)
+  {
+  wordObject[wordObject.length]= WOB[WOB.length-1];
+  WOB.splice(WOB.length-1);
+  }
+
+//wordObject[wordObject.length]= WOB[WOB.length-1];
+console.log(wordObject);
+
+runArray();
+chrome.storage.sync.set({"myValue": wordObject});///save
+chrome.extension.getBackgroundPage().wordObjectB=[
+    { word: 'test', definition:'test deffinition' } ];
+ //chrome.extension.getBackgroundPage().runArrayB();
+ // var selection = chrome.extension.getBackgroundPage().wordObjectB;
+ //console.log(selection);
+
+};
+
+
+
 
 var runArray = function (){
     if (wordObject.length<=0) {
@@ -146,33 +150,8 @@ $("#hideButton").click(function() {
 });
 
 $("#refreshButton").click(function() {
-var WOB = chrome.extension.getBackgroundPage().wordObjectB;
-console.log(WOB);
-
-
-while (WOB.length > 1)
-  {
-  wordObject[wordObject.length]= WOB[WOB.length-1];
-  WOB.splice(WOB.length-1);
-  }
-
-//wordObject[wordObject.length]= WOB[WOB.length-1];
-console.log(wordObject);
-
-runArray();
-chrome.storage.sync.set({"myValue": wordObject});///save
-
- chrome.extension.getBackgroundPage().wordObjectB=[
-    { word: 'test', definition:'test deffinition' } ];
- //chrome.extension.getBackgroundPage().runArrayB();
-  var selection = chrome.extension.getBackgroundPage().wordObjectB;
- //console.log(selection); 
-  
-
-
-
-
-
+ 
+  loadBackgroundList();
 });
 
 runArray();  
