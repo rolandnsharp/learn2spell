@@ -1,3 +1,5 @@
+
+
 var i = 0;
 var x = 0;
 var iterations = 1;
@@ -47,6 +49,7 @@ chrome.extension.getBackgroundPage().wordObjectB=[
  //console.log(selection);
 
 };
+
 
 
 
@@ -153,6 +156,25 @@ $("#refreshButton").click(function() {
  
   loadBackgroundList();
 });
+
+/*var isActive;
+
+window.onfocus = function () { 
+  isActive = true; 
+}; 
+
+window.onblur = function () { 
+  isActive = false; 
+}; 
+
+// test
+setInterval(function () { 
+    loadBackgroundList();
+
+  console.log(window.isActive ? 'active' : 'inactive'); 
+}, 1000);
+
+*/
 
 runArray();  
 
@@ -297,3 +319,36 @@ $('#spellbox').keypress(function(e) {
 
 });
 
+
+
+var baseURL = 'http://en.wiktionary.org';
+function showPage(page,text) {
+  var sourceurl = baseURL + '/wiki/' + page;
+  $('#pagetitle').text(page);
+  $('#wikiInfo').html(text);
+  $('#sourceurl').attr('href',sourceurl);
+  $('#licenseinfo').show();
+ 
+  // now you can modify content of #wikiInfo as you like
+  $('#wikiInfo').find('a:not(.references a):not(.extiw):not([href^="#"])').attr('href',
+    function() { return baseURL + $(this).attr('href');
+  });
+  // ...
+}
+$(document).ready(function() {
+  $('#pagetitle').hide();
+  $('#word').change(function() {
+    var page = this.value;
+    $('#wikiInfo').html('...please wait...');
+   
+   $.getJSON(baseURL+'/w/api.php?action=parse&format=json&prop=text|revid|displaytitle&page='+page,
+    function(json) {
+      if(json.parse.revid > 0) {
+        showPage(page,json.parse.text['*']);
+      } else {
+        $('#wikiInfo').html('word not found');
+        $('#licenseinfo').hide();
+      }
+    });
+  });
+});
