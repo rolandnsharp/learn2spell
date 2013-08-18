@@ -341,7 +341,8 @@ $('#wikiInfo').children("ol:lt(2)").appendTo('#WInfo');
 
 $("#WInfo ol li ul").detach();
 $("#WInfo ol li dl").detach();
-$("#WInfo").find("ol li:nth-child(-n+2)").appendTo('#WInfo2');
+
+$("#WInfo").find("ol li:nth-child(-n+2)").appendTo('#WInfo2 ol');
 
 //$('#wikiInfo').children("ol:lt(2)").appendTo('#WInfo2');
 //$("#WInfo2 ol li ul").detach();

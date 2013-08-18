@@ -1,7 +1,12 @@
+#wikiInfo{
+	visibility:hidden;
+}
+
 #WInfo{
+	visibility:hidden;
 	position: absolute;
-	left: 10px;
-	top: 50px;
+	right: 10px;
+	top: 360px;
 	width: 450px;
 	height: 300px;
 	overflow:scroll;
@@ -10,8 +15,9 @@
 
 #WInfo2{
 	position: absolute;
-	right: 10px;
-	top: 360px;
+	left: 10px;
+	top: 50px;
+	
 	width: 450px;
 	height: 300px;
 	overflow:scroll;
@@ -20,6 +26,7 @@
 }
 
 #WInfo3{
+	visibility:hidden;
 	position: absolute;
 	right: 10px;
 	top: 750px;
