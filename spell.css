@@ -1,9 +1,33 @@
 #WInfo{
 	position: absolute;
 	left: 10px;
-	top: 20px;
+	top: 50px;
 	width: 450px;
+	height: 300px;
+	overflow:scroll;
 	line-height: 30px;
+}
+
+#WInfo2{
+	position: absolute;
+	right: 10px;
+	top: 360px;
+	width: 450px;
+	height: 300px;
+	overflow:scroll;
+	line-height: 30px;
+	outline-color: black;
+}
+
+#WInfo3{
+	position: absolute;
+	right: 10px;
+	top: 750px;
+	width: 450px;
+	height: 300px;
+	overflow:scroll;
+	line-height: 30px;
+	outline-color: black;
 }
 
 

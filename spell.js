@@ -336,14 +336,21 @@ function showPage(page,text) {
   $('.thumbinner').hide();
   $('.references').hide();
   // now you can modify content of #wikiInfo as you like
-$('#wikiInfo').children("ol:lt(2)").attr("#defTextArea");
-$('#wikiInfo').children("ol:lt(2)").css({"color":"red","border":"2px solid red"});
+//$('#wikiInfo').children("ol:lt(2)").attr("#WInfo");
+$('#wikiInfo').children("ol:lt(2)").appendTo('#WInfo');
+//$("#WInfo").detach();
+$("#WInfo ol li ul").detach();
+$("#WInfo ol li dl").detach();
 
 
-  $('#wikiInfo').find('a:not(.references a)').attr('href',
-    function() { return baseURL + $(this).attr('href');
-  });
-  // ...
+//$('#wikiInfo').children("ol:lt(2)").appendTo('#WInfo2');
+//$("#WInfo2 ol li ul").detach();
+//$("#WInfo2 ol li dl").detach();
+//$('#WInfo').children("ol li ").appendTo('#WInfo2');
+//$('#wikiInfo').children("ol:lt(2)").css({"color":"black"}).appendTo('#WInfo2');
+//$('#wikiInfo').children("ol:lt(3)").css({"color":"black"}).appendTo('#WInfo3');
+
+
 }
 $(document).ready(function() {
   $('#pagetitle').hide();
