@@ -334,8 +334,13 @@ function showPage(page,text) {
   $('#Pronunciation').hide();
 
   $('.thumbinner').hide();
+  $('.references').hide();
   // now you can modify content of #wikiInfo as you like
-  $('#wikiInfo').find('a:not(.references a):not(.extiw):not([href^="#"])').attr('href',
+$('#wikiInfo').children("ol:lt(2)").attr("#defTextArea");
+$('#wikiInfo').children("ol:lt(2)").css({"color":"red","border":"2px solid red"});
+
+
+  $('#wikiInfo').find('a:not(.references a)').attr('href',
     function() { return baseURL + $(this).attr('href');
   });
   // ...

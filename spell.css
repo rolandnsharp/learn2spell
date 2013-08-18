@@ -1,10 +1,13 @@
-#wikiInfo ol{
+#WInfo{
 	position: absolute;
 	left: 10px;
 	top: 20px;
 	width: 450px;
 	line-height: 30px;
 }
+
+
+
 
 #spellbox {
 	input:focus;
