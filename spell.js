@@ -338,10 +338,10 @@ function showPage(page,text) {
   // now you can modify content of #wikiInfo as you like
 //$('#wikiInfo').children("ol:lt(2)").attr("#WInfo");
 $('#wikiInfo').children("ol:lt(2)").appendTo('#WInfo');
-//$("#WInfo").detach();
+
 $("#WInfo ol li ul").detach();
 $("#WInfo ol li dl").detach();
-
+$("#WInfo").find("ol li:nth-child(-n+2)").appendTo('#WInfo2');
 
 //$('#wikiInfo').children("ol:lt(2)").appendTo('#WInfo2');
 //$("#WInfo2 ol li ul").detach();
