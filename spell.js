@@ -55,6 +55,8 @@ chrome.extension.getBackgroundPage().wordObjectB=[
 
 
 var runArray = function (){
+ 
+
     if (wordObject.length<=0) {
         $('h2').text("");
     } else {  
@@ -67,7 +69,7 @@ var runArray = function (){
 for ( var z = i; z < wordObject.length; z=z+1 ){
 
     
-    $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td data-id='" + (z+1) + "'>"+wordObject[z].definition.innerText+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "'    class=\"icon-remove\"></i>"+"</td></tr>" );
+    $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td data-id='" + (z+1) + "'>"+wordObject[z].definition.textContent+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "'    class=\"icon-remove\"></i>"+"</td></tr>" );
     defineFunction();
 
     }
@@ -75,7 +77,7 @@ for ( var z = i; z < wordObject.length; z=z+1 ){
 for ( var z = 0; z < i; z=z+1 ){
 
     
-    $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td data-id='" + (z+1) + "'>"+wordObject[z].definition.innerText+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "'  class=\"icon-remove\"></i>"+"</td></tr>" );
+    $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td data-id='" + (z+1) + "'>"+wordObject[z].definition+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "'  class=\"icon-remove\"></i>"+"</td></tr>" );
     defineFunction();
     
     }
@@ -328,7 +330,7 @@ $('#spellbox').keypress(function(e) {
 
 
 
-var baseURL = 'http://en.wiktionary.org';
+/*var baseURL = 'http://en.wiktionary.org';
 function showPage(page,text) {
   var sourceurl = baseURL + '/wiki/' + page;
   $('#pagetitle').text(page);
@@ -352,7 +354,8 @@ $("#WInfo ol li dl").detach();
 
 $("#WInfo").find("ol li:nth-child(-n+2)").appendTo('#WInfo2 ol');
 //$('#WInfo2 ol').replaceWith().find("#WInfo ol li:nth-child(-n+2)");
-//.replaceWith
+
+
 }
 $(document).ready(function() {
   $('#pagetitle').hide();
@@ -362,12 +365,18 @@ $(document).ready(function() {
     var spellItem = document.getElementById('word'); 
 
     var defineItem = document.getElementById('WInfo2');
-    
-    
+   
+    $("#WInfo2").html(defineItem);
+   var defineItem2 = document.getElementById('WInfo2');
 
      wordObject[wordObject.length]= { word: spellItem.value, definition: defineItem };
+     console.log(defineItem2);
+
+
+
      console.log(wordObject);
      runArray();
+     
      chrome.storage.sync.set({"myValue": wordObject}); //////// save  
         
 
@@ -395,4 +404,91 @@ $(document).ready(function() {
   
 });
 
+*/
+var baseURL = 'http://en.wiktionary.org';
+function showPage(page,text) {
+  var sourceurl = baseURL + '/wiki/' + page;
+  $('#pagetitle').text(page);
+  $('#wikiInfo').html(text);
+  $('#sourceurl').attr('href',sourceurl);
+  $('#licenseinfo').show();
+ 
 
+   $('#wikiInfo').children("ol:lt(2)").attr('',
+    function() { //console.log(this);
+      $(this).find("li:nth-child(-n+2)");
+      console.log(this);
+
+      //$(" ol li ul").detach();
+     // $(" ol li ul").detach();
+     // console.log(this);
+//$("#WInfo ol li dl").detach();
+//$("#WInfo ol li dl").detach();
+  });
+   $('#wikiInfo').children("h4:lt(2)").attr('',
+    function() { //console.log(this);
+      $(this).find("li:nth-child(-n+2)");
+      console.log(this);
+
+       }); 
+//var boy = text.html("ol:lt(2)");
+
+console.log(wikiInfo);
+//child2 = text.children("ol:lt(2)");   //.textContent;
+//child3 = 
+//console.log(boy);
+
+  // now you can modify content of #wikiInfo as you like
+ //$('#wikiInfo').children("ol:lt(2)").text('#WInfo');
+//$('#wikiInfo').html("ol:lt(2)");
+//$("#WInfo ol li ul").detach();
+//$("#WInfo ol li dl").detach();
+
+//$("#WInfo").find("ol li:nth-child(-n+2)").appendTo('#WInfo2 ol');
+//$('#WInfo2 ol').replaceWith().find("#WInfo ol li:nth-child(-n+2)");
+
+/*
+}
+$(document).ready(function() {
+  $('#pagetitle').hide();
+  $('#word').change(function() {
+
+
+    var spellItem = document.getElementById('word'); 
+
+    var defineItem = document.getElementById('WInfo2');
+   
+    $("#WInfo2").html(defineItem);
+   var defineItem2 = document.getElementById('WInfo2');
+
+     wordObject[wordObject.length]= { word: spellItem.value, definition: defineItem };
+     console.log(defineItem2);
+
+
+
+     console.log(wordObject);
+     runArray();
+     
+     chrome.storage.sync.set({"myValue": wordObject}); //////// save  
+        
+
+        $('.spellList').show();
+        $('h2').text(wordObject[i].word); 
+  // ...*/
+}
+$(document).ready(function() {
+  $('#pagetitle').hide();
+  $('#word').change(function() {
+    var page = this.value;
+    $('#wikiInfo').html('...please wait...');
+    $.getJSON(baseURL+'/w/api.php?action=parse&format=json&prop=text|revid|displaytitle&page='+page,
+    function(json) {
+      if(json.parse.revid > 0) {
+        showPage(page,json.parse.text['*']);
+      } else {
+        $('#wikiInfo').html('word not found');
+        $('#licenseinfo').hide();
+      }
+    });
+  });
+});

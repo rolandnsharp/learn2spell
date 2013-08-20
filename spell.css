@@ -1,9 +1,9 @@
 #wikiInfo{
-	visibility:hidden;
+	
 }
 
 #WInfo{
-	visibility:hidden;
+	
 	position: absolute;
 	right: 10px;
 	top: 360px;
@@ -26,7 +26,7 @@
 }
 
 #WInfo3{
-	visibility:hidden;
+	
 	position: absolute;
 	right: 10px;
 	top: 750px;
