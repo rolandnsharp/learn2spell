@@ -67,14 +67,15 @@ var runArray = function (){
 for ( var z = i; z < wordObject.length; z=z+1 ){
 
     
-    $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td data-id='" + (z+1) + "'>"+wordObject[z].definition+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "'    class=\"icon-remove\"></i>"+"</td></tr>" );
+    $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td data-id='" + (z+1) + "'>"+wordObject[z].definition.innerText+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "'    class=\"icon-remove\"></i>"+"</td></tr>" );
     defineFunction();
+
     }
  
 for ( var z = 0; z < i; z=z+1 ){
 
     
-    $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td data-id='" + (z+1) + "'>"+wordObject[z].definition+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "'  class=\"icon-remove\"></i>"+"</td></tr>" );
+    $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td data-id='" + (z+1) + "'>"+wordObject[z].definition.innerText+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "'  class=\"icon-remove\"></i>"+"</td></tr>" );
     defineFunction();
     
     }
@@ -109,7 +110,7 @@ var defItem = prompt("edit definition");
 
 
 var defineFunction = function (){                    ///////////////////////////////////// dictionary 
-        $("#defTextArea").text(wordObject[i].definition);
+        $("#defTextArea").html(wordObject[i].definition.innerHTML);
 };
 
 defineFunction();
@@ -149,7 +150,10 @@ defineFunction();
 
 /////////////////////////////////////// hide show list
 $("#hideButton").click(function() {
-  $('.wordlist-container').toggle();    ///////////////////////////// toggle is causing an error where hide(); is not.
+  $('.wordlist-container').toggle();
+console.log(wordObject[wordObject.length-1].definition.innerText);
+runArray();
+      ///////////////////////////// toggle is causing an error where hide(); is not.
 });
 
 $("#refreshButton").click(function() {
@@ -196,9 +200,11 @@ $('body').on('dblclick',  "td", function (ev) {
 
 /////////////////////// <a class="btn" onClick="#"><i class=\"icon-remove\"></i></a> onclick=\"deleteLI()\"
 $('#enterListButton').click(function(){
+
 var spellItem = document.getElementById('listInput'); 
     wordObject[wordObject.length]= { word: spellItem.value, definition: "...definition..." };
         console.log(wordObject);///////////////////////////////////////////////////////
+
         document.getElementById("listInput").value = "";
         runArray();
 
@@ -232,7 +238,8 @@ $('#listInput').keypress(function(e) {
 $(document).ready(function(){   
 
     $('#showWordButton').click(function(){   // not sure if ill keep this just use the backspace method
-        $('h2').text(wordObject[i].word);
+        $('h2').text(wordObject[length-1].word);
+        runArray();
              
     });
     $('#spellbox').focus();
@@ -336,31 +343,46 @@ function showPage(page,text) {
   $('.thumbinner').hide();
   $('.references').hide();
   // now you can modify content of #wikiInfo as you like
-//$('#wikiInfo').children("ol:lt(2)").attr("#WInfo");
+
+
 $('#wikiInfo').children("ol:lt(2)").appendTo('#WInfo');
 
 $("#WInfo ol li ul").detach();
 $("#WInfo ol li dl").detach();
 
 $("#WInfo").find("ol li:nth-child(-n+2)").appendTo('#WInfo2 ol');
-
-//$('#wikiInfo').children("ol:lt(2)").appendTo('#WInfo2');
-//$("#WInfo2 ol li ul").detach();
-//$("#WInfo2 ol li dl").detach();
-//$('#WInfo').children("ol li ").appendTo('#WInfo2');
-//$('#wikiInfo').children("ol:lt(2)").css({"color":"black"}).appendTo('#WInfo2');
-//$('#wikiInfo').children("ol:lt(3)").css({"color":"black"}).appendTo('#WInfo3');
-
-
+//$('#WInfo2 ol').replaceWith().find("#WInfo ol li:nth-child(-n+2)");
+//.replaceWith
 }
 $(document).ready(function() {
   $('#pagetitle').hide();
   $('#word').change(function() {
+
+
+    var spellItem = document.getElementById('word'); 
+
+    var defineItem = document.getElementById('WInfo2');
+    
+    
+
+     wordObject[wordObject.length]= { word: spellItem.value, definition: defineItem };
+     console.log(wordObject);
+     runArray();
+     chrome.storage.sync.set({"myValue": wordObject}); //////// save  
+        
+
+        $('.spellList').show();
+        $('h2').text(wordObject[i].word); 
+        
+        
+        
+
     var page = this.value;
     $('#wikiInfo').html('...please wait...');
-   
+   runArray();
    $.getJSON(baseURL+'/w/api.php?action=parse&format=json&prop=text|revid|displaytitle&page='+page,
     function(json) {
+        
       if(json.parse.revid > 0) {
         showPage(page,json.parse.text['*']);
       } else {
@@ -368,5 +390,9 @@ $(document).ready(function() {
         $('#licenseinfo').hide();
       }
     });
+
   });
+  
 });
+
+
