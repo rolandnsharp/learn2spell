@@ -69,7 +69,7 @@ var runArray = function (){
 for ( var z = i; z < wordObject.length; z=z+1 ){
 
     
-    $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td data-id='" + (z+1) + "'>"+wordObject[z].definition.textContent+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "'    class=\"icon-remove\"></i>"+"</td></tr>" );
+    $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td data-id='" + (z+1) + "'>"+wordObject[z].definition+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "'    class=\"icon-remove\"></i>"+"</td></tr>" );
     defineFunction();
 
     }
@@ -153,7 +153,7 @@ defineFunction();
 /////////////////////////////////////// hide show list
 $("#hideButton").click(function() {
   $('.wordlist-container').toggle();
-console.log(wordObject[wordObject.length-1].definition.innerText);
+console.log(wordObject);
 runArray();
       ///////////////////////////// toggle is causing an error where hide(); is not.
 });
@@ -416,8 +416,18 @@ function showPage(page,text) {
 
    $('#wikiInfo').children("ol:lt(2)").attr('',
     function() { //console.log(this);
-      $(this).find("li:nth-child(-n+2)");
-      console.log(this);
+      //this.children("li:nth-child(-n+2)");
+  $(" ol li ul").detach();
+  $(" ol li ul").detach();
+var wikiDefine = this.textContent;
+      console.log(wikiDefine);
+
+  var spellItem = document.getElementById('word'); 
+    
+    wordObject[wordObject.length]= { word: spellItem.value, definition: wikiDefine };
+    console.log(wordObject);
+
+
 
       //$(" ol li ul").detach();
      // $(" ol li ul").detach();
@@ -425,15 +435,13 @@ function showPage(page,text) {
 //$("#WInfo ol li dl").detach();
 //$("#WInfo ol li dl").detach();
   });
-   $('#wikiInfo').children("h4:lt(2)").attr('',
-    function() { //console.log(this);
-      $(this).find("li:nth-child(-n+2)");
-      console.log(this);
+  
 
-       }); 
-//var boy = text.html("ol:lt(2)");
 
-console.log(wikiInfo);
+
+
+
+
 //child2 = text.children("ol:lt(2)");   //.textContent;
 //child3 = 
 //console.log(boy);
@@ -479,6 +487,8 @@ $(document).ready(function() {
 $(document).ready(function() {
   $('#pagetitle').hide();
   $('#word').change(function() {
+
+
     var page = this.value;
     $('#wikiInfo').html('...please wait...');
     $.getJSON(baseURL+'/w/api.php?action=parse&format=json&prop=text|revid|displaytitle&page='+page,
