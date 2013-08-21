@@ -426,7 +426,8 @@ var wikiDefine = this.textContent;
     
     wordObject[wordObject.length]= { word: spellItem.value, definition: wikiDefine };
     console.log(wordObject);
-
+    runArray();
+    chrome.storage.sync.set({"myValue": wordObject}); /////save
 
 
       //$(" ol li ul").detach();
