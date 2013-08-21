@@ -70,7 +70,7 @@ for ( var z = i; z < wordObject.length; z=z+1 ){
 
     
     $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td data-id='" + (z+1) + "'>"+wordObject[z].definition+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "'    class=\"icon-remove\"></i>"+"</td></tr>" );
-    defineFunction();
+    //defineFunction();
 
     }
  
@@ -78,7 +78,7 @@ for ( var z = 0; z < i; z=z+1 ){
 
     
     $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td data-id='" + (z+1) + "'>"+wordObject[z].definition+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "'  class=\"icon-remove\"></i>"+"</td></tr>" );
-    defineFunction();
+    //defineFunction();
     
     }
 
@@ -110,14 +110,14 @@ var defItem = prompt("edit definition");
 
 };
 
-
+/*
 var defineFunction = function (){                    ///////////////////////////////////// dictionary 
         $("#defTextArea").html(wordObject[i].definition.innerHTML);
 };
 
 defineFunction();
 
-
+*/
 
 
 
@@ -151,7 +151,7 @@ loadFunction();
 });
 
 
-defineFunction();
+//defineFunction();
 
 /////////////////////////////////////// hide show list
 $("#hideButton").click(function() {
@@ -192,12 +192,14 @@ runArray();
 $('body').on('click',  ".icon-remove", function (ev) {
     var clicked=$(ev.currentTarget);
   deleteLI(clicked.attr("data-id"));
+  runArray();  
   chrome.storage.sync.set({"myValue": wordObject}); //////// save
 });
 
 $('body').on('dblclick',  "td", function (ev) {
     var clicked=$(ev.currentTarget);
     editLI(clicked.attr("data-id"));
+    runArray();  
   chrome.storage.sync.set({"myValue": wordObject}); //////// save
 });
 
@@ -288,7 +290,7 @@ $('#spellbox').keypress(function(e) {
 
 $('#spellbox').keypress(function(e) {   
  var spell = document.getElementById('spellbox');   
- defineFunction();
+ //defineFunction();
     if(e.which == 13) {
                         
         if (spell.value===wordObject[i].word) {
@@ -301,7 +303,7 @@ $('#spellbox').keypress(function(e) {
                 
                 if (wordObject.length <= i) {          
                 i=0;    
-                defineFunction();                
+                //defineFunction();                
                 } 
             }
 
@@ -418,7 +420,7 @@ function showPage(page,text) {
   $('#licenseinfo').show();
  
 
-   $('#wikiInfo').children("ol:lt(2)").attr('',
+   $('#wikiInfo').children("ol:lt(1)").attr('',   ////////////////////////////////// change number of drfinitions eg verb and noun
     function() { //console.log(this);
       //this.children("li:nth-child(-n+2)");
   $(" ol li ul").detach();
@@ -429,7 +431,7 @@ var wikiDefine = this.textContent;
   //var spellItem = document.getElementById('word'); 
     
   //console.log(spellItem.value);
-
+    runArray();  
     wordObject[wordObject.length]= { word: page, definition: wikiDefine };
     //console.log(wordObject);
     runArray();
@@ -481,7 +483,7 @@ chrome.contextMenus.create({title: "Learn 2 Spell '%s' ",
                          //   wordObject[wordObject.length]= { word: info.selectionText, definition: wikiDefine };
                                     //////////////////////////////////////////////
 
-
+                                    runArray();  
                                     //////////////////////////////////////////////////////
 
                                     var page = info.selectionText;
