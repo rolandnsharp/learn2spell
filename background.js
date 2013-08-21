@@ -32,7 +32,7 @@ var saveFunction =function(){
 };
 
 
-
+/*
 chrome.contextMenus.removeAll();
 chrome.contextMenus.create({title: "Learn 2 Spell '%s' ", 
                              contexts:["selection"], 
@@ -54,4 +54,4 @@ chrome.contextMenus.create({title: "Learn 2 Spell '%s' ",
                                 //location.reload(); /////////// refreshes page ! probably not good
                                  }
 });
-
+*/

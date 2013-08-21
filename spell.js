@@ -119,6 +119,9 @@ defineFunction();
 
 
 
+
+
+
 $(document).ready(function () {   
     
 
@@ -409,6 +412,7 @@ var baseURL = 'http://en.wiktionary.org';
 function showPage(page,text) {
   var sourceurl = baseURL + '/wiki/' + page;
   $('#pagetitle').text(page);
+  console.log(page);
   $('#wikiInfo').html(text);
   $('#sourceurl').attr('href',sourceurl);
   $('#licenseinfo').show();
@@ -420,12 +424,12 @@ function showPage(page,text) {
   $(" ol li ul").detach();
   $(" ol li ul").detach();
 var wikiDefine = this.textContent;
-      console.log(wikiDefine);
+     // console.log(wikiDefine);
 
   var spellItem = document.getElementById('word'); 
     
     wordObject[wordObject.length]= { word: spellItem.value, definition: wikiDefine };
-    console.log(wordObject);
+    //console.log(wordObject);
     runArray();
     chrome.storage.sync.set({"myValue": wordObject}); /////save
 
@@ -436,54 +440,7 @@ var wikiDefine = this.textContent;
 //$("#WInfo ol li dl").detach();
 //$("#WInfo ol li dl").detach();
   });
-  
 
-
-
-
-
-
-//child2 = text.children("ol:lt(2)");   //.textContent;
-//child3 = 
-//console.log(boy);
-
-  // now you can modify content of #wikiInfo as you like
- //$('#wikiInfo').children("ol:lt(2)").text('#WInfo');
-//$('#wikiInfo').html("ol:lt(2)");
-//$("#WInfo ol li ul").detach();
-//$("#WInfo ol li dl").detach();
-
-//$("#WInfo").find("ol li:nth-child(-n+2)").appendTo('#WInfo2 ol');
-//$('#WInfo2 ol').replaceWith().find("#WInfo ol li:nth-child(-n+2)");
-
-/*
-}
-$(document).ready(function() {
-  $('#pagetitle').hide();
-  $('#word').change(function() {
-
-
-    var spellItem = document.getElementById('word'); 
-
-    var defineItem = document.getElementById('WInfo2');
-   
-    $("#WInfo2").html(defineItem);
-   var defineItem2 = document.getElementById('WInfo2');
-
-     wordObject[wordObject.length]= { word: spellItem.value, definition: defineItem };
-     console.log(defineItem2);
-
-
-
-     console.log(wordObject);
-     runArray();
-     
-     chrome.storage.sync.set({"myValue": wordObject}); //////// save  
-        
-
-        $('.spellList').show();
-        $('h2').text(wordObject[i].word); 
-  // ...*/
 }
 $(document).ready(function() {
   $('#pagetitle').hide();
@@ -502,4 +459,37 @@ $(document).ready(function() {
       }
     });
   });
+});
+
+
+
+chrome.contextMenus.removeAll();
+chrome.contextMenus.create({title: "Learn 2 Spell '%s' ", 
+                             contexts:["selection"], 
+                              onclick: function(info){ 
+                                wordObject[wordObject.length] = { word: info.selectionText /*, definition: " 'add definition' " */};
+                                //var page = info.selectionText;
+                                console.log(wordObject);
+                                runArray();
+                                chrome.storage.sync.set({"myValue": wordObject}); /////save
+                                                           
+                            
+
+
+                                    var page = info.selectionText;
+                                    $('#wikiInfo').html('...please wait...');
+                                    $.getJSON(baseURL+'/w/api.php?action=parse&format=json&prop=text|revid|displaytitle&page='+page,
+                                    function(json) {
+                                      if(json.parse.revid > 0) {
+                                        showPage(page,json.parse.text['*']);
+                                      } else {
+                                        $('#wikiInfo').html('word not found');
+                                        $('#licenseinfo').hide();
+                                      }
+                                    });
+                                  
+
+
+
+                                 }
 });
