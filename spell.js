@@ -412,7 +412,7 @@ var baseURL = 'http://en.wiktionary.org';
 function showPage(page,text) {
   var sourceurl = baseURL + '/wiki/' + page;
   $('#pagetitle').text(page);
-  console.log(page);
+ // console.log(page);
   $('#wikiInfo').html(text);
   $('#sourceurl').attr('href',sourceurl);
   $('#licenseinfo').show();
@@ -426,9 +426,11 @@ function showPage(page,text) {
 var wikiDefine = this.textContent;
      // console.log(wikiDefine);
 
-  var spellItem = document.getElementById('word'); 
+  //var spellItem = document.getElementById('word'); 
     
-    wordObject[wordObject.length]= { word: spellItem.value, definition: wikiDefine };
+  //console.log(spellItem.value);
+
+    wordObject[wordObject.length]= { word: page, definition: wikiDefine };
     //console.log(wordObject);
     runArray();
     chrome.storage.sync.set({"myValue": wordObject}); /////save
@@ -467,14 +469,20 @@ chrome.contextMenus.removeAll();
 chrome.contextMenus.create({title: "Learn 2 Spell '%s' ", 
                              contexts:["selection"], 
                               onclick: function(info){ 
-                                wordObject[wordObject.length] = { word: info.selectionText /*, definition: " 'add definition' " */};
+                             //   wordObject[wordObject.length] = { word: info.selectionText /*, definition: " 'add definition' " */};
                                 //var page = info.selectionText;
-                                console.log(wordObject);
-                                runArray();
-                                chrome.storage.sync.set({"myValue": wordObject}); /////save
-                                                           
-                            
+                               
+                               
+                                //console.log(wordObject);
+                              //  runArray();
+                               // chrome.storage.sync.set({"myValue": wordObject}); /////save
+                                   
 
+                         //   wordObject[wordObject.length]= { word: info.selectionText, definition: wikiDefine };
+                                    //////////////////////////////////////////////
+
+
+                                    //////////////////////////////////////////////////////
 
                                     var page = info.selectionText;
                                     $('#wikiInfo').html('...please wait...');
