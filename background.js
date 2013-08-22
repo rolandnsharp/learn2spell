@@ -7,7 +7,7 @@ var x = 0;
 var iterations = 1;
 
 var wordObjectB = [
-    { word: 'peanut', definition:'The oval seed of a South American plant, eaten as a snack or used for making oil or animal feed.' }
+    { word: 'test word', definition:'this word is used for testing' }
   
 ];
 
@@ -82,7 +82,7 @@ for ( var z = 0; z < i; z=z+1 ){
     //defineFunction();
     
     }
-
+chrome.storage.sync.set({"myValueB": wordObjectB});///save
 
 };
 
@@ -429,7 +429,7 @@ function showPage(page,text) {
 var wikiDefine = this.textContent;
      // console.log(wikiDefine);
 //var title = "This is your title";
-var wikiDefineShort = jQuery.trim(wikiDefine).substring(0, 400)  /////// shortening the definition for google local storage
+var wikiDefineShort = jQuery.trim(wikiDefine).substring(0, 500)  /////// shortening the definition for google local storage
                           .trim(this) + "...";
   //var spellItem = document.getElementById('word'); 
     

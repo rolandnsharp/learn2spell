@@ -40,7 +40,7 @@ while (WOB.length > 1)
 //wordObject[wordObject.length]= WOB[WOB.length-1];
 console.log(wordObject);
 
-
+runArray();
 chrome.storage.sync.set({"myValue": wordObject});///save
 chrome.extension.getBackgroundPage().wordObjectB=[
     { word: 'test', definition:'test deffinition' } ];
@@ -49,8 +49,6 @@ chrome.extension.getBackgroundPage().wordObjectB=[
  //console.log(selection);
 runArray();
 };
-
-
 
 
 
@@ -158,8 +156,7 @@ $("#hideButton").click(function() {
   $('.wordlist-container').toggle();
   loadBackgroundList();
   runArray();
-console.log(wordObject);
-runArray();
+
       ///////////////////////////// toggle is causing an error where hide(); is not.
 });
 
@@ -284,9 +281,9 @@ $('#spellbox').keypress(function(e) {
             if (document.getElementById("check1").checked===true) {
             $('h2').text(wordObject[i].word);}
 
-        }   
+        }    
         
-    }, 0);
+    }, 0); 
 });
 });
 
@@ -329,6 +326,7 @@ $('#spellbox').keypress(function(e) {
         
         if (document.getElementById("check1").checked===true){
         $('h2').text(wordObject[i].word);}
+
     }
 
 
@@ -432,7 +430,7 @@ function showPage(page,text) {
 var wikiDefine = this.textContent;
      // console.log(wikiDefine);
 
-  var wikiDefineShort = jQuery.trim(wikiDefine).substring(0, 400)  /////// shortening the definition for google local storage
+  var wikiDefineShort = jQuery.trim(wikiDefine).substring(0, 500)  /////// shortening the definition for google local storage
                           .trim(this) + "...";
   //var spellItem = document.getElementById('word'); 
     
