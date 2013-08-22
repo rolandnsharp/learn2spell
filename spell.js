@@ -5,9 +5,8 @@ var x = 0;
 var iterations = 1;
 
 var wordObject = [
-    { word: 'peanut', definition:'The oval seed of a South American plant, eaten as a snack or used for making oil or animal feed.' }
-    , { word: 'piano', definition:'A large keyboard musical instrument with a wooden case enclosing a soundboard and metal strings, which are struck by hammers when the...' }
-    , { word: 'cigarette', definition:'A thin cylinder of finely cut tobacco rolled in paper for smoking.' }
+    { word: 'word', definition:'this word is used for front testing' }
+    
 ];
 
 var loadFunction = function(){
@@ -26,29 +25,7 @@ var loadFunction = function(){
  }; 
 loadFunction();
 
-var loadBackgroundList = function (){
-var WOB = chrome.extension.getBackgroundPage().wordObjectB;
-console.log(WOB);
 
-
-while (WOB.length > 1)
-  {
-  wordObject[wordObject.length]= WOB[WOB.length-1];
-  WOB.splice(WOB.length-1);
-  }
-
-//wordObject[wordObject.length]= WOB[WOB.length-1];
-console.log(wordObject);
-
-runArray();
-chrome.storage.sync.set({"myValue": wordObject});///save
-chrome.extension.getBackgroundPage().wordObjectB=[
-    { word: 'test', definition:'test deffinition' } ];
- chrome.extension.getBackgroundPage().runArrayB();
- // var selection = chrome.extension.getBackgroundPage().wordObjectB;
- //console.log(selection);
-runArray();
-};
 
 
 
@@ -108,14 +85,29 @@ var defItem = prompt("edit definition");
 
 };
 
-/*
-var defineFunction = function (){                    ///////////////////////////////////// dictionary 
-        $("#defTextArea").html(wordObject[i].definition.innerHTML);
+var loadBackgroundList = function (){
+var WOB = chrome.extension.getBackgroundPage().wordObjectB;
+console.log(WOB);
+
+
+while (WOB.length > 1)
+  {
+  wordObject[wordObject.length]= WOB[WOB.length-1];
+  WOB.splice(WOB.length-1);
+  }
+
+//wordObject[wordObject.length]= WOB[WOB.length-1];
+console.log(wordObject);
+
+runArray();
+chrome.storage.sync.set({"myValue": wordObject});///save
+chrome.extension.getBackgroundPage().wordObjectB=[
+    { word: 'test', definition:'test deffinition' } ];
+ chrome.extension.getBackgroundPage().runArrayB();
+ // var selection = chrome.extension.getBackgroundPage().wordObjectB;
+ //console.log(selection);
+runArray();
 };
-
-defineFunction();
-
-*/
 
 
 
@@ -123,9 +115,8 @@ defineFunction();
 $(document).ready(function () {   
     
 
-
-
-
+console.log('hi mum');
+////////chrome.extension.getBackgroundPage().backload();
 loadFunction();
 
 
