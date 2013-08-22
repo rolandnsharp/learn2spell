@@ -506,10 +506,26 @@ chrome.contextMenus.create({title: "Learn 2 Spell '%s' ",
                                         
                                       } else {
                                         showPage(page,json.parse.text['*']);
+                                        runArrayB();
+                                          chrome.storage.sync.set({"myValueB": wordObjectB}); /////save
                                       }
+                                      
+                                      var tabs = chrome.extension.getViews({type: "tab"});
+                                      if (tabs[0]===undefined){
+                                        
+                                        console.log("not on front page");
+                                      }else{
+                                        tabs[0].loadBackgroundList();
+                                      }
+
+                                      
+                                     // 
                                     });
                                   
 
+
+                                  
+                            
 
 
                                  }

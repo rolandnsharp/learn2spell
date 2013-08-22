@@ -40,14 +40,14 @@ while (WOB.length > 1)
 //wordObject[wordObject.length]= WOB[WOB.length-1];
 console.log(wordObject);
 
-runArray();
+
 chrome.storage.sync.set({"myValue": wordObject});///save
 chrome.extension.getBackgroundPage().wordObjectB=[
     { word: 'test', definition:'test deffinition' } ];
  chrome.extension.getBackgroundPage().runArrayB();
  // var selection = chrome.extension.getBackgroundPage().wordObjectB;
  //console.log(selection);
-
+runArray();
 };
 
 
