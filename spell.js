@@ -44,7 +44,7 @@ runArray();
 chrome.storage.sync.set({"myValue": wordObject});///save
 chrome.extension.getBackgroundPage().wordObjectB=[
     { word: 'test', definition:'test deffinition' } ];
- //chrome.extension.getBackgroundPage().runArrayB();
+ chrome.extension.getBackgroundPage().runArrayB();
  // var selection = chrome.extension.getBackgroundPage().wordObjectB;
  //console.log(selection);
 
@@ -156,6 +156,8 @@ loadFunction();
 /////////////////////////////////////// hide show list
 $("#hideButton").click(function() {
   $('.wordlist-container').toggle();
+  loadBackgroundList();
+  runArray();
 console.log(wordObject);
 runArray();
       ///////////////////////////// toggle is causing an error where hide(); is not.
@@ -247,7 +249,9 @@ $(document).ready(function(){
     $('#showWordButton').click(function(){   // not sure if ill keep this just use the backspace method
         $('h2').text(wordObject[length-1].word);
         runArray();
-             
+             //chrome.extension.getBackgroundPage().runArrayB();
+ // var selection = chrome.extension.getBackgroundPage().wordObjectB;
+ //console.log(selection);
     });
     $('#spellbox').focus();
 
@@ -428,11 +432,13 @@ function showPage(page,text) {
 var wikiDefine = this.textContent;
      // console.log(wikiDefine);
 
+  var wikiDefineShort = jQuery.trim(wikiDefine).substring(0, 400)  /////// shortening the definition for google local storage
+                          .trim(this) + "...";
   //var spellItem = document.getElementById('word'); 
     
   //console.log(spellItem.value);
     runArray();  
-    wordObject[wordObject.length]= { word: page, definition: wikiDefine };
+    wordObject[wordObject.length]= { word: page, definition: wikiDefineShort };
     //console.log(wordObject);
     runArray();
     chrome.storage.sync.set({"myValue": wordObject}); /////save
@@ -465,13 +471,13 @@ $(document).ready(function() {
   });
 });
 
-
+/*
 
 chrome.contextMenus.removeAll();
 chrome.contextMenus.create({title: "Learn 2 Spell '%s' ", 
                              contexts:["selection"], 
                               onclick: function(info){ 
-                             //   wordObject[wordObject.length] = { word: info.selectionText /*, definition: " 'add definition' " */};
+                             //   wordObject[wordObject.length] = { word: info.selectionText , definition: " 'add definition' " };
                                 //var page = info.selectionText;
                                
                                
@@ -503,3 +509,5 @@ chrome.contextMenus.create({title: "Learn 2 Spell '%s' ",
 
                                  }
 });
+
+*/
