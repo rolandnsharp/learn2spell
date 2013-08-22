@@ -494,12 +494,18 @@ chrome.contextMenus.create({title: "Learn 2 Spell '%s' ",
                                     $('#wikiInfo').html('...please wait...');
                                     $.getJSON(baseURL+'/w/api.php?action=parse&format=json&prop=text|revid|displaytitle&page='+page,
                                     function(json) {
-                                      if(json.parse.revid > 0) {
-                                        showPage(page,json.parse.text['*']);
-                                      } else {
-                                        $('#wikiInfo').html('word not found');
-                                        $('#licenseinfo').hide();
+                                      console.log(json.parse);
+                                      if(json.parse === undefined) {
 
+                                        console.log("word not found");
+                                        wordObjectB[wordObjectB.length]= { word: info.selectionText, definition: "word not found - add definition" };
+                                          //console.log(wordObjectB);
+                                          runArrayB();
+                                          chrome.storage.sync.set({"myValueB": wordObjectB}); /////save
+
+                                        
+                                      } else {
+                                        showPage(page,json.parse.text['*']);
                                       }
                                     });
                                   
