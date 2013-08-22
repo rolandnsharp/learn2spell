@@ -457,7 +457,7 @@ $(document).ready(function() {
   $('#word').change(function() {
 
 
-    var page = this.value;
+    var page = this.value.toLowerCase();
     $('#wikiInfo').html('...please wait...');
     $.getJSON(baseURL+'/w/api.php?action=parse&format=json&prop=text|revid|displaytitle&page='+page,
     function(json) {
@@ -466,7 +466,7 @@ $(document).ready(function() {
                                           if(json.parse === undefined) {
 
                                             console.log("word not found");
-                                            wordObject[wordObject.length]= { word: page, definition: "word not found - add definition" };
+                                            wordObject[wordObject.length]= { word: page, definition: "word not found - double click here to add definition" };
                                               //console.log(wordObjectB);
                                               runArray();
                                               chrome.storage.sync.set({"myValue": wordObject}); /////save

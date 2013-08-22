@@ -490,7 +490,7 @@ chrome.contextMenus.create({title: "Learn 2 Spell '%s' ",
                                     console.log(wordObjectB); 
                                     //////////////////////////////////////////////////////
 
-                                    var page = info.selectionText;
+                                    var page = info.selectionText.toLowerCase();
                                     $('#wikiInfo').html('...please wait...');
                                     $.getJSON(baseURL+'/w/api.php?action=parse&format=json&prop=text|revid|displaytitle&page='+page,
                                     function(json) {
@@ -498,7 +498,7 @@ chrome.contextMenus.create({title: "Learn 2 Spell '%s' ",
                                       if(json.parse === undefined) {
 
                                         console.log("word not found");
-                                        wordObjectB[wordObjectB.length]= { word: info.selectionText, definition: "word not found - add definition" };
+                                        wordObjectB[wordObjectB.length]= { word: info.selectionText, definition: "word not found - double click here to add definition" };
                                           //console.log(wordObjectB);
                                           runArrayB();
                                           chrome.storage.sync.set({"myValueB": wordObjectB}); /////save
