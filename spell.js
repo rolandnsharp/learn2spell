@@ -465,7 +465,7 @@ $(document).ready(function() {
                                             
                                           } else {
                                             showPage(page,json.parse.text['*']);
-                                            $('#wikiInfo').replaceWith("");
+                                            $('#wikiInfo').html("<div></div>");
                                           }
 
 
