@@ -112,7 +112,7 @@ $(document).ready(function() {
     function(json) {
       if(json.parse.revid > 0) {
         showPage(page,json.parse.text['*']);
-       // $('#wikiInfoB').replaceWith("");
+       $('#wikiInfoB').html("<div></div>");
       } else {
         $('#wikiInfoB').html('word not found');
         $('#licenseinfo').hide();
@@ -159,7 +159,7 @@ chrome.contextMenus.create({title: "Learn 2 Spell '%s' ",
                                         
                                       } else {
                                         showPage(page,json.parse.text['*']);
-                                        //$('#wikiInfoB').replaceWith("");
+                                        $('#wikiInfoB').html("<div></div>");
                                         runArrayB();
                                           chrome.storage.sync.set({"myValueB": wordObjectB}); /////save
                                       }

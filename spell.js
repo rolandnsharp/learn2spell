@@ -442,6 +442,7 @@ var wikiDefine = this.textContent;
   });
 
 }
+
 $(document).ready(function() {
   $('#pagetitle').hide();
   $('#word').change(function() {
@@ -466,6 +467,7 @@ $(document).ready(function() {
                                           } else {
                                             showPage(page,json.parse.text['*']);
                                             $('#wikiInfo').html("<div></div>");
+                                            document.getElementById("word").value = "";
                                           }
 
 
