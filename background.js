@@ -11,21 +11,21 @@ var wordObjectB = [
   
 ];
 
-var loadFunction = function(){
+var loadFunctionB = function(){
     //chrome.storage.sync.set({"myValueB": wordObjectB}); activate this to get the program running. The emply storage will throw an error 
     chrome.storage.sync.get("myValueB", //// load saved data. 
-    function(val) {
-    if (val.myValueB === undefined){
+    function(valB) {
+    if (valB.myValueB === undefined){
         chrome.storage.sync.set({"myValueB": wordObjectB});
         runArrayB();
     } else {
-    wordObjectB=val.myValueB;
+    wordObjectB=valB.myValueB;
     runArrayB();
     }   
     
   });
  }; 
-loadFunction();
+loadFunctionB();
 
 var runArrayB = function (){
  
@@ -78,16 +78,16 @@ function showPage(page,text) {
       //this.children("li:nth-child(-n+2)");
   $(" ol li ul").detach();
   $(" ol li ul").detach();
-var wikiDefine = this.textContent;
+var wikiDefineB = this.textContent;
      // console.log(wikiDefine);
 //var title = "This is your title";
-var wikiDefineShort = jQuery.trim(wikiDefine).substring(0, 500)  /////// shortening the definition for google local storage
+var wikiDefineShortB = jQuery.trim(wikiDefineB).substring(0, 500)  /////// shortening the definition for google local storage
                           .trim(this) + "...";
   //var spellItem = document.getElementById('word'); 
     
   //console.log(spellItem.value);
     runArrayB();  
-    wordObjectB[wordObjectB.length]= { word: page, definition: wikiDefineShort };
+    wordObjectB[wordObjectB.length]= { word: page, definition: wikiDefineShortB };
     //console.log(wordObjectB);
     runArrayB();
     chrome.storage.sync.set({"myValueB": wordObjectB}); /////save
@@ -102,6 +102,7 @@ var wikiDefineShort = jQuery.trim(wikiDefine).substring(0, 500)  /////// shorten
 
 }
 $(document).ready(function() {
+  
   $('#pagetitle').hide();
   $('#word').change(function() {
 
@@ -119,6 +120,15 @@ $(document).ready(function() {
       }
     });
   });
+
+
+
+
+
+
+
+                                      
+
 });
 
 

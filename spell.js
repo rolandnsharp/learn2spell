@@ -4,6 +4,7 @@ var i = 0;
 var x = 0;
 var iterations = 1;
 
+
 var wordObject = [
     { word: 'word', definition:'this word is used for front testing' }
     
@@ -15,15 +16,19 @@ var loadFunction = function(){
     function(val) {
     if (val.myValue === undefined){
         chrome.storage.sync.set({"myValue": wordObject});
+        loadBackgroundList();
         runArray();
     } else {
     wordObject=val.myValue;
     runArray();
+    console.log(wordObject);
+    loadBackgroundList();
+
     }   
     
   });
  }; 
-loadFunction();
+//loadFunction();
 
 
 
@@ -57,7 +62,7 @@ for ( var z = 0; z < i; z=z+1 ){
     
     }
 
-
+//console.log(wordObject);
 };
 
 
@@ -75,8 +80,7 @@ var deleteLI = function (XX) {
 
 var editLI = function (TT){
 var defItem = prompt("edit definition");
-    console.log(defItem);
-    console.log(TT);
+    
     wordObject[TT-1]= { word: wordObject[TT-1].word, definition: defItem };
     chrome.storage.sync.set({"myValue": wordObject}); /////save
         /////////////////////////////////////////////////////
@@ -86,9 +90,10 @@ var defItem = prompt("edit definition");
 };
 
 var loadBackgroundList = function (){
+ 
 var WOB = chrome.extension.getBackgroundPage().wordObjectB;
 console.log(WOB);
-
+console.log(wordObject);
 
 while (WOB.length > 1)
   {
@@ -110,15 +115,10 @@ runArray();
 };
 
 
-
-
 $(document).ready(function () {   
-    
+loadFunction();    
 
-console.log('hi mum');
-////////chrome.extension.getBackgroundPage().backload();
-loadFunction();
-
+//loadBackgroundListOnPageLoad();
 
 
 
@@ -157,6 +157,9 @@ $("#loadButton").click(function() {
  
   loadBackgroundList();
 });
+
+
+
 
 /*var isActive;
 
@@ -329,82 +332,6 @@ $('#spellbox').keypress(function(e) {
 });
 
 
-
-/*var baseURL = 'http://en.wiktionary.org';
-function showPage(page,text) {
-  var sourceurl = baseURL + '/wiki/' + page;
-  $('#pagetitle').text(page);
-  $('#wikiInfo').html(text);
-  $('#sourceurl').attr('href',sourceurl);
-  $('#licenseinfo').show();
-  $('.audiofile').hide();
-  $('.toc').hide();
-  $('.NavContent').hide();
-  $('#Pronunciation').hide();
-
-  $('.thumbinner').hide();
-  $('.references').hide();
-  // now you can modify content of #wikiInfo as you like
-
-
-$('#wikiInfo').children("ol:lt(2)").appendTo('#WInfo');
-
-$("#WInfo ol li ul").detach();
-$("#WInfo ol li dl").detach();
-
-$("#WInfo").find("ol li:nth-child(-n+2)").appendTo('#WInfo2 ol');
-//$('#WInfo2 ol').replaceWith().find("#WInfo ol li:nth-child(-n+2)");
-
-
-}
-$(document).ready(function() {
-  $('#pagetitle').hide();
-  $('#word').change(function() {
-
-
-    var spellItem = document.getElementById('word'); 
-
-    var defineItem = document.getElementById('WInfo2');
-   
-    $("#WInfo2").html(defineItem);
-   var defineItem2 = document.getElementById('WInfo2');
-
-     wordObject[wordObject.length]= { word: spellItem.value, definition: defineItem };
-     console.log(defineItem2);
-
-
-
-     console.log(wordObject);
-     runArray();
-     
-     chrome.storage.sync.set({"myValue": wordObject}); //////// save  
-        
-
-        $('.spellList').show();
-        $('h2').text(wordObject[i].word); 
-        
-        
-        
-
-    var page = this.value;
-    $('#wikiInfo').html('...please wait...');
-   runArray();
-   $.getJSON(baseURL+'/w/api.php?action=parse&format=json&prop=text|revid|displaytitle&page='+page,
-    function(json) {
-        
-      if(json.parse.revid > 0) {
-        showPage(page,json.parse.text['*']);
-      } else {
-        $('#wikiInfo').html('word not found');
-        $('#licenseinfo').hide();
-      }
-    });
-
-  });
-  
-});
-
-*/
 var baseURL = 'http://en.wiktionary.org';
 function showPage(page,text) {
   var sourceurl = baseURL + '/wiki/' + page;
