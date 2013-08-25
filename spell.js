@@ -408,6 +408,7 @@ function showPage(page,text) {
   var sourceurl = baseURL + '/wiki/' + page;
   $('#pagetitle').text(page);
  // console.log(page);
+  //var wikibox = "";
   $('#wikiInfo').html(text);
   $('#sourceurl').attr('href',sourceurl);
   $('#licenseinfo').show();
@@ -451,6 +452,7 @@ $(document).ready(function() {
     $.getJSON(baseURL+'/w/api.php?action=parse&format=json&prop=text|revid|displaytitle&page='+page,
     function(json) {
                                           $('#loading').html('');
+
                                           console.log(json.parse);
                                           if(json.parse === undefined) {
 
@@ -463,6 +465,7 @@ $(document).ready(function() {
                                             
                                           } else {
                                             showPage(page,json.parse.text['*']);
+                                            $('#wikiInfo').replaceWith("");
                                           }
 
 
