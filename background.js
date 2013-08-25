@@ -68,12 +68,12 @@ function showPage(page,text) {
   var sourceurl = baseURL + '/wiki/' + page;
   $('#pagetitle').text(page);
  // console.log(page);
-  $('#wikiInfo').html(text);
+  $('#wikiInfoB').html(text);
   $('#sourceurl').attr('href',sourceurl);
   $('#licenseinfo').show();
  
 
-   $('#wikiInfo').children("ol:lt(1)").attr('',   ////////////////////////////////// change number of drfinitions eg verb and noun
+   $('#wikiInfoB').children("ol:lt(1)").attr('',   ////////////////////////////////// change number of drfinitions eg verb and noun
     function() { //console.log(this);
       //this.children("li:nth-child(-n+2)");
   $(" ol li ul").detach();
@@ -107,13 +107,14 @@ $(document).ready(function() {
 
 
     var page = this.value;
-    $('#wikiInfo').html('...please wait...');
+    $('#wikiInfoB').html('...please wait...');
     $.getJSON(baseURL+'/w/api.php?action=parse&format=json&prop=text|revid|displaytitle&page='+page,
     function(json) {
       if(json.parse.revid > 0) {
         showPage(page,json.parse.text['*']);
+        $('#wikiInfoB').replaceWith("");
       } else {
-        $('#wikiInfo').html('word not found');
+        $('#wikiInfoB').html('word not found');
         $('#licenseinfo').hide();
       }
     });
@@ -143,7 +144,7 @@ chrome.contextMenus.create({title: "Learn 2 Spell '%s' ",
                                     //////////////////////////////////////////////////////
 
                                     var page = info.selectionText.toLowerCase();
-                                    $('#wikiInfo').html('...please wait...');
+                                    $('#wikiInfoB').html('...please wait...');
                                     $.getJSON(baseURL+'/w/api.php?action=parse&format=json&prop=text|revid|displaytitle&page='+page,
                                     function(json) {
                                       console.log(json.parse);
@@ -158,6 +159,7 @@ chrome.contextMenus.create({title: "Learn 2 Spell '%s' ",
                                         
                                       } else {
                                         showPage(page,json.parse.text['*']);
+                                        $('#wikiInfoB').replaceWith("");
                                         runArrayB();
                                           chrome.storage.sync.set({"myValueB": wordObjectB}); /////save
                                       }
