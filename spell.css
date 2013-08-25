@@ -1,5 +1,7 @@
-#wikiInfo{
+.icon-remove:hover{
 	
+	background-color:gray;
+	border-radius: 2px;
 }
 
 #WInfo{

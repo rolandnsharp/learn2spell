@@ -145,13 +145,15 @@ loadFunction();
 /////////////////////////////////////// hide show list
 $("#hideButton").click(function() {
   $('.wordlist-container').toggle();
-  loadBackgroundList();
-  runArray();
+  //loadBackgroundList();
+  //runArray();
 
       ///////////////////////////// toggle is causing an error where hide(); is not.
 });
 
-$("#refreshButton").click(function() {
+
+
+$("#loadButton").click(function() {
  
   loadBackgroundList();
 });
@@ -462,6 +464,7 @@ $(document).ready(function() {
                                               //console.log(wordObjectB);
                                               runArray();
                                               chrome.storage.sync.set({"myValue": wordObject}); /////save
+                                              document.getElementById("word").value = "";
 
                                             
                                           } else {
