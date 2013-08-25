@@ -1,9 +1,6 @@
-
-
 var i = 0;
 var x = 0;
 var iterations = 1;
-
 
 var wordObject = [
     { word: 'word', definition:'this word is used for front testing' }
@@ -29,10 +26,6 @@ var loadFunction = function(){
   });
  }; 
 //loadFunction();
-
-
-
-
 
 var runArray = function (){
  
@@ -64,8 +57,6 @@ for ( var z = 0; z < i; z=z+1 ){
 
 //console.log(wordObject);
 };
-
-
 
 var deleteLI = function (XX) {
         wordObject.splice(XX-1, 1);
@@ -109,19 +100,12 @@ chrome.storage.sync.set({"myValue": wordObject});///save
 chrome.extension.getBackgroundPage().wordObjectB=[
     { word: 'test', definition:'test deffinition' } ];
  chrome.extension.getBackgroundPage().runArrayB();
- // var selection = chrome.extension.getBackgroundPage().wordObjectB;
- //console.log(selection);
 runArray();
 };
 
 
 $(document).ready(function () {   
 loadFunction();    
-
-//loadBackgroundListOnPageLoad();
-
-
-
 
     $('#noi').text(iterations);
     $("#plusOne").click(function() {
@@ -139,50 +123,12 @@ loadFunction();
     var x = 0;
 });
 
-
-//defineFunction();
-
-/////////////////////////////////////// hide show list
 $("#hideButton").click(function() {
   $('.wordlist-container').toggle();
-  //loadBackgroundList();
-  //runArray();
 
-      ///////////////////////////// toggle is causing an error where hide(); is not.
 });
-
-
-
-$("#loadButton").click(function() {
- 
-  loadBackgroundList();
-});
-
-
-
-
-/*var isActive;
-
-window.onfocus = function () { 
-  isActive = true; 
-}; 
-
-window.onblur = function () { 
-  isActive = false; 
-}; 
-
-// test
-setInterval(function () { 
-    loadBackgroundList();
-
-  console.log(window.isActive ? 'active' : 'inactive'); 
-}, 1000);
-
-*/
 
 runArray();  
-
-
 
 $('body').on('click',  ".icon-remove", function (ev) {
     var clicked=$(ev.currentTarget);
@@ -198,9 +144,6 @@ $('body').on('dblclick',  "td", function (ev) {
   chrome.storage.sync.set({"myValue": wordObject}); //////// save
 });
 
-
-
-/////////////////////// <a class="btn" onClick="#"><i class=\"icon-remove\"></i></a> onclick=\"deleteLI()\"
 $('#enterListButton').click(function(){
 
 var spellItem = document.getElementById('listInput'); 
@@ -233,23 +176,11 @@ $('#listInput').keypress(function(e) {
 
 });
 
-
 });
-
 
 $(document).ready(function(){   
 
-    $('#showWordButton').click(function(){   // not sure if ill keep this just use the backspace method
-        $('h2').text(wordObject[length-1].word);
-        runArray();
-             //chrome.extension.getBackgroundPage().runArrayB();
- // var selection = chrome.extension.getBackgroundPage().wordObjectB;
- //console.log(selection);
-    });
     $('#spellbox').focus();
-
-//////////////////////////////////////////////////  detect empty textbox
-
 
 var input = $('#spellbox'),
 label = $('#inputHiddenSpan');
@@ -324,131 +255,52 @@ $('#spellbox').keypress(function(e) {
         $('h2').text(wordObject[i].word);}
 
     }
-
-
 });
-
-
 });
-
 
 var baseURL = 'http://en.wiktionary.org';
 function showPage(page,text) {
   var sourceurl = baseURL + '/wiki/' + page;
   $('#pagetitle').text(page);
- // console.log(page);
   //var wikibox = "";
   $('#wikiInfo').html(text);
   $('#sourceurl').attr('href',sourceurl);
   $('#licenseinfo').show();
- 
-
-   $('#wikiInfo').children("ol:lt(1)").attr('',   ////////////////////////////////// change number of drfinitions eg verb and noun
+  $('#wikiInfo').children("ol:lt(1)").attr('',   ///////////////////////// change number of drfinitions eg verb and noun
     function() { //console.log(this);
-      //this.children("li:nth-child(-n+2)");
+  //this.children("li:nth-child(-n+2)");
   $(" ol li ul").detach();
   $(" ol li ul").detach();
-var wikiDefine = this.textContent;
-     // console.log(wikiDefine);
-
+  var wikiDefine = this.textContent;
   var wikiDefineShort = jQuery.trim(wikiDefine).substring(0, 500)  /////// shortening the definition for google local storage
                           .trim(this) + "...";
-  //var spellItem = document.getElementById('word'); 
-    
-  //console.log(spellItem.value);
     runArray();  
     wordObject[wordObject.length]= { word: page, definition: wikiDefineShort };
-    //console.log(wordObject);
     runArray();
     chrome.storage.sync.set({"myValue": wordObject}); /////save
-
-
-      //$(" ol li ul").detach();
-     // $(" ol li ul").detach();
-     // console.log(this);
-//$("#WInfo ol li dl").detach();
-//$("#WInfo ol li dl").detach();
   });
-
 }
 
 $(document).ready(function() {
   $('#pagetitle').hide();
   $('#word').change(function() {
-
-
     var page = this.value.toLowerCase();
     $('#loading').html('...please wait...');
     $.getJSON(baseURL+'/w/api.php?action=parse&format=json&prop=text|revid|displaytitle&page='+page,
     function(json) {
                                           $('#loading').html('');
-
                                           console.log(json.parse);
                                           if(json.parse === undefined) {
-
                                             console.log("word not found");
                                             wordObject[wordObject.length]= { word: page, definition: "word not found - double click here to add definition" };
-                                              //console.log(wordObjectB);
                                               runArray();
                                               chrome.storage.sync.set({"myValue": wordObject}); /////save
                                               document.getElementById("word").value = "";
-
-                                            
                                           } else {
                                             showPage(page,json.parse.text['*']);
                                             $('#wikiInfo').html("<div></div>");
                                             document.getElementById("word").value = "";
                                           }
-
-
-
-
-
     });
   });
 });
-
-
-
-
-
-/*
-
-chrome.contextMenus.removeAll();
-chrome.contextMenus.create({title: "Learn 2 Spell '%s' ", 
-                             contexts:["selection"], 
-                              onclick: function(info){ 
-                             //   wordObject[wordObject.length] = { word: info.selectionText , definition: " 'add definition' " };
-                                //var page = info.selectionText;
-                               
-                               
-                                //console.log(wordObject);
-                              //  runArray();
-                               // chrome.storage.sync.set({"myValue": wordObject}); /////save
-                                   
-
-                         //   wordObject[wordObject.length]= { word: info.selectionText, definition: wikiDefine };
-                                    //////////////////////////////////////////////
-
-                                    runArray();  
-                                    //////////////////////////////////////////////////////
-
-                                    var page = info.selectionText;
-                                    $('#wikiInfo').html('...please wait...');
-                                    $.getJSON(baseURL+'/w/api.php?action=parse&format=json&prop=text|revid|displaytitle&page='+page,
-                                    function(json) {
-                                      if(json.parse.revid > 0) {
-                                        showPage(page,json.parse.text['*']);
-                                      } else {
-                                        $('#wikiInfo').html('word not found');
-                                        $('#licenseinfo').hide();
-                                      }
-                                    });
-                                  
-
-
-
-                                 }
-});
-
-*/
