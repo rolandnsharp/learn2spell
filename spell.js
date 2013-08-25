@@ -144,38 +144,6 @@ $('body').on('dblclick',  "td", function (ev) {
   chrome.storage.sync.set({"myValue": wordObject}); //////// save
 });
 
-$('#enterListButton').click(function(){
-
-var spellItem = document.getElementById('listInput'); 
-    wordObject[wordObject.length]= { word: spellItem.value, definition: "...definition..." };
-        console.log(wordObject);///////////////////////////////////////////////////////
-
-        document.getElementById("listInput").value = "";
-        runArray();
-
-        $('.spellList').show();
-        $('h2').text(wordObject[i].word); 
-        chrome.storage.sync.set({"myValue": wordObject}); //////// save
-});
-
-$('#listInput').keypress(function(e) {
- var spellItem = document.getElementById('listInput');   ///////////////// same function as enterlistbutton
-
-
-    if(e.which == 13) {
-        
-        wordObject[wordObject.length]= { word: spellItem.value, definition: "...definition..." };
-        console.log(wordObject);
-        document.getElementById("listInput").value = "";
-        runArray();
-        $('.spellList').show();
-        $('h2').text(wordObject[i].word); 
-        chrome.storage.sync.set({"myValue": wordObject}); /////save
-                                    
-    } 
-
-});
-
 });
 
 $(document).ready(function(){   
