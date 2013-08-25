@@ -2,13 +2,9 @@ var i = 0;
 var x = 0;
 var iterations = 1;
 
-var wordObject = [
-    { word: 'word', definition:'this word is used for front testing' }
-    
-];
+var wordObject = [{ word: 'word', definition:'this word is used for front testing' }];
 
 var loadFunction = function(){
-    //chrome.storage.sync.set({"myValue": wordObject}); activate this to get the program running. The emply storage will throw an error 
     chrome.storage.sync.get("myValue", //// load saved data. 
     function(val) {
     if (val.myValue === undefined){
@@ -20,89 +16,54 @@ var loadFunction = function(){
     runArray();
     console.log(wordObject);
     loadBackgroundList();
-
     }   
-    
   });
  }; 
-//loadFunction();
 
 var runArray = function (){
- 
-
     if (wordObject.length<=0) {
         $('h2').text("");
     } else {  
         $('h2').text(wordObject[i].word);
-        };
-    
+        };    
     $(".wordlist-table tbody").empty();
-
-
-for ( var z = i; z < wordObject.length; z=z+1 ){
-
-    
+for ( var z = i; z < wordObject.length; z=z+1 ){    
     $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td data-id='" + (z+1) + "'>"+wordObject[z].definition+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "'    class=\"icon-remove\"></i>"+"</td></tr>" );
-    //defineFunction();
-
     }
- 
 for ( var z = 0; z < i; z=z+1 ){
-
-    
     $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td data-id='" + (z+1) + "'>"+wordObject[z].definition+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "'  class=\"icon-remove\"></i>"+"</td></tr>" );
-    //defineFunction();
-    
     }
-
-//console.log(wordObject);
 };
 
 var deleteLI = function (XX) {
         wordObject.splice(XX-1, 1);
         runArray(); 
         if (wordObject.length <= 0){
-
         } else {
         $('h2').text(wordObject[i].word);
         }
         };
 
-
 var editLI = function (TT){
 var defItem = prompt("edit definition");
-    
     wordObject[TT-1]= { word: wordObject[TT-1].word, definition: defItem };
     chrome.storage.sync.set({"myValue": wordObject}); /////save
-        /////////////////////////////////////////////////////
-        
-        runArray();
-
+    runArray();
 };
 
 var loadBackgroundList = function (){
- 
 var WOB = chrome.extension.getBackgroundPage().wordObjectB;
-console.log(WOB);
-console.log(wordObject);
-
 while (WOB.length > 1)
   {
   wordObject[wordObject.length]= WOB[WOB.length-1];
   WOB.splice(WOB.length-1);
   }
-
-//wordObject[wordObject.length]= WOB[WOB.length-1];
-console.log(wordObject);
-
 runArray();
 chrome.storage.sync.set({"myValue": wordObject});///save
-chrome.extension.getBackgroundPage().wordObjectB=[
-    { word: 'test', definition:'test deffinition' } ];
- chrome.extension.getBackgroundPage().runArrayB();
+chrome.extension.getBackgroundPage().wordObjectB=[ { word: 'test', definition:'front to back test deffinition' } ];
+chrome.extension.getBackgroundPage().runArrayB();
 runArray();
 };
-
 
 $(document).ready(function () {   
 loadFunction();    
@@ -125,10 +86,9 @@ loadFunction();
 
 $("#hideButton").click(function() {
   $('.wordlist-container').toggle();
-
 });
 
-runArray();  
+runArray();  //////needed?
 
 $('body').on('click',  ".icon-remove", function (ev) {
     var clicked=$(ev.currentTarget);
@@ -143,11 +103,9 @@ $('body').on('dblclick',  "td", function (ev) {
     runArray();  
   chrome.storage.sync.set({"myValue": wordObject}); //////// save
 });
-
 });
 
 $(document).ready(function(){   
-
     $('#spellbox').focus();
 
 var input = $('#spellbox'),
@@ -175,14 +133,10 @@ $('#spellbox').keypress(function(e) {
             
             if (document.getElementById("check1").checked===true) {
             $('h2').text(wordObject[i].word);}
-
         }    
-        
     }, 0); 
 });
 });
-
-//////////////////////////////////////////////////////
 
 $('#spellbox').keypress(function(e) {   
  var spell = document.getElementById('spellbox');   
@@ -221,7 +175,6 @@ $('#spellbox').keypress(function(e) {
         
         if (document.getElementById("check1").checked===true){
         $('h2').text(wordObject[i].word);}
-
     }
 });
 });
@@ -252,7 +205,7 @@ function showPage(page,text) {
 $(document).ready(function() {
   $('#pagetitle').hide();
   $('#word').change(function() {
-    var page = this.value.toLowerCase();
+    var page = this.value.toLowerCase(); /////////// maybe change this later
     $('#loading').html('...please wait...');
     $.getJSON(baseURL+'/w/api.php?action=parse&format=json&prop=text|revid|displaytitle&page='+page,
     function(json) {
