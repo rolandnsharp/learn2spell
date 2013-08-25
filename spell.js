@@ -447,10 +447,10 @@ $(document).ready(function() {
 
 
     var page = this.value.toLowerCase();
-    $('#wikiInfo').html('...please wait...');
+    $('#loading').html('...please wait...');
     $.getJSON(baseURL+'/w/api.php?action=parse&format=json&prop=text|revid|displaytitle&page='+page,
     function(json) {
-          
+                                          $('#loading').html('');
                                           console.log(json.parse);
                                           if(json.parse === undefined) {
 
