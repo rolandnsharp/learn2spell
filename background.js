@@ -78,6 +78,7 @@ $(document).ready(function() {
   });                 
 });
 
+
 chrome.contextMenus.removeAll();
 chrome.contextMenus.create({title: "Learn 2 Spell '%s' ", 
                              contexts:["selection"], 
