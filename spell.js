@@ -56,9 +56,13 @@ var deleteLI = function (XX) {
 
 var editLI = function (TT){
 var defItem = prompt("edit definition");
+    if (defItem===null){
+      return;
+    }else{
     wordObject[TT-1]= { word: wordObject[TT-1].word, definition: defItem };
     chrome.storage.sync.set({"myValue": wordObject}); /////save
     runArray();
+    }
 };
 
 var loadBackgroundList = function (){
