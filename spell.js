@@ -5,13 +5,10 @@ var x = 0;
 var iterations = 1;
 
 var wordObject = [
-{ word: 'read', definition:'Using Learn2Spell is easy. If, while browsing the web, you come accross a word that you would like to drill into memory. Highlight the word, right-click, and select \'Learn2Spell\'.' },
+{ word: 'read', definition:'Using Learn2Spell is easy. If, while browsing the web, you come across a word that you wish to drill into memory. Highlight the word, right-click, and select \'Learn2Spell\'.' },
 { word: 'here', definition:'You can also add words manually with the input box above.' },
-{ word: 'before', definition:'After your word is added to this list, it will automaticially take a definition from Wikionary. If you are not given a definition or are unhappy with the one given just double-click the definition text to add your own.' },
-{ word: 'starting', definition:'this word is used for front testing' },
-{ word: 'word', definition:'After you have some words in the list that you wish to drill. Start using the touch-typing area. touch-typing is recomemded for drilling the words into memory as it utilizes your muscle memory. If you can\'t touch-type try typing acadamy' },
-{ word: 'word', definition:'this word is used for front testing' },
-{ word: 'word', definition:'this word is used for front testing' }
+{ word: 'before', definition:'After your word is added to this list, it will automatically take a definition from Wiktionary. If you are not given a definition or are unhappy with the one given just double-click the definition text to add your own.' },
+{ word: 'word', definition:'After you have some words in the list that you wish to drill. Start using the touch-typing area. touch-typing is recommended for drilling the words into memory as it utilizes your muscle memory.' },
 ];
 
 var loadFunction = function(){

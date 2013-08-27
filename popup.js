@@ -95,7 +95,7 @@ loadFunction();
 });
 
 $("#hideButton").click(function() {
-  chrome.tabs.update(null, {url:"index.html"});
+  chrome.tabs.create({url:"index.html"});
 });
 
 runArray();  //////needed?
