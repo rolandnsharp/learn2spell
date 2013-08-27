@@ -78,22 +78,6 @@ runArray();
 $(document).ready(function () {   
 loadFunction();    
 
-    $('#noi').text(iterations);
-    $("#plusOne").click(function() {
-    iterations = iterations +1;
-    $('#noi').text(iterations);
-    var x = 0;
-});
-    $("#minusOne").click(function() {
-        if (iterations<=2){
-            iterations = 2;
-            var x = 0;
-        }
-    iterations = iterations -1;
-    $('#noi').text(iterations);
-    var x = 0;
-});
-
 $("#hideButton").click(function() {
   chrome.tabs.create({url:"index.html"});
 });

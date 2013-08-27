@@ -1,5 +1,3 @@
-
-
 var i = 0;
 var x = 0;
 var iterations = 1;
@@ -10,6 +8,19 @@ var wordObject = [
 { word: 'before', definition:'After your word is added to this list, it will automatically take a definition from Wiktionary. If you are not given a definition or are unhappy with the one given just double-click the definition text to add your own.' },
 { word: 'word', definition:'After you have some words in the list that you wish to drill. Start using the touch-typing area. touch-typing is recommended for drilling the words into memory as it utilizes your muscle memory.' },
 ];
+
+
+var oneStep = function () {
+   
+   var shifted = wordObject.shift();
+   wordObject[wordObject.length] = shifted;
+   console.log(wordObject);
+   chrome.storage.sync.set({"myValue": wordObject});//
+
+};
+
+
+
 
 var loadFunction = function(){
     chrome.storage.sync.get("myValue", //// load saved data. 
@@ -34,12 +45,10 @@ var runArray = function (){
         $('h2').text(wordObject[i].word);
         };    
     $(".wordlist-table tbody").empty();
-for ( var z = i; z < wordObject.length; z=z+1 ){    
+for ( var z = 0; z < wordObject.length; z=z+1 ){    
     $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td data-id='" + (z+1) + "'>"+wordObject[z].definition+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "'    class=\"icon-remove\"></i>"+"</td></tr>" );
     }
-for ( var z = 0; z < i; z=z+1 ){
-    $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td data-id='" + (z+1) + "'>"+wordObject[z].definition+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "'  class=\"icon-remove\"></i>"+"</td></tr>" );
-    }
+    //oneStep();
 };
 
 var deleteLI = function (XX) {
@@ -97,6 +106,7 @@ loadFunction();
 
 $("#hideButton").click(function() {
   $('.wordlist-container').toggle();
+  
 });
 
 runArray();  //////needed?
@@ -160,7 +170,8 @@ $('#spellbox').keypress(function(e) {
             
             if (x%iterations===0) {
                 //alert('press enter and continue to the next word');///////////////////////// alert off
-                i = (i+1);
+                //i = (i+1);
+                oneStep();
                 
                 if (wordObject.length <= i) {          
                 i=0;    
@@ -172,8 +183,7 @@ $('#spellbox').keypress(function(e) {
             if (document.getElementById("check1").checked===true){
             $('h2').text(wordObject[i].word);}
             $('#spellbox').animate({backgroundColor: '#5bd642'}).delay(40).animate({backgroundColor: '#ffffff'});
-            runArray(); 
-
+            runArray();
             document.getElementById("spellbox").value = "";
             //$('.spellList').hide();
              } else {
@@ -206,10 +216,20 @@ function showPage(page,text) {
   var wikiDefine = this.textContent;
   var wikiDefineShort = jQuery.trim(wikiDefine).substring(0, 500)  /////// shortening the definition for google local storage
                           .trim(this) + "...";
-    runArray();  
+    runArray(); 
+    console.log(i);
+    
+   
+   
+
     wordObject[wordObject.length]= { word: page, definition: wikiDefineShort };
     runArray();
     chrome.storage.sync.set({"myValue": wordObject}); /////save
+
+ 
+
+
+
   });
 }
 

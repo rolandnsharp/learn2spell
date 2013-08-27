@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-<html>
-    
     <head>
         <title>
-            Learn to Spell
+            Learn 2 Spell
         </title>
         <link rel='stylesheet' type='text/css' href='spell.css' />
         <link rel='stylesheet' type='text/css' href="bootstrap.min.css" />
@@ -13,28 +11,120 @@
         <script src='jquery.animate-colors-min.js'>
                 
         </script>
-        <script type='text/javascript' src='spell.js'>
+        <script type='text/javascript' src='about.js'>
                 
         </script>
+
+
+
     </head>
     
     <body>
-   
+        <div class="navbar navbar-inverse">
+            <div class="navbar-inner">
+        <div class="container" style="width: 940px;">
+                <a class="brand" href="/index.html">Learn2Spell</a>
+                <ul class="nav">
+                    <li class="active">
+                        <a href="/index.html">Home</a>
+                    </li>
+                    <li>
+                        <!--<a href="/about.html">About</a>-->
+                    </li>
+                    
+                </ul>
+        </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row" style="margin-top: 40px;">
+                <div class="span12 ">
+                    <!--Body content-->
+                            <div style="float: right;">
+                             
+
+
+<div class="input-prepend input-append">
+  <span class="add-on">Repeat</span>
+   <span id="noi" class="add-on"></span>
+  <button id="minusOne" class="btn" type="button">-1</button>
+  <button id="plusOne" class="btn" type="button">+1</button>
+</div>
+<input id="check1" type="checkbox"> Show spelling word while typing
+</br>
+
+
+
+                            </div>
+
+
+
+                            <h2 style="position:absolute;">
+                            </h2>
+
+
+
+
+                            <input id="spellbox" placeHolder="Type here" />
+                            <br />
+                            <div  id="defTextArea"></div>
+                          
+                </div>
+            </div>
+            
+       <button id="hideButton" class="btn btn-inverse btn-block" type="button" style="margin-top: 50px;">
+                        Show/Hide List
+                    </button>
   
-  <script type="text/javascript">
+                    <div class="wordlist-container" >
+          <!--  <h3>Word List</h3>-->
+                  
 
 
-  </script>
 
-  Lookup a word: <input type="text" id="word" />
+                    <div class="input-append">
+             
+                        </button>
+
+                    </div><div> 
+<div id="loading">Add spelling word: </div>
   <h1 id='pagetitle'></h1>
-  <div id="wikiInfo"></div>
-  <div id="licenseinfo" style="font-size:small; display:none;">
+  
+  
+ 
+</div> <div id="licenseinfo" style="font-size:small; display:none;">
     Modified original content <a id='sourceurl'>from Wiktionary</a>.
-    Text available under <a href="http:Content is available under the <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution/Share-Alike License</a>.
-  </div>
-</body>
-</html>
+    
+  </div><input placeholder="Search Wikionary - Press Enter" type="text" id="word">
+
+  
+            <table class="table wordlist-table">
+              <thead>
+                <tr>
+                  <th>Word</th>
+                  <th>Definition</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+
+
+            </div>
+        <span style="display: none;" id="inputHiddenSpan" class="add-on">
+        </span>
+
+
+
+
+
+<div id="wikiInfo"></div>
+
     </body>
 
 </html>
