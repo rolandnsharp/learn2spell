@@ -37,20 +37,25 @@ var runArray = function (){
         $('h2').text(wordObject[i].word);
         };    
     $(".wordlist-table tbody").empty();
-for ( var z = i; z < wordObject.length; z=z+1 ){    
-    $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "'    class=\"icon-remove\"></i>"+"</td></tr>" );
-    }
-for ( var z = 0; z < i; z=z+1 ){
-    $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "'  class=\"icon-remove\"></i>"+"</td></tr>" );
+for ( var z = 0; z < wordObject.length; z=z+1 ){    
+    $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td>"+"<i id=\"deleteLIP" + (z+1) + "\" data-id='" + (z+1) + "'    class=\"icon-remove\"></i>"+"</td></tr>" );
     }
 };
 
-var deleteLI = function (XX) {
+var deleteLIP = function (XX) {
         wordObject.splice(XX-1, 1);
         runArray(); 
         if (wordObject.length <= 0){
         } else {
         $('h2').text(wordObject[i].word);
+        }
+        var tabs = chrome.extension.getViews({type: "tab"});
+        if (tabs[0]===undefined){
+                                        
+        console.log("not on front page");
+        }else{
+         console.log(tabs[0]);
+        tabs[0].deleteLI(XX);
         }
         };
 
@@ -86,7 +91,7 @@ runArray();  //////needed?
 
 $('body').on('click',  ".icon-remove", function (ev) {
     var clicked=$(ev.currentTarget);
-  deleteLI(clicked.attr("data-id"));
+  deleteLIP(clicked.attr("data-id"));
   runArray();  
   chrome.storage.sync.set({"myValue": wordObject}); //////// save
 });
