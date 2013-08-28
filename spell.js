@@ -35,10 +35,8 @@ var loadFunction = function(){
 var runArray = function (){
     if (wordObject.length<=0) {
         $('h2').text("");
-        $("#PN").html("<a id=\"pronounce\" href=\"\" class=\"btn btn-small\">     ...</a>");
     } else {  
-        $('h2').text(wordObject[i].word);
-        $("#PN").html("<a id=\"pronounce\" href=\"\" class=\"btn btn-small\">"+wordObject[0].word+" <i class=\"icon-volume-up\"></i></a>"); 
+        $('h2').html(wordObject[i].word+"<i class=\"icon-volume-up\"></i>");
         };    
     $(".wordlist-table tbody").empty();
 for ( var z = 0; z < wordObject.length; z=z+1 ){    
@@ -51,7 +49,7 @@ var deleteLI = function (XX) {
         runArray(); 
         if (wordObject.length <= 0){
         } else {
-        $('h2').text(wordObject[i].word);
+        $('h2').html(wordObject[i].word+"<i class=\"icon-volume-up\"></i>");
         }
         };
 
@@ -102,12 +100,11 @@ loadFunction();
     var x = 0;
 });
 
-  
-$("#PN").click(function() {
-  window.open('http://www.forvo.com/word/'+wordObject[0].word+"",'_newtab');
-    
-    return false;
 
+$('body').on('click',  ".icon-volume-up", function () {
+  
+  window.location.reload();//// change this
+  window.open('http://www.forvo.com/word/'+wordObject[0].word+"",'_newtab');
 });
 
 
@@ -115,7 +112,7 @@ $("#hideButton").click(function() {
   $('.wordlist-container').toggle();
 });
 
-runArray();  //////needed?
+//runArray();  //////needed?
 
 $('body').on('click',  ".icon-remove", function (ev) {
     var clicked=$(ev.currentTarget);
@@ -145,19 +142,19 @@ $('#spellbox').keypress(function(e) {
         var spell = document.getElementById('spellbox');
         
         if (spell.value==="" && x%iterations===0) {             
-            $('h2').text(wordObject[i].word);
+            $('h2').html(wordObject[i].word+"<i class=\"icon-volume-up\"></i>");
                     
         }  else if (e.which == 8 && spell.value==="") {     //e.which == 8 not working (reveal word when backspace
-            $('h2').text(wordObject[i].word);
+            $('h2').html(wordObject[i].word+"<i class=\"icon-volume-up\"></i>");
                                      // empty #spellbox. Eventult make it reveal on backspace 
         }  else if (spell.value==="" && x%iterations!==0) {
             $('h2').text("Spell it again!");
             if (document.getElementById("check1").checked===true){
-            $('h2').text(wordObject[i].word);}
+            $('h2').html(wordObject[i].word+"<i class=\"icon-volume-up\"></i>");}
         }  else {                                           // of last charactor.
             $('h2').empty(); 
             if (document.getElementById("check1").checked===true) {
-            $('h2').text(wordObject[i].word);}
+            $('h2').html(wordObject[i].word+"<i class=\"icon-volume-up\"></i>");}
         }    
     }, 0); 
 });
@@ -171,9 +168,9 @@ $('#spellbox').keypress(function(e) {
             if (x%iterations===0) {
                 oneStep();    //////////////// new oneStep method
             }
-            $('h2').text(wordObject[i].word);
+            $('h2').html(wordObject[i].word+"<i class=\"icon-volume-up\"></i>");
             if (document.getElementById("check1").checked===true){
-            $('h2').text(wordObject[i].word);}
+            $('h2').html(wordObject[i].word+"<i class=\"icon-volume-up\"></i>");}
             $('#spellbox').animate({backgroundColor: '#5bd642'}).delay(40).animate({backgroundColor: '#ffffff'});
             runArray();
             document.getElementById("spellbox").value = "";
@@ -184,10 +181,10 @@ $('#spellbox').keypress(function(e) {
                     }
 
     } else if (e.which == 8 && spell.value==="") {  //same here . e.which 8 not working
-        $('h2').text(wordObject[i].word); 
+        $('h2').html(wordObject[i].word+"<i class=\"icon-volume-up\"></i>"); 
         
         if (document.getElementById("check1").checked===true){
-        $('h2').text(wordObject[i].word);}
+        $('h2').html(wordObject[i].word+"<i class=\"icon-volume-up\"></i>");}
     }
 });
 });
