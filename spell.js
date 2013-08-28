@@ -104,12 +104,19 @@ loadFunction();
 $('body').on('click',  ".icon-volume-up", function () {
   
   window.location.reload();//// change this
-  window.open('http://www.forvo.com/word/'+wordObject[0].word+"",'_newtab');
+  window.open('http://www.forvo.com/word/'+wordObject[0].word+"",'_newtab'); 
 });
 
 
 $("#hideButton").click(function() {
   $('.wordlist-container').toggle();
+});
+$("#reverseButton").click(function() {
+  console.log("brown snakes");
+  wordObject = wordObject.reverse();
+  chrome.storage.sync.set({"myValue": wordObject}); //////// save
+  window.location.reload();//// change this
+  runArray;
 });
 
 //runArray();  //////needed?
