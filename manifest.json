@@ -1,7 +1,7 @@
 {
   "name": "Learn 2 Spell",
   "description": "Learn spelling and vocabulary with touch-typing drills.",
-  "version": "1.6",  
+  "version": "1.7",  
   "manifest_version": 2,
 
 "content_security_policy": "script-src 'self' https://en.wiktionary.org; object-src 'self'",
