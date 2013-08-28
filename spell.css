@@ -7,14 +7,14 @@ html body {
 .icon-volume-up{
 
 	position:relative;
-	left: 10px;
+	left: 14px;
 	top: 10px;
 
 }
 .icon-volume-up:hover{
 
 	position:relative;
-	left: 10px;
+	left: 14px;
 	top: 10px;
 	background-color:gray;
 	border-radius: 2px;
