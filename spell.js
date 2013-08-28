@@ -100,6 +100,13 @@ loadFunction();
     var x = 0;
 });
 
+
+$("#pronounce").click(function() {
+  window.open('http://www.forvo.com/word/'+wordObject[0].word+"",'_newtab');
+    return false;
+});
+
+
 $("#hideButton").click(function() {
   $('.wordlist-container').toggle();
 });

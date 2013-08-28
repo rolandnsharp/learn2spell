@@ -4,6 +4,12 @@ html body {
            
 }
 
+#pronounce {
+	position: absolute;
+	left: 400px;
+	top: 70px;
+}
+
 .icon-remove:hover{
 	
 	background-color:gray;
