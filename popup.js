@@ -65,11 +65,9 @@ var defItem = prompt("edit definition");
 
 var loadBackgroundList = function (){
 var WOB = chrome.extension.getBackgroundPage().wordObjectB;
-console.log(WOB);
 WOB.push( { word: 'test', definition:'front to back test deffinition' } );          //
 WOB.reverse();                                                                      //// clean this up.
 WOB.pop();                                                                          //
-console.log(WOB);
 while (WOB.length > 1)
   {
   wordObject[wordObject.length]= WOB[WOB.length-1];

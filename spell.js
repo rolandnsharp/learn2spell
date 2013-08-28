@@ -9,8 +9,7 @@ var wordObject = [
 { word: 'starting', definition:'After you have some words in the list that you wish to drill, start using the touch-typing area. Touch-typing is recommended for drilling words as it utilizes your muscle memory.' },
 ];
 
-var oneStep = function () {
-   
+var oneStep = function () {  
    var shifted = wordObject.shift();
    wordObject[wordObject.length] = shifted;
    console.log(wordObject);
@@ -67,11 +66,9 @@ var defItem = prompt("edit definition");
 
 var loadBackgroundList = function (){
 var WOB = chrome.extension.getBackgroundPage().wordObjectB;
-console.log(WOB);
 WOB.push( { word: 'test', definition:'front to back test deffinition' } );          //
 WOB.reverse();                                                                      //// clean this up.
 WOB.pop();                                                                          //
-console.log(WOB);
 while (WOB.length > 1)
   {
   wordObject[wordObject.length]= WOB[WOB.length-1];
@@ -161,14 +158,7 @@ $('#spellbox').keypress(function(e) {
         if (spell.value===wordObject[i].word) {
             x=x+1;
             if (x%iterations===0) {
-                //alert('press enter and continue to the next word');///////////////////////// alert off
-                //i = (i+1);
-                oneStep();
-                
-                if (wordObject.length <= i) {          
-                i=0;    
-                //defineFunction();                
-                } 
+                oneStep();    //////////////// new oneStep method
             }
             $('h2').text(wordObject[i].word);
             if (document.getElementById("check1").checked===true){
@@ -201,13 +191,12 @@ function showPage(page,text) {
   $('#licenseinfo').show();
   $('#wikiInfo').children("ol:lt(1)").attr('',   ///////////////////////// change number of drfinitions eg verb and noun
     function() { //console.log(this);
-  //this.children("li:nth-child(-n+2)");
+  //this.children("li:nth-child(-n+2)");   no longer works now wikiDefine is a variable 
   $(" ol li ul").detach();
   $(" ol li ul").detach();
   var wikiDefine = this.textContent;
-  var wikiDefineShort = jQuery.trim(wikiDefine).substring(0, 500)  /////// shortening the definition for google local storage
+  var wikiDefineShort = jQuery.trim(wikiDefine).substring(0, 500)  /////// shorten the definition for google local storage
                           .trim(this) + "...";
-    //runArray(); 
     wordObject[wordObject.length]= { word: page, definition: wikiDefineShort };
     runArray();
     chrome.storage.sync.set({"myValue": wordObject}); /////save
