@@ -1,8 +1,5 @@
 
 
-var ib = 0;
-var xb = 0;
-
 var wordObjectB = [{ word: 'test word', definition:'this word is used for back testing' }];
 
 var loadFunctionB = function(){
@@ -21,19 +18,6 @@ var loadFunctionB = function(){
 loadFunctionB();
 
 var runArrayB = function (){
-    if (wordObjectB.length<=0) {
-        $('h2').text("");
-    } else {  
-        $('h2').text(wordObjectB[ib].word);
-        };
-    $(".wordlist-table tbody").empty();
-for ( var zb = ib; zb < wordObjectB.length; zb=zb+1 ){   
-    $(".wordlist-table tbody").append("<tr><td>"+wordObjectB[zb].word+"</td><td data-id='" + (zb+1) + "'>"+wordObjectB[zb].definition+"</td><td>"+"<i id=\"deleteLI" + (zb+1) + "\" data-id='" + (zb+1) + "'    class=\"icon-remove\"></i>"+"</td></tr>" );
-    } 
-for ( var zb = 0; zb < ib; zb=zb+1 ){
-  
-    $(".wordlist-table tbody").append("<tr><td>"+wordObjectB[zb].word+"</td><td data-id='" + (zb+1) + "'>"+wordObjectB[zb].definition+"</td><td>"+"<i id=\"deleteLI" + (zb+1) + "\" data-id='" + (zb+1) + "'  class=\"icon-remove\"></i>"+"</td></tr>" );
-    }
 chrome.storage.sync.set({"myValueB": wordObjectB});///save
 };
 

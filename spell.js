@@ -3,12 +3,11 @@ var x = 0;
 var iterations = 1;
 
 var wordObject = [
-{ word: 'read', definition:'Using Learn2Spell is easy. If, while browsing the web, you come across a word that you wish to drill into memory. Highlight the word, right-click, and select \'Learn2Spell\'.' },
-{ word: 'here', definition:'You can also add words manually with the input box above.' },
-{ word: 'before', definition:'After your word is added to this list, it will automatically take a definition from Wiktionary. If you are not given a definition or are unhappy with the one given just double-click the definition text to add your own.' },
-{ word: 'word', definition:'After you have some words in the list that you wish to drill. Start using the touch-typing area. touch-typing is recommended for drilling the words into memory as it utilizes your muscle memory.' },
+{ word: 'read', definition:'Using Learn2Spell is easy. If, while browsing the web, you come across a word that you wish to drill into memory, highlight the word, right-click, and select \'Learn2Spell\'.' },
+{ word: 'this', definition:'You can also add words manually with the input box above.' },
+{ word: 'before', definition:'After your word is added to this list, it will automatically take a definition from Wiktionary. If you are not given a definition or are unhappy with the one given, double-click the definition text to add your own.' },
+{ word: 'starting', definition:'After you have some words in the list that you wish to drill, start using the touch-typing area. Touch-typing is recommended for drilling words as it utilizes your muscle memory.' },
 ];
-
 
 var oneStep = function () {
    
@@ -16,11 +15,7 @@ var oneStep = function () {
    wordObject[wordObject.length] = shifted;
    console.log(wordObject);
    chrome.storage.sync.set({"myValue": wordObject});//
-
 };
-
-
-
 
 var loadFunction = function(){
     chrome.storage.sync.get("myValue", //// load saved data. 
@@ -48,7 +43,6 @@ var runArray = function (){
 for ( var z = 0; z < wordObject.length; z=z+1 ){    
     $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td data-id='" + (z+1) + "'>"+wordObject[z].definition+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "'    class=\"icon-remove\"></i>"+"</td></tr>" );
     }
-    //oneStep();
 };
 
 var deleteLI = function (XX) {
@@ -73,6 +67,7 @@ var defItem = prompt("edit definition");
 
 var loadBackgroundList = function (){
 var WOB = chrome.extension.getBackgroundPage().wordObjectB;
+
 while (WOB.length > 1)
   {
   wordObject[wordObject.length]= WOB[WOB.length-1];
@@ -106,7 +101,6 @@ loadFunction();
 
 $("#hideButton").click(function() {
   $('.wordlist-container').toggle();
-  
 });
 
 runArray();  //////needed?
@@ -150,8 +144,6 @@ $('#spellbox').keypress(function(e) {
             $('h2').text(wordObject[i].word);}
         }  else {                                           // of last charactor.
             $('h2').empty(); 
-            //$('.wordlist-container').hide();    ///////////////////////////// toggle is causing an error where hide(); is not.
-            
             if (document.getElementById("check1").checked===true) {
             $('h2').text(wordObject[i].word);}
         }    
@@ -161,13 +153,9 @@ $('#spellbox').keypress(function(e) {
 
 $('#spellbox').keypress(function(e) {   
  var spell = document.getElementById('spellbox');   
- //defineFunction();
-    if(e.which == 13) {
-                        
+    if(e.which == 13) {               
         if (spell.value===wordObject[i].word) {
-            
             x=x+1;
-            
             if (x%iterations===0) {
                 //alert('press enter and continue to the next word');///////////////////////// alert off
                 //i = (i+1);
@@ -178,7 +166,6 @@ $('#spellbox').keypress(function(e) {
                 //defineFunction();                
                 } 
             }
-
             $('h2').text(wordObject[i].word);
             if (document.getElementById("check1").checked===true){
             $('h2').text(wordObject[i].word);}
@@ -216,23 +203,12 @@ function showPage(page,text) {
   var wikiDefine = this.textContent;
   var wikiDefineShort = jQuery.trim(wikiDefine).substring(0, 500)  /////// shortening the definition for google local storage
                           .trim(this) + "...";
-    runArray(); 
-    console.log(i);
-    
-   
-   
-
+    //runArray(); 
     wordObject[wordObject.length]= { word: page, definition: wikiDefineShort };
     runArray();
     chrome.storage.sync.set({"myValue": wordObject}); /////save
-
- 
-
-
-
   });
 }
-
 $(document).ready(function() {
   $('#pagetitle').hide();
   $('#word').change(function() {
