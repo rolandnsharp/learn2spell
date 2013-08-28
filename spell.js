@@ -35,8 +35,10 @@ var loadFunction = function(){
 var runArray = function (){
     if (wordObject.length<=0) {
         $('h2').text("");
+        $("#PN").html("<a id=\"pronounce\" href=\"\" class=\"btn btn-small\">     ...</a>");
     } else {  
         $('h2').text(wordObject[i].word);
+        $("#PN").html("<a id=\"pronounce\" href=\"\" class=\"btn btn-small\">"+wordObject[0].word+" <i class=\"icon-volume-up\"></i></a>"); 
         };    
     $(".wordlist-table tbody").empty();
 for ( var z = 0; z < wordObject.length; z=z+1 ){    
@@ -100,10 +102,12 @@ loadFunction();
     var x = 0;
 });
 
-
-$("#pronounce").click(function() {
+  
+$("#PN").click(function() {
   window.open('http://www.forvo.com/word/'+wordObject[0].word+"",'_newtab');
+    
     return false;
+
 });
 
 
