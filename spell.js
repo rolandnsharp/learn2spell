@@ -12,7 +12,6 @@ var wordObject = [
 var oneStep = function () {  
    var shifted = wordObject.shift();
    wordObject[wordObject.length] = shifted;
-   console.log(wordObject);
    chrome.storage.sync.set({"myValue": wordObject});//
 };
 
@@ -26,7 +25,6 @@ var loadFunction = function(){
     } else {
     wordObject=val.myValue;
     runArray();
-    console.log(wordObject);
     loadBackgroundList();
     }   
   });
@@ -102,9 +100,18 @@ loadFunction();
 
 
 $('body').on('click',  ".icon-volume-up", function () {
-  
+   $.getJSON("http://apifree.forvo.com/action/word-pronunciations/format/json/word/"+wordObject[0].word+"/order/rate-desc/limit/1/key/aad01d7956b025335a7b9d89ab0ef826/", function(jd) {
+    console.log(jd.items[0].pathmp3);
+            
+    });
+                                             
+                                         
+                                          //  showPage(page,json.parse.text['*']);
+
+
+/*
   window.location.reload();//// change this
-  window.open('http://www.forvo.com/word/'+wordObject[0].word+"",'_newtab'); 
+  window.open('http://www.forvo.com/word/'+wordObject[0].word+"",'_newtab'); */
 });
 
 
@@ -112,7 +119,6 @@ $("#hideButton").click(function() {
   $('.wordlist-container').toggle();
 });
 $("#reverseButton").click(function() {
-  console.log("brown snakes");
   wordObject = wordObject.reverse();
   chrome.storage.sync.set({"myValue": wordObject}); //////// save
   window.location.reload();//// change this
