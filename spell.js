@@ -101,12 +101,28 @@ loadFunction();
 
 $('body').on('click',  ".icon-volume-up", function () {
    $.getJSON("http://apifree.forvo.com/action/word-pronunciations/format/json/word/"+wordObject[0].word+"/order/rate-desc/limit/1/key/aad01d7956b025335a7b9d89ab0ef826/", function(jd) {
-    console.log(jd.items[0].pathmp3);
-            
+    //console.log(jd.items[0].pathmp3);
+      var song =jd.items[0].pathmp3;
+      //song.get(0).play();  
+
+       var audioElement = document.createElement('audio');
+ audioElement.setAttribute("preload", "auto");
+ audioElement.autobuffer = true;
+
+ var source1 = document.createElement('source');
+ source1.type= 'audio/mp3';
+ source1.src= song;
+ audioElement.appendChild(source1);
+ audioElement.load;
+ audioElement.play();
+
+
+
     });
                                              
                                          
-                                          //  showPage(page,json.parse.text['*']);
+ 
+ 
 
 
 /*
