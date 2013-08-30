@@ -98,50 +98,31 @@ loadFunction();
     var x = 0;
 });
 
-
 $('body').on('click',  ".icon-volume-up", function () {
    $.getJSON("http://apifree.forvo.com/action/word-pronunciations/format/json/word/"+wordObject[0].word+"/order/rate-desc/limit/1/key/aad01d7956b025335a7b9d89ab0ef826/", function(jd) {
-    //console.log(jd.items[0].pathmp3);
       var song =jd.items[0].pathmp3;
-      //song.get(0).play();  
-
-       var audioElement = document.createElement('audio');
+      var audioElement = document.createElement('audio');
  audioElement.setAttribute("preload", "auto");
  audioElement.autobuffer = true;
-
  var source1 = document.createElement('source');
  source1.type= 'audio/mp3';
  source1.src= song;
  audioElement.appendChild(source1);
  audioElement.load;
  audioElement.play();
-
-
-
     });
-                                             
-                                         
- 
- 
-
-
-/*
-  window.location.reload();//// change this
-  window.open('http://www.forvo.com/word/'+wordObject[0].word+"",'_newtab'); */
 });
-
 
 $("#hideButton").click(function() {
   $('.wordlist-container').toggle();
 });
+
 $("#reverseButton").click(function() {
   wordObject = wordObject.reverse();
   chrome.storage.sync.set({"myValue": wordObject}); //////// save
   window.location.reload();//// change this
   runArray;
 });
-
-//runArray();  //////needed?
 
 $('body').on('click',  ".icon-remove", function (ev) {
     var clicked=$(ev.currentTarget);
@@ -167,9 +148,7 @@ $('#spellbox').keypress(function(e) {
     input.bind('keydown keypress', function() {
         setTimeout(function() {
         label.text(input.val());
-        
-        var spell = document.getElementById('spellbox');
-        
+        var spell = document.getElementById('spellbox');   
         if (spell.value==="" && x%iterations===0) {             
             $('h2').html(wordObject[i].word+"<i class=\"icon-volume-up\"></i>");
                     
@@ -207,11 +186,10 @@ $('#spellbox').keypress(function(e) {
              } else {
                 $('#spellbox').animate({backgroundColor: '#e01432'}).delay(40).animate({backgroundColor: '#ffffff'});  // $(".class").animate({"background-color":"red"},40).animate({"background-color":"transparent"},40);
                     runArray(); 
+                    document.getElementById("spellbox").value = "";
                     }
-
     } else if (e.which == 8 && spell.value==="") {  //same here . e.which 8 not working
         $('h2').html(wordObject[i].word+"<i class=\"icon-volume-up\"></i>"); 
-        
         if (document.getElementById("check1").checked===true){
         $('h2').html(wordObject[i].word+"<i class=\"icon-volume-up\"></i>");}
     }

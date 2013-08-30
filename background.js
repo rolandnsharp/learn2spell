@@ -66,7 +66,7 @@ $(document).ready(function() {
 
 
 chrome.contextMenus.removeAll();
-chrome.contextMenus.create({title: "Learn 2 Spell '%s' ", 
+chrome.contextMenus.create({title: "Learn2Spell '%s' ", 
                              contexts:["selection"], 
                               onclick: function(info){ 
                                    runArrayB(); 
