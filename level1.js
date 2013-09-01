@@ -144,42 +144,46 @@ $('body').on('dblclick',  "td", function (ev) {
 });
 });
 
+
+
+
 $(document).ready(function(){  
-$('.wordlist-container').hide();  
-    $('#spellbox').focus();
-/*
-var input = $('#spellbox'),
-label = $('#inputHiddenSpan');
-$('#spellbox').keypress(function(e) {
-    input.bind('keydown keypress', function() {
-        setTimeout(function() {
-        label.text(input.val());
-        var spell = document.getElementById('spellbox');   
-        if (spell.value==="" && x%iterations===0) {             
-            $('h2').html(wordObject[i].word+"<i class=\"icon-volume-up\"></i>");
-                    
-        }  else if (e.which == 8 && spell.value==="") {     //e.which == 8 not working (reveal word when backspace
-            $('h2').html(wordObject[i].word+"<i class=\"icon-volume-up\"></i>");
-                                     // empty #spellbox. Eventult make it reveal on backspace 
-        }  else if (spell.value==="" && x%iterations!==0) {
-            $('h2').text("Spell it again!");
-            if (document.getElementById("check1").checked===true){
-            $('h2').html(wordObject[i].word+"<i class=\"icon-volume-up\"></i>");}
-        }  else {                                           // of last charactor.
-            $('h2').empty(); 
-            if (document.getElementById("check1").checked===true) {
-            $('h2').html(wordObject[i].word+"<i class=\"icon-volume-up\"></i>");}
-        }    
-    }, 0); 
+$('#spellbox').focus();
+$("#spellbox").keypress(function (e) {
+    var c = String.fromCharCode(e.which);
+    //console.log(c);
+    //process the single character or
+    var textValue = $("#spellbox").val();
+    var fulltext = textValue + c;
+    //process the full text
+    var lowText = fulltext.toLowerCase();
+
+    //console.log(wordObject[i].word.repeat(4).length);
+
+    if (lowText=== wordObject[i].word.repeat(4).substring(0,lowText.length)) {
+      $('h2').animate({color: '#5bd642'});
+    } else {
+      $('h2').animate({color: '#e01432'});
+    }
+    var spell = document.getElementById('spellbox');
+    var lastWord = spell.value.substring(spell.value.length-wordObject[i].word.length, spell.value.length);
+    if(e.which == 13 && lastWord===wordObject[i].word) { }
+        
+                   
+        
 });
-});
-*/
-$('#spellbox').keypress(function(e) {  
+
+
+/*  $('.wordlist-container').hide();  
+  $('#spellbox').focus();
+  $('#spellbox').keypress(function(e) {  
+
+  //  console.log(e);
 
  var spell = document.getElementById('spellbox');   
     if(e.which == 32) { 
         var lastWord = spell.value.substring(spell.value.length-wordObject[i].word.length, spell.value.length);
-        console.log(lastWord);             
+       // console.log(lastWord);             
         if (lastWord===wordObject[i].word) {
             x=x+1;
             console.log(x);
@@ -217,7 +221,14 @@ $('#spellbox').keypress(function(e) {
         //if (document.getElementById("check1").checked===true){
         //$('h2').html(5*wordObject[i].word+"<i class=\"icon-volume-up\"></i>");}
     }
+
+
+
+
 });
+*/
+
+
 });
 
 var baseURL = 'http://en.wiktionary.org';
