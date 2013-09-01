@@ -10,21 +10,13 @@ html body {
 	bottom: 5px;
 }
 
-.icon-volume-up{
 
-	position:relative;
-	left: 14px;
-	top: 10px;
-	opacity:0.6;
-}
 .icon-volume-up:hover{
 
-	position:relative;
-	left: 14px;
-	top: 10px;
+
 	background-color:gray;
 	border-radius: 2px;
-		opacity:1.0;
+		
 	
 }
 .icon-remove:hover{

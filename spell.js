@@ -34,11 +34,11 @@ var runArray = function (){
     if (wordObject.length<=0) {
         $('h2').text("");
     } else {  
-        $('h2').html(wordObject[i].word+"<i class=\"icon-volume-up\"></i>");
+        $('h2').html(wordObject[i].word);
         };    
     $(".wordlist-table tbody").empty();
 for ( var z = 0; z < wordObject.length; z=z+1 ){    
-    $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td data-id='" + (z+1) + "'>"+wordObject[z].definition+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "'    class=\"icon-remove\"></i>"+"</td></tr>" );
+    $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td data-id='" + (z+1) + "'>"+wordObject[z].definition+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "' class=\"icon-remove\"></i>"+" "+"<i sound-id='" +(z+1)+ "' class=\"icon-volume-up\"></i>"+"</td></tr>" );
     }
 };
 
@@ -47,7 +47,7 @@ var deleteLI = function (XX) {
         runArray(); 
         if (wordObject.length <= 0){
         } else {
-        $('h2').html(wordObject[i].word+"<i class=\"icon-volume-up\"></i>");
+        $('h2').html(wordObject[i].word);
         }
         };
 
@@ -98,8 +98,9 @@ loadFunction();
     var x = 0;
 });
 
-$('body').on('click',  ".icon-volume-up", function () {
-   $.getJSON("http://apifree.forvo.com/action/word-pronunciations/format/json/word/"+wordObject[0].word+"/order/rate-desc/limit/1/key/aad01d7956b025335a7b9d89ab0ef826/", function(jd) {
+$('body').on('click',  ".icon-volume-up", function (ev) {
+  var clicked=$(ev.currentTarget);
+   $.getJSON("http://apifree.forvo.com/action/word-pronunciations/format/json/word/"+wordObject[clicked.attr("sound-id")-1].word+"/order/rate-desc/limit/1/key/aad01d7956b025335a7b9d89ab0ef826/", function(jd) {
       var song =jd.items[0].pathmp3;
       var audioElement = document.createElement('audio');
  audioElement.setAttribute("preload", "auto");
@@ -150,19 +151,19 @@ $('#spellbox').keypress(function(e) {
         label.text(input.val());
         var spell = document.getElementById('spellbox');   
         if (spell.value==="" && x%iterations===0) {             
-            $('h2').html(wordObject[i].word+"<i class=\"icon-volume-up\"></i>");
+            $('h2').html(wordObject[i].word);
                     
         }  else if (e.which == 8 && spell.value==="") {     //e.which == 8 not working (reveal word when backspace
-            $('h2').html(wordObject[i].word+"<i class=\"icon-volume-up\"></i>");
+            $('h2').html(wordObject[i].word);
                                      // empty #spellbox. Eventult make it reveal on backspace 
         }  else if (spell.value==="" && x%iterations!==0) {
             $('h2').text("Spell it again!");
             if (document.getElementById("check1").checked===true){
-            $('h2').html(wordObject[i].word+"<i class=\"icon-volume-up\"></i>");}
+            $('h2').html(wordObject[i].word);}
         }  else {                                           // of last charactor.
             $('h2').empty(); 
             if (document.getElementById("check1").checked===true) {
-            $('h2').html(wordObject[i].word+"<i class=\"icon-volume-up\"></i>");}
+            $('h2').html(wordObject[i].word);}
         }    
     }, 0); 
 });
@@ -176,9 +177,9 @@ $('#spellbox').keypress(function(e) {
             if (x%iterations===0) {
                 oneStep();    //////////////// new oneStep method
             }
-            $('h2').html(wordObject[i].word+"<i class=\"icon-volume-up\"></i>");
+            $('h2').html(wordObject[i].word);
             if (document.getElementById("check1").checked===true){
-            $('h2').html(wordObject[i].word+"<i class=\"icon-volume-up\"></i>");}
+            $('h2').html(wordObject[i].word);}
             $('#spellbox').animate({backgroundColor: '#5bd642'}).delay(40).animate({backgroundColor: '#ffffff'});
             runArray();
             document.getElementById("spellbox").value = "";
@@ -189,9 +190,9 @@ $('#spellbox').keypress(function(e) {
                     document.getElementById("spellbox").value = "";
                     }
     } else if (e.which == 8 && spell.value==="") {  //same here . e.which 8 not working
-        $('h2').html(wordObject[i].word+"<i class=\"icon-volume-up\"></i>"); 
+        $('h2').html(wordObject[i].word); 
         if (document.getElementById("check1").checked===true){
-        $('h2').html(wordObject[i].word+"<i class=\"icon-volume-up\"></i>");}
+        $('h2').html(wordObject[i].word);}
     }
 });
 });

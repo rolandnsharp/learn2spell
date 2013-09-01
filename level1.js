@@ -161,9 +161,9 @@ $("#spellbox").keypress(function (e) {
     //console.log(wordObject[i].word.repeat(4).length);
 
     if (lowText=== wordObject[i].word.repeat(4).substring(0,lowText.length)) {
-      $('h2').animate({color: '#5bd642'});
+      $('h2').animate({backgroundColor: '#5bd642'});
     } else {
-      $('h2').animate({color: '#e01432'});
+      $('h2').animate({backgroundColor: '#e01432'});
     }
     var spell = document.getElementById('spellbox');
     var lastWord = spell.value.substring(spell.value.length-wordObject[i].word.length, spell.value.length);
