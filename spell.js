@@ -17,7 +17,24 @@ var wordObject2 = [
 { word: 'lsit2', definition:'222222222222' }
 ];
 
+var activeList = 0;
 
+chrome.storage.sync.get("myValueAL", //// load saved active list data. 
+  function(valAL) {
+    if (valAL.myValueAL === undefined){
+        return;
+    } else {
+    console.log(valAL.myValueAL);
+    if (valAL.myValueAL===1){
+
+    } else if (valAL.myValueAL===2){
+
+      $('#list2').attr("disabled", true);
+  $('#list1').attr("disabled", false);
+
+    }
+    }   
+  });
 
 var oneStep = function () {  
    var shifted = wordObject.shift();
@@ -40,6 +57,12 @@ var loadFunction = function(){
   });
  }; 
 
+var saveFunction = function(){
+//  if () {}
+
+
+};
+
 var runArray = function (){
     if (wordObject.length<=0) {
         $('h2').text("");
@@ -50,6 +73,7 @@ var runArray = function (){
 for ( var z = 0; z < wordObject.length; z=z+1 ){    
     $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td data-id='" + (z+1) + "'>"+wordObject[z].definition+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "' class=\"icon-remove\"></i>"+" "+"<i sound-id='" +(z+1)+ "' class=\"icon-volume-up\"></i>"+"</td></tr>" );
     }
+    chrome.storage.sync.set({"myValue": wordObject});///save
 };
 
 var deleteLI = function (XX) {
@@ -130,23 +154,17 @@ $("#hideButton").click(function() {
   $('.wordlist-container').toggle();
 });
 
-//$("#createList").click(function() {
-//  prompt("Enter list name");
-//});
-
-
-$(document).on("click", "#createList", function(e) {
-            bootbox.alert("Hello world!", function() {
-                console.log("Alert Callback");
-            });
-        });
-
+$("#createList").click(function() {
+  prompt("Enter list name");
+});
 
 
 
 $("#list1").click(function() {
   $('#list1').attr("disabled", true);
   $('#list2').attr("disabled", false);
+  activeList=1;
+  chrome.storage.sync.set({"myValueAL": activeList}); //////// save AL
   wordObject2=wordObject;
   chrome.storage.sync.set({"myValue2": wordObject2}); //////// save
   chrome.storage.sync.get("myValue1", //// load saved data. 
@@ -164,11 +182,13 @@ $("#list1").click(function() {
 $("#list2").click(function() {
   $('#list2').attr("disabled", true);
   $('#list1').attr("disabled", false);
+  activeList=2;
+  chrome.storage.sync.set({"myValueAL": activeList}); //////// save AL
   wordObject1=wordObject;
   chrome.storage.sync.set({"myValue1": wordObject1}); //////// save
   chrome.storage.sync.get("myValue2", //// load saved data. 
   function(val2) {
-    if (val2.myValue === undefined){
+    if (val2.myValue2 === undefined){
         return;
     } else {
     wordObject2=val2.myValue2;
