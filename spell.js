@@ -9,6 +9,16 @@ var wordObject = [
 { word: 'starting', definition:'After you have some words in the list that you wish to drill, start using the touch-typing area. Touch-typing is recommended for drilling words as it utilizes your muscle memory.' },
 ];
 
+var wordObject1 = [
+{ word: 'lsit1', definition:'1111111' }
+];
+
+var wordObject2 = [
+{ word: 'lsit2', definition:'222222222222' }
+];
+
+
+
 var oneStep = function () {  
    var shifted = wordObject.shift();
    wordObject[wordObject.length] = shifted;
@@ -52,15 +62,17 @@ var deleteLI = function (XX) {
         };
 
 var editLI = function (TT){
-var defItem = prompt("edit definition");
-    if (defItem===null){
-      return;
-    }else{
+bootbox.prompt("edit definition", function(defItem) {                
+  if (defItem === null) {                                             
+    return;                              
+  } else {
     wordObject[TT-1]= { word: wordObject[TT-1].word, definition: defItem };
     chrome.storage.sync.set({"myValue": wordObject}); /////save
-    runArray();
-    }
+    runArray();                        
+  }
+});
 };
+
 
 var loadBackgroundList = function (){
 var WOB = chrome.extension.getBackgroundPage().wordObjectB;
@@ -116,6 +128,54 @@ $('body').on('click',  ".icon-volume-up", function (ev) {
 
 $("#hideButton").click(function() {
   $('.wordlist-container').toggle();
+});
+
+//$("#createList").click(function() {
+//  prompt("Enter list name");
+//});
+
+
+$(document).on("click", "#createList", function(e) {
+            bootbox.alert("Hello world!", function() {
+                console.log("Alert Callback");
+            });
+        });
+
+
+
+
+$("#list1").click(function() {
+  $('#list1').attr("disabled", true);
+  $('#list2').attr("disabled", false);
+  wordObject2=wordObject;
+  chrome.storage.sync.set({"myValue2": wordObject2}); //////// save
+  chrome.storage.sync.get("myValue1", //// load saved data. 
+  function(val1) {
+    if (val1.myValue1 === undefined){
+        return;
+    } else {
+    wordObject1=val1.myValue1;
+    }   
+  });
+  wordObject=wordObject1;
+  runArray();
+});
+
+$("#list2").click(function() {
+  $('#list2').attr("disabled", true);
+  $('#list1').attr("disabled", false);
+  wordObject1=wordObject;
+  chrome.storage.sync.set({"myValue1": wordObject1}); //////// save
+  chrome.storage.sync.get("myValue2", //// load saved data. 
+  function(val2) {
+    if (val2.myValue === undefined){
+        return;
+    } else {
+    wordObject2=val2.myValue2;
+    }   
+  });
+  wordObject=wordObject2;
+  runArray();
 });
 
 $("#reverseButton").click(function() {
