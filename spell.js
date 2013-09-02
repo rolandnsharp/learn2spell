@@ -19,6 +19,31 @@ var wordObject2 = [
 
 var activeList = 0;
 
+chrome.storage.sync.get("myValue1", //// load saved data. 
+    function(val1) {
+    if (val1.myValue1 === undefined){
+        chrome.storage.sync.set({"myValue1": wordObject1});
+        console.log("nothin saved 1");
+        
+    } else {
+    wordObject1=val1.myValue1;
+
+    }   
+  });
+
+chrome.storage.sync.get("myValue2", //// load saved data. 
+    function(val2) {
+    if (val2.myValue2 === undefined){
+        chrome.storage.sync.set({"myValue2": wordObject2});
+        console.log("nothin saved 2");
+    } else {
+    wordObject2=val2.myValue2;
+
+    }   
+  });
+
+
+
 chrome.storage.sync.get("myValueAL", //// load saved active list data. 
   function(valAL) {
     if (valAL.myValueAL === undefined){
@@ -29,7 +54,7 @@ chrome.storage.sync.get("myValueAL", //// load saved active list data.
 
     } else if (valAL.myValueAL===2){
 
-      $('#list2').attr("disabled", true);
+  $('#list2').attr("disabled", true);
   $('#list1').attr("disabled", false);
 
     }
@@ -158,25 +183,18 @@ $("#createList").click(function() {
   prompt("Enter list name");
 });
 
-
-
 $("#list1").click(function() {
   $('#list1').attr("disabled", true);
   $('#list2').attr("disabled", false);
   activeList=1;
   chrome.storage.sync.set({"myValueAL": activeList}); //////// save AL
+  
   wordObject2=wordObject;
   chrome.storage.sync.set({"myValue2": wordObject2}); //////// save
-  chrome.storage.sync.get("myValue1", //// load saved data. 
-  function(val1) {
-    if (val1.myValue1 === undefined){
-        return;
-    } else {
-    wordObject1=val1.myValue1;
-    }   
-  });
+  
   wordObject=wordObject1;
   runArray();
+
 });
 
 $("#list2").click(function() {
@@ -184,19 +202,22 @@ $("#list2").click(function() {
   $('#list1').attr("disabled", false);
   activeList=2;
   chrome.storage.sync.set({"myValueAL": activeList}); //////// save AL
+  
   wordObject1=wordObject;
   chrome.storage.sync.set({"myValue1": wordObject1}); //////// save
-  chrome.storage.sync.get("myValue2", //// load saved data. 
-  function(val2) {
-    if (val2.myValue2 === undefined){
-        return;
-    } else {
-    wordObject2=val2.myValue2;
-    }   
-  });
+  
+  
   wordObject=wordObject2;
   runArray();
+
 });
+
+
+
+
+
+
+
 
 $("#reverseButton").click(function() {
   wordObject = wordObject.reverse();
