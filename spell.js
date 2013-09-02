@@ -82,9 +82,9 @@ chrome.storage.sync.get("myValueAL", //// load saved active list data.
     } else {
     console.log(valAL.myValueAL);
     if (valAL.myValueAL===1){
-
+      activeList=1;
     } else if (valAL.myValueAL===2){
-
+  activeList=2;   
   $('#list2').attr("disabled", true);
   $('#list2d').attr("disabled", true);
   $('#list1').attr("disabled", false);
@@ -127,10 +127,12 @@ var runArray = function (){
         };    
     $(".wordlist-table tbody").empty();
 for ( var z = 0; z < wordObject.length; z=z+1 ){    
-    $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td data-id='" + (z+1) + "'>"+wordObject[z].definition+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "' class=\"icon-remove\"></i>"+" "+"<i sound-id='" +(z+1)+ "' class=\"icon-volume-up\"></i>"+"</td></tr>" );
+    $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td data-id='" + (z+1) + "'>"+wordObject[z].definition+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "' class=\"icon-remove\"></i>"+" "+"<i sound-id='" +(z+1)+ "' class=\"icon-volume-up\"></i>"+" "+"<i trans-id='" +(z+1)+ "' class=\"icon-arrow-right\"></i>"+" "+"</td></tr>" );
     }
     chrome.storage.sync.set({"myValue": wordObject});///save
 };
+
+
 
 var deleteLI = function (XX) {
         wordObject.splice(XX-1, 1);
@@ -289,6 +291,30 @@ $("#reverseButton").click(function() {
   window.location.reload();//// change this
   runArray;
 });
+
+
+$('body').on('click',  ".icon-arrow-right", function (ev) {
+    var clicked=$(ev.currentTarget);
+    var transID = clicked.attr("trans-id");
+    if (activeList===1) {
+
+    wordObject2[wordObject2.length]=wordObject[transID-1];
+    deleteLI(clicked.attr("trans-id"));
+
+    
+    } else if (activeList===2){
+
+    wordObject1[wordObject1.length]=wordObject[transID-1];
+    deleteLI(clicked.attr("trans-id"));
+    
+
+  }
+
+  
+  runArray();  
+  chrome.storage.sync.set({"myValue": wordObject}); //////// save///////////////////////////////
+});
+
 
 $('body').on('click',  ".icon-remove", function (ev) {
     var clicked=$(ev.currentTarget);

@@ -25,6 +25,12 @@ html body {
 	border-radius: 2px;
 }
 
+.icon-arrow-right:hover{
+	
+	background-color:gray;
+	border-radius: 2px;
+}
+
 #WInfo{
 	
 	position: absolute;
