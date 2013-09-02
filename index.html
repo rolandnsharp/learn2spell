@@ -12,34 +12,38 @@
         <script src='jquery.animate-colors-min.js'>
                 
         </script>
-        <script type='text/javascript' src='spell.js'>
-                
+        <script type='text/javascript' src='spell.js'>               
         </script>
-
-
-
-    </head>
-    
+    </head>    
     <body>
         <div class="navbar navbar-inverse">
             <div class="navbar-inner">
         <div class="container" style="width: 940px;">
                 <a class="brand" href="/index.html">Learn2Spell</a>
                <!-- <ul class="nav">
-                   
                         <a id="createList" href="#" class="btn btn-inverse">Create List </a>
                         <a id="createList" href="#" class="btn btn-inverse">Create List </a>
-                    
-     
+                </ul>-->                              
+              <div id="button1div" class="btn-group">
+                <button id="list1" class="btn btn-primary" type="button" disabled="true">List 1</button>
+                <a id="list1d" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" disabled="true"><span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li edit-id="1"><a href="#"><i class="icon-pencil" ></i> Rename</a></li>
+              <!--    <li edit-id="1d" ><a href="#"><i class="icon-trash"></i> Delete</a></li> -->
+                </ul>
+              </div>
+              <div id="button2div" class="btn-group">
+                <button id="list2" class="btn btn-primary" type="button">List 2</button>
+                <a id="list2d" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li edit-id="2"><a href="#"><i class="icon-pencil" ></i> Rename</a></li>
+                <!--  <li edit-id="2d" ><a href="#"><i class="icon-trash"></i> Delete</a></li> -->
+                </ul>
+              </div>
 
-                </ul>-->
-              <button id="list1" class="btn btn-inverse" type="button" disabled="true">List 1</button>
-              <button id="list2" class="btn btn-inverse" type="button">List 2</button>
-
-
-             <!--   <div class="pull-right">
+          <!--   <div class="pull-right">
                 <a id="createList" href="#" class="btn btn-inverse">Create List <i class="icon-white icon-plus-sign"></i></a>
-                </div>      not yet ready        --> 
+                </div>  -->  
         </div>
             </div>
         </div>
@@ -60,8 +64,9 @@
   <button id="plusOne" class="btn" type="button">+1</button>
   <button id="reverseButton" class="btn btn-inverse" type="button">reverse list order</button>
 </div>
-<input id="check1" type="checkbox"> Show spelling word while typing
+
 </br>
+<input id="check1" type="checkbox"> Show spelling word while typing
 
 
 

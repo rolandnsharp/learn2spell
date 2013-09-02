@@ -19,6 +19,37 @@ var wordObject2 = [
 
 var activeList = 0;
 
+chrome.storage.sync.get("result1Value", //// load saved data. 
+    function(res1) {
+    if (res1.result1Value === undefined){
+        
+        console.log("nothin saved 1");
+        
+    } else {
+    result1=res1.result1Value;
+    $("#list1").html(result1);
+
+    }   
+  });
+
+
+
+
+chrome.storage.sync.get("result2Value", //// load saved data. 
+    function(res2) {
+    if (res2.result2Value === undefined){
+        
+        console.log("nothin saved 2");
+        
+    } else {
+    result2=res2.result2Value;
+    $("#list2").html(result2);
+
+    }   
+  });
+
+
+
 chrome.storage.sync.get("myValue1", //// load saved data. 
     function(val1) {
     if (val1.myValue1 === undefined){
@@ -55,7 +86,9 @@ chrome.storage.sync.get("myValueAL", //// load saved active list data.
     } else if (valAL.myValueAL===2){
 
   $('#list2').attr("disabled", true);
+  $('#list2d').attr("disabled", true);
   $('#list1').attr("disabled", false);
+  $('#list1d').attr("disabled", false);
 
     }
     }   
@@ -84,8 +117,6 @@ var loadFunction = function(){
 
 var saveFunction = function(){
 //  if () {}
-
-
 };
 
 var runArray = function (){
@@ -185,7 +216,9 @@ $("#createList").click(function() {
 
 $("#list1").click(function() {
   $('#list1').attr("disabled", true);
+  $('#list1d').attr("disabled", true);
   $('#list2').attr("disabled", false);
+  $('#list2d').attr("disabled", false);
   activeList=1;
   chrome.storage.sync.set({"myValueAL": activeList}); //////// save AL
   
@@ -199,7 +232,9 @@ $("#list1").click(function() {
 
 $("#list2").click(function() {
   $('#list2').attr("disabled", true);
+  $('#list2d').attr("disabled", true);
   $('#list1').attr("disabled", false);
+  $('#list1d').attr("disabled", false);
   activeList=2;
   chrome.storage.sync.set({"myValueAL": activeList}); //////// save AL
   
@@ -212,10 +247,39 @@ $("#list2").click(function() {
 
 });
 
-
-
-
-
+$('body').on('click',  "li", function (ev) {
+  var clicked=$(ev.currentTarget);
+  var editListNo = clicked.attr("edit-id");
+  console.log(editListNo);
+  if (editListNo==="1"){
+      bootbox.prompt("Rename List 1", function(result1) {                
+        if (result1 === null) {                                             
+          return;                              
+        } else {
+          $("#list1").html(result1);
+          chrome.storage.sync.set({"result1Value": result1}); //////// save                          
+        }
+      });
+  } else if (editListNo==="2"){
+      bootbox.prompt("Rename List 2", function(result2) {                
+        if (result2 === null) {                                             
+          return;                              
+        } else {
+          $("#list2").html(result2);
+          chrome.storage.sync.set({"result2Value": result2}); //////// save                           
+        }
+      });
+  } else if (editListNo==="1d") {
+        bootbox.confirm("Are you sure you want to delete List 1?", function(result) {
+            console.log("Confirm result: "+result);
+    }); 
+  } else if (editListNo==="2d") {
+        bootbox.confirm("Are you sure you want to delete List 2?", function(result) {
+           // $("#button2div").hide();
+    }); 
+  }
+  
+});
 
 
 
