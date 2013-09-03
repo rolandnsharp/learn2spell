@@ -309,8 +309,80 @@ $('body').on('dblclick',  "td", function (ev) {
 });
 });
 
-$(document).ready(function(){   
-    $('#spellbox').focus();
+$(document).ready(function(){  
+
+$('#spellbox').focus();
+$("#spellbox").keydown(function (e) {
+    $('.wordlist-container').hide();
+
+    var c = String.fromCharCode(e.which);
+    //console.log(c);
+    //process the single character or
+    var textValue = $("#spellbox").val();
+    var fulltext = textValue + c;
+    //process the full text
+    var lowText = fulltext.toLowerCase();
+    console.log(lowText);
+    //console.log(wordObject[i].word.length);
+
+    $("h2").empty();
+    
+    for ( var d = 0; d < wordObject[0].word.length; d=d+1 ){    
+    
+    $('h2').append("<h7>"+wordObject[0].word.substring(d, d+1)+"</h7>");
+    }
+
+    if (e.which === 8) {
+      fulltext = textValue.substring(0, fulltext.length-2);
+      console.log(fulltext);
+      lowText = fulltext.toLowerCase();
+              if (lowText=== wordObject[i].word.substring(0,lowText.length)) {
+              $('h2 h7:nth-child(-n+'+lowText.length+')').css({backgroundColor: '#5bd642'});
+
+            } else {
+              $('h2 h7:nth-child('+lowText.length+')').animate({backgroundColor: '#e01432'});   /// can probably delete this 
+              //runArray();
+             // document.getElementById("spellbox").value = "";
+           }
+    }
+
+    if (lowText=== wordObject[i].word.substring(0,lowText.length)) {
+      $('h2 h7:nth-child(-n+'+lowText.length+')').css({backgroundColor: '#5bd642'});
+
+      if (document.getElementById("check1").checked!==true){
+      $('h2 h7:nth-child(n+'+(lowText.length+1)+')').css({color: 'white'}); ////////////////////////////////////////////////////////////////////// show. 
+      }
+
+    } 
+
+    else if (e.which === 32 && lowText === wordObject[0].word+" "){
+      //console.log("spalde");
+      document.getElementById("spellbox").value = "";
+     //return false;
+    // oneStep(); when blanked space repeats word
+     //runArray();
+     return false;
+    } 
+    
+    else if (e.which === 13 && lowText.substring(0,lowText.length-1) === wordObject[0].word){
+      //console.log("spalde");
+      document.getElementById("spellbox").value = "";
+     //return false;
+     oneStep(); 
+     runArray();
+     return false;
+    } 
+
+    else {
+      $('h2 > h7').animate({backgroundColor: '#e01432'}).delay(40).animate({backgroundColor: '#ffffff'});
+      //runArray();
+     document.getElementById("spellbox").value = "";
+     return false;
+    }
+});
+});
+
+/*    $('#spellbox').focus();
 
 var input = $('#spellbox'),
 label = $('#inputHiddenSpan');
@@ -364,7 +436,7 @@ $('#spellbox').keypress(function(e) {
         $('h2').html(wordObject[i].word);}
     }
 });
-});
+});*/
 
 var baseURL = 'http://en.wiktionary.org';
 function showPage(page,text) {
@@ -410,3 +482,5 @@ $(document).ready(function() {
     });
   });
 });
+
+

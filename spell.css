@@ -85,6 +85,8 @@ html body {
 
 }
 h2 {
+	position: relative;
+	top: 150px;
 	color: #444 !important;
 }
 

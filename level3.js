@@ -153,6 +153,7 @@ $('body').on('dblclick',  "td", function (ev) {
 $(document).ready(function(){  
 $('#spellbox').focus();
 $("#spellbox").keydown(function (e) {
+
     var c = String.fromCharCode(e.which);
     //console.log(c);
     //process the single character or
@@ -176,6 +177,7 @@ $("#spellbox").keydown(function (e) {
       lowText = fulltext.toLowerCase();
               if (lowText=== wordObject[i].word.substring(0,lowText.length)) {
               $('h2 h7:nth-child(-n+'+lowText.length+')').css({backgroundColor: '#5bd642'});
+
             } else {
               $('h2 h7:nth-child('+lowText.length+')').animate({backgroundColor: '#e01432'});   /// can probably delete this 
               //runArray();
@@ -185,6 +187,8 @@ $("#spellbox").keydown(function (e) {
 
     if (lowText=== wordObject[i].word.substring(0,lowText.length)) {
       $('h2 h7:nth-child(-n+'+lowText.length+')').css({backgroundColor: '#5bd642'});
+
+     // $('h2 h7:nth-child(n+'+(lowText.length+1)+')').css({color: 'white'}); ////////////////////////////////////////////////////////////////////// show. 
 
     } 
 
