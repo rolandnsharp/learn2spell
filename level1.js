@@ -41,10 +41,10 @@ var runArray = function (){
 for ( var z = 0; z < wordObject.length; z=z+1 ){    
     $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td data-id='" + (z+1) + "'>"+wordObject[z].definition+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "'    class=\"icon-remove\"></i>"+"</td></tr>" );
     }
-    $('h3').empty();
+    $('h2').empty();
 for ( var d = 0; d < wordObject[0].word.length; d=d+1 ){    
     
-    $('h3').append("<h7>"+wordObject[0].word.substring(d, d+1)+"</h7>");
+    $('h2').append("<h7>"+wordObject[0].word.substring(d, d+1)+"</h7>");
     }
     
 
@@ -163,35 +163,61 @@ $("#spellbox").keydown(function (e) {
     console.log(lowText);
     //console.log(wordObject[i].word.length);
 
-    $("h3").empty();
+    $("h2").empty();
     
     for ( var d = 0; d < wordObject[0].word.length; d=d+1 ){    
     
-    $('h3').append("<h7>"+wordObject[0].word.substring(d, d+1)+"</h7>");
+    $('h2').append("<h7>"+wordObject[0].word.substring(d, d+1)+"</h7>");
     }
-    
-
 
     if (e.which === 8) {
       fulltext = textValue.substring(0, fulltext.length-2);
       console.log(fulltext);
       lowText = fulltext.toLowerCase();
               if (lowText=== wordObject[i].word.substring(0,lowText.length)) {
-              $('h3 h7:nth-child(-n+'+lowText.length+')').css({backgroundColor: '#5bd642'});
+              $('h2 h7:nth-child(-n+'+lowText.length+')').css({backgroundColor: '#5bd642'});
             } else {
-              $('h3 h7:nth-child('+lowText.length+')').animate({backgroundColor: '#e01432'});
+              $('h2 h7:nth-child('+lowText.length+')').animate({backgroundColor: '#e01432'});   /// can probably delete this 
               //runArray();
              // document.getElementById("spellbox").value = "";
            }
 
-
-
     }
     //nth-child(-n+2)
+    
+
+
+
+
+
     if (lowText=== wordObject[i].word.substring(0,lowText.length)) {
-      $('h3 h7:nth-child(-n+'+lowText.length+')').css({backgroundColor: '#5bd642'});
-    } else {
-      $('h3 > h7').animate({backgroundColor: '#e01432'}).delay(40).animate({backgroundColor: '#ffffff'});
+      $('h2 h7:nth-child(-n+'+lowText.length+')').css({backgroundColor: '#5bd642'});
+    
+
+    } 
+
+    else if (e.which === 32 && lowText === wordObject[0].word+" "){
+      //console.log("spalde");
+      document.getElementById("spellbox").value = "";
+     //return false;
+     oneStep();
+     runArray();
+     return false;
+    } 
+    
+    else if (e.which === 13 && lowText.substring(0,lowText.length-1) === wordObject[0].word){
+      //console.log("spalde");
+      document.getElementById("spellbox").value = "";
+     //return false;
+     oneStep();
+     runArray();
+     return false;
+    } 
+
+
+
+    else {
+      $('h2 > h7').animate({backgroundColor: '#e01432'}).delay(40).animate({backgroundColor: '#ffffff'});
       //runArray();
      document.getElementById("spellbox").value = "";
      return false;
@@ -200,17 +226,11 @@ $("#spellbox").keydown(function (e) {
     }
     //document.getElementById("spellbox").value = "";
 
-    if (e.which === 32 && lowText === wordObject[0].word+" "){
-      console.log("spalde");
-      //oneStep();
-      runArray();
-    }
 
         
                    
-        
-});
 
+});
 
 
 
