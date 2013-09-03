@@ -9,10 +9,6 @@ var wordObject = [
 { word: 'starting', definition:'After you have some words in the list that you wish to drill, start using the touch-typing area. Touch-typing is recommended for drilling words as it utilizes your muscle memory.' },
 ];
 
-String.prototype.repeat = function( num )
-{
-    return new Array( num + 1 ).join( this+ " " );
-}
 
 var oneStep = function () {  
    var shifted = wordObject.shift();
@@ -39,11 +35,16 @@ var runArray = function (){
     if (wordObject.length<=0) {
         $('h2').text("");
     } else {  
-        $('h2').html(wordObject[i].word.repeat(4)+"<i class=\"icon-volume-up\"></i>");
+        $('h2').html(wordObject[i].word+"<i class=\"icon-volume-up\"></i>");
         };    
     $(".wordlist-table tbody").empty();
 for ( var z = 0; z < wordObject.length; z=z+1 ){    
     $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td data-id='" + (z+1) + "'>"+wordObject[z].definition+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "'    class=\"icon-remove\"></i>"+"</td></tr>" );
+    }
+    $('h3').empty();
+for ( var d = 0; d < wordObject[0].word.length; d=d+1 ){    
+    
+    $('h3').append("<h7>"+wordObject[0].word.substring(d, d+1)+"</h7>");
     }
     
 
@@ -160,19 +161,23 @@ $("#spellbox").keydown(function (e) {
     //process the full text
     var lowText = fulltext.toLowerCase();
     console.log(lowText);
-    //console.log(wordObject[i].word.repeat(4).length);
+    //console.log(wordObject[i].word.length);
 
     $("h3").empty();
+    
     for ( var d = 0; d < wordObject[0].word.length; d=d+1 ){    
     
     $('h3').append("<h7>"+wordObject[0].word.substring(d, d+1)+"</h7>");
     }
+    
+
+
     if (e.which === 8) {
       fulltext = textValue.substring(0, fulltext.length-2);
       console.log(fulltext);
       lowText = fulltext.toLowerCase();
-              if (lowText=== wordObject[i].word.repeat(4).substring(0,lowText.length)) {
-              $('h3 h7:nth-child('+lowText.length+')').animate({backgroundColor: '#5bd642'});
+              if (lowText=== wordObject[i].word.substring(0,lowText.length)) {
+              $('h3 h7:nth-child(-n+'+lowText.length+')').css({backgroundColor: '#5bd642'});
             } else {
               $('h3 h7:nth-child('+lowText.length+')').animate({backgroundColor: '#e01432'});
               //runArray();
@@ -183,15 +188,23 @@ $("#spellbox").keydown(function (e) {
 
     }
     //nth-child(-n+2)
-    if (lowText=== wordObject[i].word.repeat(4).substring(0,lowText.length)) {
-      $('h3 h7:nth-child('+lowText.length+')').animate({backgroundColor: '#5bd642'});
+    if (lowText=== wordObject[i].word.substring(0,lowText.length)) {
+      $('h3 h7:nth-child(-n+'+lowText.length+')').css({backgroundColor: '#5bd642'});
     } else {
-      $('h3 h7:nth-child('+lowText.length+')').animate({backgroundColor: '#e01432'}).delay(40).animate({backgroundColor: '#ffffff'});
+      $('h3 > h7').animate({backgroundColor: '#e01432'}).delay(40).animate({backgroundColor: '#ffffff'});
       //runArray();
      document.getElementById("spellbox").value = "";
+     return false;
+
 
     }
     //document.getElementById("spellbox").value = "";
+
+    if (e.which === 32 && lowText === wordObject[0].word+" "){
+      console.log("spalde");
+      //oneStep();
+      runArray();
+    }
 
         
                    
@@ -235,9 +248,9 @@ $("#spellbox").keydown(function (e) {
                 oneStep();    //////////////// new oneStep method
                 document.getElementById("spellbox").value = "";
             }
-            $('h2').html(wordObject[i].word.repeat(4)+"<i class=\"icon-volume-up\"></i>");
+            $('h2').html(wordObject[i].word+"<i class=\"icon-volume-up\"></i>");
             //if (document.getElementById("check1").checked===true){
-            //$('h2').html(wordObject[i].word.repeat(4)+"<i class=\"icon-volume-up\"></i>");}
+            //$('h2').html(wordObject[i].word+"<i class=\"icon-volume-up\"></i>");}
             $('#spellbox').animate({backgroundColor: '#5bd642'}).delay(40).animate({backgroundColor: '#ffffff'});
             runArray();
            // document.getElementById("spellbox").value = document.getElementById("spellbox").value + wordObject[i].word;
