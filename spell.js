@@ -14,7 +14,7 @@ var wordObject1 = [
 ];
 
 var wordObject2 = [
-{ word: 'lsit2', definition:'222222222222' }
+{ word: 'lsit2', definition:'This is your second list. Use it for a second language you may be studying or for storing words you have already learnt. Click the arrow icon to transfer a word between lists. You can also rename your lists with the option in the dropdown menu.  ' }
 ];
 
 var activeList = 0;
@@ -32,9 +32,6 @@ chrome.storage.sync.get("result1Value", //// load saved data.
     }   
   });
 
-
-
-
 chrome.storage.sync.get("result2Value", //// load saved data. 
     function(res2) {
     if (res2.result2Value === undefined){
@@ -47,8 +44,6 @@ chrome.storage.sync.get("result2Value", //// load saved data.
 
     }   
   });
-
-
 
 chrome.storage.sync.get("myValue1", //// load saved data. 
     function(val1) {
@@ -72,8 +67,6 @@ chrome.storage.sync.get("myValue2", //// load saved data.
 
     }   
   });
-
-
 
 chrome.storage.sync.get("myValueAL", //// load saved active list data. 
   function(valAL) {
@@ -115,10 +108,6 @@ var loadFunction = function(){
   });
  }; 
 
-var saveFunction = function(){
-//  if () {}
-};
-
 var runArray = function (){
     if (wordObject.length<=0) {
         $('h2').text("");
@@ -131,8 +120,6 @@ for ( var z = 0; z < wordObject.length; z=z+1 ){
     }
     chrome.storage.sync.set({"myValue": wordObject});///save
 };
-
-
 
 var deleteLI = function (XX) {
         wordObject.splice(XX-1, 1);
@@ -242,8 +229,7 @@ $("#list2").click(function() {
   
   wordObject1=wordObject;
   chrome.storage.sync.set({"myValue1": wordObject1}); //////// save
-  
-  
+
   wordObject=wordObject2;
   runArray();
 
@@ -283,8 +269,6 @@ $('body').on('click',  "li", function (ev) {
   
 });
 
-
-
 $("#reverseButton").click(function() {
   wordObject = wordObject.reverse();
   chrome.storage.sync.set({"myValue": wordObject}); //////// save
@@ -292,29 +276,23 @@ $("#reverseButton").click(function() {
   runArray;
 });
 
-
-$('body').on('click',  ".icon-arrow-right", function (ev) {
+$('body').on('click',  ".icon-arrow-right", function (ev) {   /// transfer word between list button
     var clicked=$(ev.currentTarget);
     var transID = clicked.attr("trans-id");
     if (activeList===1) {
-
     wordObject2[wordObject2.length]=wordObject[transID-1];
-    deleteLI(clicked.attr("trans-id"));
+    deleteLI(clicked.attr("trans-id")); 
+    chrome.storage.sync.set({"myValue2": wordObject2}); //////// save
 
-    
     } else if (activeList===2){
-
     wordObject1[wordObject1.length]=wordObject[transID-1];
-    deleteLI(clicked.attr("trans-id"));
-    
+    deleteLI(clicked.attr("trans-id")); 
+    chrome.storage.sync.set({"myValue1": wordObject1}); //////// save
 
   }
-
-  
   runArray();  
   chrome.storage.sync.set({"myValue": wordObject}); //////// save///////////////////////////////
 });
-
 
 $('body').on('click',  ".icon-remove", function (ev) {
     var clicked=$(ev.currentTarget);

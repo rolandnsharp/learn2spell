@@ -45,6 +45,8 @@ var runArray = function (){
 for ( var z = 0; z < wordObject.length; z=z+1 ){    
     $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td data-id='" + (z+1) + "'>"+wordObject[z].definition+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "'    class=\"icon-remove\"></i>"+"</td></tr>" );
     }
+    
+
 };
 
 var deleteLI = function (XX) {
@@ -149,7 +151,7 @@ $('body').on('dblclick',  "td", function (ev) {
 
 $(document).ready(function(){  
 $('#spellbox').focus();
-$("#spellbox").keypress(function (e) {
+$("#spellbox").keydown(function (e) {
     var c = String.fromCharCode(e.which);
     //console.log(c);
     //process the single character or
@@ -157,21 +159,63 @@ $("#spellbox").keypress(function (e) {
     var fulltext = textValue + c;
     //process the full text
     var lowText = fulltext.toLowerCase();
-
+    console.log(lowText);
     //console.log(wordObject[i].word.repeat(4).length);
 
-    if (lowText=== wordObject[i].word.repeat(4).substring(0,lowText.length)) {
-      $('h2').animate({backgroundColor: '#5bd642'});
-    } else {
-      $('h2').animate({backgroundColor: '#e01432'});
+    $("h3").empty();
+    for ( var d = 0; d < wordObject[0].word.length; d=d+1 ){    
+    
+    $('h3').append("<h7>"+wordObject[0].word.substring(d, d+1)+"</h7>");
     }
-    var spell = document.getElementById('spellbox');
-    var lastWord = spell.value.substring(spell.value.length-wordObject[i].word.length, spell.value.length);
-    if(e.which == 13 && lastWord===wordObject[i].word) { }
+    if (e.which === 8) {
+      fulltext = textValue.substring(0, fulltext.length-2);
+      console.log(fulltext);
+      lowText = fulltext.toLowerCase();
+              if (lowText=== wordObject[i].word.repeat(4).substring(0,lowText.length)) {
+              $('h3 h7:nth-child('+lowText.length+')').animate({backgroundColor: '#5bd642'});
+            } else {
+              $('h3 h7:nth-child('+lowText.length+')').animate({backgroundColor: '#e01432'});
+              //runArray();
+             // document.getElementById("spellbox").value = "";
+           }
+
+
+
+    }
+    //nth-child(-n+2)
+    if (lowText=== wordObject[i].word.repeat(4).substring(0,lowText.length)) {
+      $('h3 h7:nth-child('+lowText.length+')').animate({backgroundColor: '#5bd642'});
+    } else {
+      $('h3 h7:nth-child('+lowText.length+')').animate({backgroundColor: '#e01432'}).delay(40).animate({backgroundColor: '#ffffff'});
+      //runArray();
+     document.getElementById("spellbox").value = "";
+
+    }
+    //document.getElementById("spellbox").value = "";
+
         
                    
         
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*  $('.wordlist-container').hide();  
