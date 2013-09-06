@@ -1,3 +1,4 @@
+
 var i = 0;
 var x = 0;
 var iterations = 1;
@@ -195,8 +196,14 @@ $('body').on('click',  ".icon-volume-up", function (ev) {
     });
 });
 
+
+
+
+
+
 $("#hideButton").click(function() {
   $('.wordlist-container').toggle();
+
 });
 
 $("#createList").click(function() {
@@ -312,7 +319,7 @@ $('body').on('dblclick',  "td", function (ev) {
 $(document).ready(function(){  
 
 $('#spellbox').focus();
-$("#spellbox").keydown(function (e) {
+$("#spellbox").keypress(function (e) {   /// need keypress for french characters . backspace needs fixing
     $('.wordlist-container').hide();
 
     var c = String.fromCharCode(e.which);
@@ -334,6 +341,7 @@ $("#spellbox").keydown(function (e) {
 
     if (e.which === 8) {
       fulltext = textValue.substring(0, fulltext.length-2);
+
       console.log(fulltext);
       lowText = fulltext.toLowerCase();
               if (lowText=== wordObject[i].word.substring(0,lowText.length)) {
@@ -350,7 +358,7 @@ $("#spellbox").keydown(function (e) {
       $('h2 h7:nth-child(-n+'+lowText.length+')').css({backgroundColor: '#5bd642'});
 
       if (document.getElementById("check1").checked!==true){
-      $('h2 h7:nth-child(n+'+(lowText.length+1)+')').css({color: 'white'}); ////////////////////////////////////////////////////////////////////// show. 
+      $('h2 h7:nth-child(n+'+(lowText.length+1)+')').css({color: 'white'}); /////////////////////////////////////////// show word while typing. 
       }
 
     } 
@@ -375,6 +383,7 @@ $("#spellbox").keydown(function (e) {
 
     else {
       $('h2 > h7').animate({backgroundColor: '#e01432'}).delay(40).animate({backgroundColor: '#ffffff'});
+      //$("h2").empty();   ///// causing problem
       //runArray();
      document.getElementById("spellbox").value = "";
      return false;

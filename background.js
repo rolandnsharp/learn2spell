@@ -1,4 +1,17 @@
+chrome.browserAction.onClicked.addListener(function(activeTab)
+{
+    var newURL = "index.html";
+    chrome.tabs.create({ url: newURL });
+});
 
+
+// manifest.json required to restore the popup menu
+/*
+"browser_action": {
+    "default_icon": "2.png",
+    "default_popup": "popup.html"
+  },
+*/
 
 var wordObjectB = [{ word: 'test word', definition:'this word is used for back testing' }];
 
@@ -79,7 +92,7 @@ chrome.contextMenus.create({title: "Learn2Spell '%s' ",
                                       console.log(json.parse);
                                       if(json.parse === undefined) {
                                         console.log("word not found");
-                                        wordObjectB[wordObjectB.length]= { word: info.selectionText, definition: "word not found - double click here to add definition" };
+                                        wordObjectB[wordObjectB.length]= { word: info.selectionText.toLowerCase(), definition: "word not found - double click here to add definition" };
                                           runArrayB();
                                           chrome.storage.sync.set({"myValueB": wordObjectB}); /////save
                                       } else {
