@@ -20,6 +20,10 @@ var wordObject2 = [
 
 var activeList = 0;
 
+var result1 = "List 1";
+
+var result2 = "List 2";
+
 chrome.storage.sync.get("result1Value", //// load saved data. 
     function(res1) {
     if (res1.result1Value === undefined){
@@ -29,7 +33,7 @@ chrome.storage.sync.get("result1Value", //// load saved data.
     } else {
     result1=res1.result1Value;
     $("#list1").html(result1);
-
+    chrome.extension.getBackgroundPage().clf1(result1,result2);
     }   
   });
 
@@ -42,9 +46,10 @@ chrome.storage.sync.get("result2Value", //// load saved data.
     } else {
     result2=res2.result2Value;
     $("#list2").html(result2);
-
+    chrome.extension.getBackgroundPage().clf1(result1,result2);
     }   
   });
+
 
 chrome.storage.sync.get("myValue1", //// load saved data. 
     function(val1) {
@@ -150,9 +155,9 @@ if (activeList===1){
   var WOB = chrome.extension.getBackgroundPage().wordObjectB;
 } else if (activeList===2) {
   var WOB = chrome.extension.getBackgroundPage().wordObjectB2;
+} else {
+  var WOB = chrome.extension.getBackgroundPage().wordObjectB;
 }
-
-//var WOB = chrome.extension.getBackgroundPage().wordObjectB;
 WOB.push( { word: 'test', definition:'front to back test deffinition' } );          //
 WOB.reverse();                                                                      //// clean this up.
 WOB.pop();                                                                          //
@@ -266,29 +271,37 @@ $('body').on('click',  "li", function (ev) {
   var editListNo = clicked.attr("edit-id");
   console.log(editListNo);
   if (editListNo==="1"){
-      bootbox.prompt("Rename List 1", function(result1) {                
-        if (result1 === null) {                                             
+      bootbox.prompt("Rename List 1", function(r1) {                
+        if (r1 === null) {                                             
           return;                              
         } else {
-          $("#list1").html(result1);
-          chrome.storage.sync.set({"result1Value": result1}); //////// save    
-          chrome.extension.getBackgroundPage().listName1= result1;  
-          chrome.extension.getBackgroundPage().clf();   
-          chrome.extension.getBackgroundPage().runArrayB();                     
+          $("#list1").html(r1);
+          result1=r1;
+          chrome.storage.sync.set({"result1Value": result1}); //////// save  
+          chrome.extension.getBackgroundPage().clf1(r1,result2);  
+       // chrome.extension.getBackgroundPage().result1= result1;  
+        //  chrome.extension.getBackgroundPage().clf1(result1);   
+         // chrome.extension.getBackgroundPage().clf1(result1,result2);                      
         }
       });
   } else if (editListNo==="2"){
-      bootbox.prompt("Rename List 2", function(result2) {                
-        if (result2 === null) {                                             
+      bootbox.prompt("Rename List 2", function(r2) {                
+        if (r2 === null) {                                             
           return;                              
         } else {
-          $("#list2").html(result2);
+          $("#list2").html(r2);
+          result2=r2;
           chrome.storage.sync.set({"result2Value": result2}); //////// save 
-          chrome.extension.getBackgroundPage().listName2=result2; 
-          chrome.extension.getBackgroundPage().clf();   
-          chrome.extension.getBackgroundPage().runArrayB();                        
+          chrome.extension.getBackgroundPage().clf1(result1,r2);
+
+         // chrome.extension.getBackgroundPage().result2=result2; 
+        //  chrome.extension.getBackgroundPage().clf2();   
+       // chrome.extension.getBackgroundPage().clf1(result1,result2);                          
         }
       });
+
+  
+
   } else if (editListNo==="1d") {
         bootbox.confirm("Are you sure you want to delete List 1?", function(result) {
             console.log("Confirm result: "+result);
@@ -298,7 +311,7 @@ $('body').on('click',  "li", function (ev) {
            // $("#button2div").hide();
     }); 
   }
-  
+
 });
 
 $("#reverseButton").click(function() {
@@ -416,33 +429,7 @@ $("#spellbox").keypress(function (e) {   /// need keypress for french characters
 });
 });
 
-/*    $('#spellbox').focus();
-
-var input = $('#spellbox'),
-label = $('#inputHiddenSpan');
-$('#spellbox').keypress(function(e) {
-    input.bind('keydown keypress', function() {
-        setTimeout(function() {
-        label.text(input.val());
-        var spell = document.getElementById('spellbox');   
-        if (spell.value==="" && x%iterations===0) {             
-            $('h2').html(wordObject[i].word);
-                    
-        }  else if (e.which == 8 && spell.value==="") {     //e.which == 8 not working (reveal word when backspace
-            $('h2').html(wordObject[i].word);
-                                     // empty #spellbox. Eventult make it reveal on backspace 
-        }  else if (spell.value==="" && x%iterations!==0) {
-            $('h2').text("Spell it again!");
-            if (document.getElementById("check1").checked===true){
-            $('h2').html(wordObject[i].word);}
-        }  else {                                           // of last charactor.
-            $('h2').empty(); 
-            if (document.getElementById("check1").checked===true) {
-            $('h2').html(wordObject[i].word);}
-        }    
-    }, 0); 
-});
-});
+/*  
 
 $('#spellbox').keypress(function(e) {   
  var spell = document.getElementById('spellbox');   

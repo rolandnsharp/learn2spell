@@ -12,6 +12,37 @@ chrome.browserAction.onClicked.addListener(function(activeTab)
     "default_popup": "popup.html"
   },
 */
+var result1 = "List 1";
+
+var result2 = "List 2";
+
+chrome.storage.sync.get("result1Value", //// load saved data. 
+    function(res1) {
+    if (res1.result1Value === undefined){
+        
+        console.log("nothin saved 1");
+        clf1(result1,result2);
+    } else {
+    result1=res1.result1Value;
+    //$("#list1").html(result1);
+    clf1(result1,result2);
+    }   
+  });
+
+chrome.storage.sync.get("result2Value", //// load saved data. 
+    function(res2) {
+    if (res2.result2Value === undefined){
+      
+        console.log("nothin saved 2");
+        clf1(result1,result2);
+        
+    } else {
+    result2=res2.result2Value;
+    //$("#list2").html(result2);
+    clf1(result1,result2);
+    }   
+  });
+
 
 
 var wordObjectB = [{ word: 'test word', definition:'this word is used for back testing' }];
@@ -23,11 +54,12 @@ var loadFunctionB = function(){
     chrome.storage.sync.get("myValueB", //// load saved data. 
     function(valB) {
     if (valB.myValueB === undefined){
+        
         chrome.storage.sync.set({"myValueB": wordObjectB});
-        runArrayB();
+        //runArrayB();
     } else {
     wordObjectB=valB.myValueB;
-    runArrayB();
+    chrome.storage.sync.set({"myValueB": wordObjectB});///save
     }   
   });
  }; 
@@ -39,10 +71,10 @@ var loadFunctionB2 = function(){
     function(valB2) {
     if (valB2.myValueB2 === undefined){
         chrome.storage.sync.set({"myValueB2": wordObjectB2});
-        runArrayB2();
+        
     } else {
     wordObjectB2=valB2.myValueB2;
-    runArrayB();
+    chrome.storage.sync.set({"myValueB2": wordObjectB2});///save
     }   
   });
  }; 
@@ -54,7 +86,7 @@ chrome.storage.sync.set({"myValueB2": wordObjectB2});///save
 };
 
 runArrayB();
-var wikiDefineShortB ="";
+var wikiDefineShortB ="word not found - double click here to add definition";
 var baseURL = 'http://en.wiktionary.org';
 function showPage(page,text) {
   var sourceurl = baseURL + '/wiki/' + page;
@@ -96,21 +128,11 @@ $(document).ready(function() {
   });                 
 });
 
-var listName1 = "List 1";
 
-var listName2 = "List 2";
-
-var clf = function (){
- console.log(listName1);
- console.log(listName2);
-
-};
-
-
-
+var clf1 = function (r1,r2){
 
 chrome.contextMenus.removeAll();
-chrome.contextMenus.create({title: "add '%s' to "+listName1, 
+chrome.contextMenus.create({title: "add '%s' to " + r1, 
                              contexts:["selection"], 
                               onclick: function(info){ 
                                    runArrayB(); 
@@ -142,7 +164,7 @@ chrome.contextMenus.create({title: "add '%s' to "+listName1,
                                     });
                                  }
 });
-chrome.contextMenus.create({title: "add '%s' to "+listName2, 
+chrome.contextMenus.create({title: "add '%s' to " + r2,
                              contexts:["selection"], 
                               onclick: function(info){ 
                                    runArrayB(); 
@@ -176,3 +198,6 @@ chrome.contextMenus.create({title: "add '%s' to "+listName2,
                                     });
                                  }
 });
+
+
+};
