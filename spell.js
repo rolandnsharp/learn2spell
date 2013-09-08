@@ -117,7 +117,7 @@ var runArray = function (){
         };    
     $(".wordlist-table tbody").empty();
 for ( var z = 0; z < wordObject.length; z=z+1 ){    
-    $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td data-id='" + (z+1) + "'>"+wordObject[z].definition+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "' class=\"icon-remove\"></i>"+" "+"<i sound-id='" +(z+1)+ "' class=\"icon-volume-up\"></i>"+" "+"<i trans-id='" +(z+1)+ "' class=\"icon-arrow-right\"></i>"+" "+"</td></tr>" );
+    $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td data-id='" + (z+1) + "'>"+wordObject[z].definition+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "' class=\"icon-remove\"></i><i sound-id='" +(z+1)+ "' class=\"icon-volume-up\"></i></td></tr>" );
     }
     chrome.storage.sync.set({"myValue": wordObject});///save
 };
@@ -145,7 +145,14 @@ bootbox.prompt("edit definition", function(defItem) {
 
 
 var loadBackgroundList = function (){
-var WOB = chrome.extension.getBackgroundPage().wordObjectB;
+console.log(activeList);
+if (activeList===1){
+  var WOB = chrome.extension.getBackgroundPage().wordObjectB;
+} else if (activeList===2) {
+  var WOB = chrome.extension.getBackgroundPage().wordObjectB2;
+}
+
+//var WOB = chrome.extension.getBackgroundPage().wordObjectB;
 WOB.push( { word: 'test', definition:'front to back test deffinition' } );          //
 WOB.reverse();                                                                      //// clean this up.
 WOB.pop();                                                                          //
@@ -156,7 +163,13 @@ while (WOB.length > 1)
   }
 runArray();
 chrome.storage.sync.set({"myValue": wordObject});///save
-chrome.extension.getBackgroundPage().wordObjectB=[ { word: 'test', definition:'front to back test deffinition' } ];
+
+if (activeList===1){
+  chrome.extension.getBackgroundPage().wordObjectB=[ { word: 'test', definition:'front to back test deffinition' } ];
+} else if (activeList===2) {
+  chrome.extension.getBackgroundPage().wordObjectB2=[ { word: 'test 2', definition:'front to back test deffinition 2' } ];
+}
+
 chrome.extension.getBackgroundPage().runArrayB();
 runArray();
 };
@@ -211,33 +224,39 @@ $("#createList").click(function() {
 });
 
 $("#list1").click(function() {
+  
   $('#list1').attr("disabled", true);
   $('#list1d').attr("disabled", true);
   $('#list2').attr("disabled", false);
   $('#list2d').attr("disabled", false);
   activeList=1;
+  
   chrome.storage.sync.set({"myValueAL": activeList}); //////// save AL
   
   wordObject2=wordObject;
   chrome.storage.sync.set({"myValue2": wordObject2}); //////// save
   
   wordObject=wordObject1;
+  loadBackgroundList();
   runArray();
 
 });
 
 $("#list2").click(function() {
+  
   $('#list2').attr("disabled", true);
   $('#list2d').attr("disabled", true);
   $('#list1').attr("disabled", false);
   $('#list1d').attr("disabled", false);
   activeList=2;
+  
   chrome.storage.sync.set({"myValueAL": activeList}); //////// save AL
   
   wordObject1=wordObject;
   chrome.storage.sync.set({"myValue1": wordObject1}); //////// save
 
   wordObject=wordObject2;
+  loadBackgroundList();
   runArray();
 
 });
@@ -252,7 +271,10 @@ $('body').on('click',  "li", function (ev) {
           return;                              
         } else {
           $("#list1").html(result1);
-          chrome.storage.sync.set({"result1Value": result1}); //////// save                          
+          chrome.storage.sync.set({"result1Value": result1}); //////// save    
+          chrome.extension.getBackgroundPage().listName1= result1;  
+          chrome.extension.getBackgroundPage().clf();   
+          chrome.extension.getBackgroundPage().runArrayB();                     
         }
       });
   } else if (editListNo==="2"){
@@ -261,7 +283,10 @@ $('body').on('click',  "li", function (ev) {
           return;                              
         } else {
           $("#list2").html(result2);
-          chrome.storage.sync.set({"result2Value": result2}); //////// save                           
+          chrome.storage.sync.set({"result2Value": result2}); //////// save 
+          chrome.extension.getBackgroundPage().listName2=result2; 
+          chrome.extension.getBackgroundPage().clf();   
+          chrome.extension.getBackgroundPage().runArrayB();                        
         }
       });
   } else if (editListNo==="1d") {
@@ -282,7 +307,7 @@ $("#reverseButton").click(function() {
   window.location.reload();//// change this
   runArray;
 });
-
+/*
 $('body').on('click',  ".icon-arrow-right", function (ev) {   /// transfer word between list button
     var clicked=$(ev.currentTarget);
     var transID = clicked.attr("trans-id");
@@ -300,7 +325,7 @@ $('body').on('click',  ".icon-arrow-right", function (ev) {   /// transfer word 
   runArray();  
   chrome.storage.sync.set({"myValue": wordObject}); //////// save///////////////////////////////
 });
-
+*/
 $('body').on('click',  ".icon-remove", function (ev) {
     var clicked=$(ev.currentTarget);
   deleteLI(clicked.attr("data-id"));

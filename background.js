@@ -13,7 +13,10 @@ chrome.browserAction.onClicked.addListener(function(activeTab)
   },
 */
 
+
 var wordObjectB = [{ word: 'test word', definition:'this word is used for back testing' }];
+
+var wordObjectB2 = [{ word: 'test word 2', definition:'this word is used for back testing 2' }];
 
 var loadFunctionB = function(){
     //chrome.storage.sync.set({"myValueB": wordObjectB}); activate this to get the program running. The emply storage will throw an error 
@@ -30,12 +33,28 @@ var loadFunctionB = function(){
  }; 
 loadFunctionB();
 
+var loadFunctionB2 = function(){
+    //chrome.storage.sync.set({"myValueB": wordObjectB}); activate this to get the program running. The emply storage will throw an error 
+    chrome.storage.sync.get("myValueB2", //// load saved data. 
+    function(valB2) {
+    if (valB2.myValueB2 === undefined){
+        chrome.storage.sync.set({"myValueB2": wordObjectB2});
+        runArrayB2();
+    } else {
+    wordObjectB2=valB2.myValueB2;
+    runArrayB();
+    }   
+  });
+ }; 
+loadFunctionB();
+
 var runArrayB = function (){
 chrome.storage.sync.set({"myValueB": wordObjectB});///save
+chrome.storage.sync.set({"myValueB2": wordObjectB2});///save
 };
 
 runArrayB();
-
+var wikiDefineShortB ="";
 var baseURL = 'http://en.wiktionary.org';
 function showPage(page,text) {
   var sourceurl = baseURL + '/wiki/' + page;
@@ -50,13 +69,13 @@ function showPage(page,text) {
   $(" ol li ul").detach();
 var wikiDefineB = this.textContent;
 
-var wikiDefineShortB = jQuery.trim(wikiDefineB).substring(0, 500)  /////// shortening the definition for google local storage
+wikiDefineShortB = jQuery.trim(wikiDefineB).substring(0, 500)  /////// shortening the definition for google local storage
                           .trim(this) + "...";
   //var spellItem = document.getElementById('word'); 
     runArrayB();  
-    wordObjectB[wordObjectB.length]= { word: page, definition: wikiDefineShortB };
-    runArrayB();
-    chrome.storage.sync.set({"myValueB": wordObjectB}); /////save
+   // wordObjectB[wordObjectB.length]= { word: page, definition: wikiDefineShortB };
+   // runArrayB();
+   // chrome.storage.sync.set({"myValueB": wordObjectB}); /////save
   });
 }
 $(document).ready(function() {
@@ -77,14 +96,25 @@ $(document).ready(function() {
   });                 
 });
 
+var listName1 = "List 1";
+
+var listName2 = "List 2";
+
+var clf = function (){
+ console.log(listName1);
+ console.log(listName2);
+
+};
+
+
+
 
 chrome.contextMenus.removeAll();
-chrome.contextMenus.create({title: "Learn2Spell '%s' ", 
+chrome.contextMenus.create({title: "add '%s' to "+listName1, 
                              contexts:["selection"], 
                               onclick: function(info){ 
                                    runArrayB(); 
                                     console.log(wordObjectB); 
-                                    
                                     var page = info.selectionText.toLowerCase();
                                     $('#wikiInfoB').html('...please wait...');
                                     $.getJSON(baseURL+'/w/api.php?action=parse&format=json&prop=text|revid|displaytitle&page='+page,
@@ -97,6 +127,7 @@ chrome.contextMenus.create({title: "Learn2Spell '%s' ",
                                           chrome.storage.sync.set({"myValueB": wordObjectB}); /////save
                                       } else {
                                         showPage(page,json.parse.text['*']);
+                                        wordObjectB[wordObjectB.length]= { word: info.selectionText.toLowerCase(), definition: wikiDefineShortB };
                                         $('#wikiInfoB').html("<div></div>");
                                         runArrayB();
                                           chrome.storage.sync.set({"myValueB": wordObjectB}); /////save
@@ -111,4 +142,37 @@ chrome.contextMenus.create({title: "Learn2Spell '%s' ",
                                     });
                                  }
 });
+chrome.contextMenus.create({title: "add '%s' to "+listName2, 
+                             contexts:["selection"], 
+                              onclick: function(info){ 
+                                   runArrayB(); 
+                                    console.log(wordObjectB); 
+                                    var page = info.selectionText.toLowerCase();
+                                    $('#wikiInfoB').html('...please wait...');
+                                    $.getJSON(baseURL+'/w/api.php?action=parse&format=json&prop=text|revid|displaytitle&page='+page,
+                                    function(json) {
+                                      console.log(json.parse);
+                                      if(json.parse === undefined) {
+                                        console.log("word not found");
+                                        wordObjectB2[wordObjectB2.length]= { word: info.selectionText.toLowerCase(), definition: "word not found - double click here to add definition" };
+                                          runArrayB();
+                                          chrome.storage.sync.set({"myValueB2": wordObjectB2}); /////save
+                                      } else {
+                                        showPage(page,json.parse.text['*']);
 
+                                        wordObjectB2[wordObjectB2.length]= { word: info.selectionText.toLowerCase(), definition: wikiDefineShortB };
+
+                                        $('#wikiInfoB').html("<div></div>");
+                                        runArrayB();
+                                          chrome.storage.sync.set({"myValueB2": wordObjectB2}); /////save
+                                      }
+                                      var tabs = chrome.extension.getViews({type: "tab"});
+                                      if (tabs[0]===undefined){
+                                        
+                                        console.log("not on front page");
+                                      }else{
+                                        tabs[0].loadBackgroundList();
+                                      }
+                                    });
+                                 }
+});
