@@ -192,7 +192,7 @@ loadFunction();
 
 $("#check2").change(function() {
     if(this.checked) {
-        //Do stuff
+        
         $(".defBox h5").text(wordObject[0].definition);
         
     } else if (this.checked!==true){
@@ -333,7 +333,6 @@ $('body').on('click',  "li", function (ev) {
 $("#reverseButton").click(function() {
   wordObject = wordObject.reverse();
   chrome.storage.sync.set({"myValue": wordObject}); //////// save
- // window.location.reload();//// change this
   runArray();
 });
 /*
@@ -368,6 +367,22 @@ $('body').on('dblclick',  "td", function (ev) {
     runArray();  
   chrome.storage.sync.set({"myValue": wordObject}); //////// save
 });
+
+
+$('body').on('dblclick',  ".defBox", function () {
+bootbox.prompt("edit definition", function(defItem) {                
+  if (defItem === null) {                                             
+    return;                              
+  } else {
+    wordObject[0]= { word: wordObject[0].word, definition: defItem };
+    chrome.storage.sync.set({"myValue": wordObject}); /////save
+    runArray();                        
+  }
+});
+});
+
+
+
 });
 
 $(document).ready(function(){  
