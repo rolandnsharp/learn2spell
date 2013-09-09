@@ -128,11 +128,10 @@ $(document).ready(function() {
   });                 
 });
 
-
 var clf1 = function (r1,r2){
 
 chrome.contextMenus.removeAll();
-chrome.contextMenus.create({title: "add '%s' to " + r1, 
+chrome.contextMenus.create({title: "Add '%s' to " + r1, 
                              contexts:["selection"], 
                               onclick: function(info){ 
                                    runArrayB(); 
@@ -164,7 +163,7 @@ chrome.contextMenus.create({title: "add '%s' to " + r1,
                                     });
                                  }
 });
-chrome.contextMenus.create({title: "add '%s' to " + r2,
+chrome.contextMenus.create({title: "Add '%s' to " + r2,
                              contexts:["selection"], 
                               onclick: function(info){ 
                                    runArrayB(); 

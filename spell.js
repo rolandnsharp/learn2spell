@@ -15,7 +15,7 @@ var wordObject1 = [
 ];
 
 var wordObject2 = [
-{ word: 'lsit2', definition:'This is your second list. Use it for a second language you may be studying or for storing words you have already learnt. Click the arrow icon to transfer a word between lists. You can also rename your lists with the option in the dropdown menu.  ' }
+{ word: 'lsit2', definition:'This is your second list. Use it for a second language you may be studying or for storing words you have already learnt. You can rename your lists with the option in the dropdown menu.  ' }
 ];
 
 var activeList = 0;
@@ -114,11 +114,19 @@ var loadFunction = function(){
   });
  }; 
 
+
+
 var runArray = function (){
     if (wordObject.length<=0) {
         $('h2').text("");
+        
     } else {  
         $('h2').html(wordObject[i].word);
+        $(".defBox h5").text("");
+        if (document.getElementById("check2").checked===true){
+
+          $(".defBox h5").text(wordObject[0].definition);
+        }
         };    
     $(".wordlist-table tbody").empty();
 for ( var z = 0; z < wordObject.length; z=z+1 ){    
@@ -159,7 +167,7 @@ if (activeList===1){
   var WOB = chrome.extension.getBackgroundPage().wordObjectB;
 }
 WOB.push( { word: 'test', definition:'front to back test deffinition' } );          //
-WOB.reverse();                                                                      //// clean this up.
+WOB.reverse();                                                                      //// clean this up later.
 WOB.pop();                                                                          //
 while (WOB.length > 1)
   {
@@ -181,6 +189,18 @@ runArray();
 
 $(document).ready(function () {   
 loadFunction();    
+
+$("#check2").change(function() {
+    if(this.checked) {
+        //Do stuff
+        $(".defBox h5").text(wordObject[0].definition);
+        
+    } else if (this.checked!==true){
+      $(".defBox h5").text("");
+    }
+});
+
+
 
     $('#noi').text(iterations);
     $("#plusOne").click(function() {
@@ -214,13 +234,9 @@ $('body').on('click',  ".icon-volume-up", function (ev) {
     });
 });
 
-
-
-
-
-
 $("#hideButton").click(function() {
   $('.wordlist-container').toggle();
+  runArray();
 
 });
 
@@ -317,8 +333,8 @@ $('body').on('click',  "li", function (ev) {
 $("#reverseButton").click(function() {
   wordObject = wordObject.reverse();
   chrome.storage.sync.set({"myValue": wordObject}); //////// save
-  window.location.reload();//// change this
-  runArray;
+ // window.location.reload();//// change this
+  runArray();
 });
 /*
 $('body').on('click',  ".icon-arrow-right", function (ev) {   /// transfer word between list button
