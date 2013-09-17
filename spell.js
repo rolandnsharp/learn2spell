@@ -24,6 +24,10 @@ var result1 = "List 1";
 
 var result2 = "List 2";
 
+
+   
+
+
 chrome.storage.sync.get("result1Value", //// load saved data. 
     function(res1) {
     if (res1.result1Value === undefined){
@@ -190,15 +194,51 @@ runArray();
 $(document).ready(function () {   
 loadFunction();    
 
+
+
+
+
+
 $("#check2").change(function() {
     if(this.checked) {
+
+
+          setStatus = document.getElementById('check2');
+          setStatus.onclick = function() {
+        if(document.getElementById('check2').checked) {
+            localStorage.setItem('check2', "true");
+            //chrome.storage.sync.set({"myValue": wordObject});
+            console.log("true");
+        } 
+    }
+
+
+
         
         $(".defBox h5").text(wordObject[0].definition);
         
     } else if (this.checked!==true){
+
+      localStorage.setItem('check2', "false");
+            console.log("false");
+
       $(".defBox h5").text("");
     }
 });
+
+
+
+    //console.log(localStorage.getItem('check2'));
+if (localStorage.getItem('check2') === "true") {
+        console.log("its checked");
+       // $('#check2').prop('checked', true);
+        document.getElementById("check2").checked=true;
+    } else {
+      document.getElementById("check2").checked=false;
+    }
+
+
+
 
 
 
@@ -380,8 +420,6 @@ bootbox.prompt("edit definition", function(defItem) {
   }
 });
 });
-
-
 
 });
 
