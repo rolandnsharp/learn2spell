@@ -24,9 +24,15 @@ var result1 = "List 1";
 
 var result2 = "List 2";
 
-
-   
-
+chrome.storage.sync.get("CK2",
+   function(res1) {
+    console.log(res1.CK2+"jj") 
+    if (res1.CK2==="false"){
+    document.getElementById("check2").checked=false;
+   } else {
+    document.getElementById("check2").checked=true;
+   }
+  });
 
 chrome.storage.sync.get("result1Value", //// load saved data. 
     function(res1) {
@@ -194,54 +200,27 @@ runArray();
 $(document).ready(function () {   
 loadFunction();    
 
-
-
-
-
-
 $("#check2").change(function() {
     if(this.checked) {
-
-
-          setStatus = document.getElementById('check2');
-          setStatus.onclick = function() {
-        if(document.getElementById('check2').checked) {
             localStorage.setItem('check2', "true");
-            //chrome.storage.sync.set({"myValue": wordObject});
+           chrome.storage.sync.set({"CK2": "true"});///save
             console.log("true");
-        } 
-    }
-
-
-
-        
-        $(".defBox h5").text(wordObject[0].definition);
-        
+            $(".defBox h5").text(wordObject[0].definition);
     } else if (this.checked!==true){
-
-      localStorage.setItem('check2', "false");
+            localStorage.setItem('check2', "false");
+            chrome.storage.sync.set({"CK2": "false"});///save
             console.log("false");
-
-      $(".defBox h5").text("");
+            $(".defBox h5").text("");
     }
 });
 
-
-
-    //console.log(localStorage.getItem('check2'));
-if (localStorage.getItem('check2') === "true") {
+/*if (localStorage.getItem('check2') === "true") {
         console.log("its checked");
-       // $('#check2').prop('checked', true);
         document.getElementById("check2").checked=true;
     } else {
-      document.getElementById("check2").checked=false;
-    }
-
-
-
-
-
-
+        document.getElementById("check2").checked=false;
+    }*/
+ 
     $('#noi').text(iterations);
     $("#plusOne").click(function() {
     iterations = iterations +1;
