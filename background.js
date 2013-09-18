@@ -1,6 +1,4 @@
 
-
-
 // manifest.json required to restore the popup menu
 /*
 "browser_action": {
@@ -38,8 +36,6 @@ chrome.storage.sync.get("result2Value", //// load saved data.
     clf1(result1,result2);
     }   
   });
-
-
 
 var wordObjectB = [{ word: 'test word', definition:'this word is used for back testing' }];
 
@@ -130,9 +126,6 @@ wikiDefineShortB = jQuery.trim(wikiDefineB).substring(0, 500)  /////// shortenin
   });
 }
 
-
-
-
 $(document).ready(function() {
 
 chrome.browserAction.onClicked.addListener(function(activeTab){
@@ -144,8 +137,6 @@ var newURL = "index.html";
     openTab("index.html");
   }
 });
-
-
 
   $('#pagetitle').hide();
   $('#word').change(function() {

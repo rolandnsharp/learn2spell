@@ -24,11 +24,6 @@ var result1 = "List 1";
 
 var result2 = "List 2";
 
-
-
-
-
-
 chrome.storage.sync.get("CK2",
    function(res) {
     if (res.CK2==="false"){
@@ -126,8 +121,6 @@ var loadFunction = function(){
   });
  }; 
 
-
-
 var runArray = function (){
     if (wordObject.length<=0) {
         $('h2').text("");
@@ -168,7 +161,6 @@ bootbox.prompt("edit definition", function(defItem) {
 });
 };
 
-
 var loadBackgroundList = function (){
 console.log(activeList);
 if (activeList===1){
@@ -201,22 +193,7 @@ runArray();
 
 $(document).ready(function () {   
 loadFunction(); 
-
-
-chrome.browserAction.onClicked.addListener(function(activeTab){
-var tabs = chrome.extension.getViews({type: "tab"});
-var newURL = "index.html";
-  if(tabs[0]===undefined){
-    chrome.tabs.create({ url: newURL });
-    //return;
-  } else {
-    
-          
-          chrome.tabs.update(AT[0], {active: true});
-
-  }
-});
-
+//$('.optionsBox').hide();
 
 $("#check2").change(function() {
     if(this.checked) {
@@ -262,6 +239,10 @@ $('body').on('click',  ".icon-volume-up", function (ev) {
  audioElement.load;
  audioElement.play();
     });
+});
+
+$("#optionsButton").click(function() {
+  $('.optionsBox').toggle();
 });
 
 $("#hideButton").click(function() {
@@ -355,6 +336,9 @@ $("#reverseButton").click(function() {
   chrome.storage.sync.set({"myValue": wordObject}); //////// save
   runArray();
 });
+
+
+
 /*
 $('body').on('click',  ".icon-arrow-right", function (ev) {   /// transfer word between list button
     var clicked=$(ev.currentTarget);
@@ -408,6 +392,10 @@ $(document).ready(function(){
 $('#spellbox').focus();
 $("#spellbox").keypress(function (e) {   /// need keypress for french characters . backspace needs fixing
     $('.wordlist-container').hide();
+    $('.optionsBox').hide();
+   // spellbox
+   // $('#spellbox').hide();
+
 
     var c = String.fromCharCode(e.which);
     //console.log(c);
@@ -461,9 +449,24 @@ $("#spellbox").keypress(function (e) {   /// need keypress for french characters
     
     else if (e.which === 13 && lowText.substring(0,lowText.length-1) === wordObject[0].word){
       //console.log("spalde");
-      document.getElementById("spellbox").value = "";
+
      //return false;
-     oneStep(); 
+     oneStep();
+     if (document.getElementById("check3").checked===true){ 
+           document.getElementById("spellbox").value = "";
+           $.getJSON("http://apifree.forvo.com/action/word-pronunciations/format/json/word/"+wordObject[0].word+"/order/rate-desc/limit/1/key/aad01d7956b025335a7b9d89ab0ef826/", function(jd) {
+           var song =jd.items[0].pathmp3;
+           var audioElement = document.createElement('audio');
+           audioElement.setAttribute("preload", "auto");
+           audioElement.autobuffer = true;
+           var source1 = document.createElement('source');
+           source1.type= 'audio/mp3';
+           source1.src= song;
+           audioElement.appendChild(source1);
+           audioElement.load;
+           audioElement.play();
+           });
+     }      
      runArray();
      return false;
     } 
