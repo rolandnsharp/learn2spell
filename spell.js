@@ -24,12 +24,30 @@ var result1 = "List 1";
 
 var result2 = "List 2";
 
+chrome.storage.sync.get("CK1",
+   function(res) {
+    if (res.CK1==="false"){
+    document.getElementById("check1").checked=false;
+   } else {
+    document.getElementById("check1").checked=true;
+   }
+  });
+
 chrome.storage.sync.get("CK2",
    function(res) {
     if (res.CK2==="false"){
     document.getElementById("check2").checked=false;
    } else {
     document.getElementById("check2").checked=true;
+   }
+  });
+
+chrome.storage.sync.get("CK3",
+   function(res) {
+    if (res.CK3==="false"){
+    document.getElementById("check3").checked=false;
+   } else {
+    document.getElementById("check3").checked=true;
    }
   });
 
@@ -195,17 +213,31 @@ $(document).ready(function () {
 loadFunction(); 
 //$('.optionsBox').hide();
 
+$("#check1").change(function() {
+    if(this.checked) {
+           chrome.storage.sync.set({"CK1": "true"});///save
+    } else if (this.checked!==true){
+            chrome.storage.sync.set({"CK1": "false"});///save
+    }
+});
+
 $("#check2").change(function() {
     if(this.checked) {
-            localStorage.setItem('check2', "true");
            chrome.storage.sync.set({"CK2": "true"});///save
-            console.log("true");
             $(".defBox h5").text(wordObject[0].definition);
     } else if (this.checked!==true){
-            localStorage.setItem('check2', "false");
             chrome.storage.sync.set({"CK2": "false"});///save
-            console.log("false");
             $(".defBox h5").text("");
+    }
+});
+
+$("#check3").change(function() {
+    if(this.checked) {
+           chrome.storage.sync.set({"CK3": "true"});///save
+           console.log("true");
+    } else if (this.checked!==true){
+            chrome.storage.sync.set({"CK3": "false"});///save
+            console.log("false");
     }
 });
 
@@ -337,8 +369,6 @@ $("#reverseButton").click(function() {
   runArray();
 });
 
-
-
 /*
 $('body').on('click',  ".icon-arrow-right", function (ev) {   /// transfer word between list button
     var clicked=$(ev.currentTarget);
@@ -393,19 +423,16 @@ $('#spellbox').focus();
 $("#spellbox").keypress(function (e) {   /// need keypress for french characters . backspace needs fixing
     $('.wordlist-container').hide();
     $('.optionsBox').hide();
-   // spellbox
    // $('#spellbox').hide();
 
-
     var c = String.fromCharCode(e.which);
-    //console.log(c);
+
     //process the single character or
     var textValue = $("#spellbox").val();
     var fulltext = textValue + c;
     //process the full text
     var lowText = fulltext.toLowerCase();
     console.log(lowText);
-    //console.log(wordObject[i].word.length);
 
     $("h2").empty();
     
@@ -448,12 +475,14 @@ $("#spellbox").keypress(function (e) {   /// need keypress for french characters
     } 
     
     else if (e.which === 13 && lowText.substring(0,lowText.length-1) === wordObject[0].word){
-      //console.log("spalde");
-
      //return false;
+
+
+
      oneStep();
+     document.getElementById("spellbox").value = "";
+
      if (document.getElementById("check3").checked===true){ 
-           document.getElementById("spellbox").value = "";
            $.getJSON("http://apifree.forvo.com/action/word-pronunciations/format/json/word/"+wordObject[0].word+"/order/rate-desc/limit/1/key/aad01d7956b025335a7b9d89ab0ef826/", function(jd) {
            var song =jd.items[0].pathmp3;
            var audioElement = document.createElement('audio');
