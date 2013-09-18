@@ -3,6 +3,10 @@ var i = 0;
 var x = 0;
 var iterations = 1;
 
+var textValue = ""; 
+
+var bodyPress = true;
+
 var wordObject = [
 { word: 'read', definition:'Using Learn2Spell is easy. If, while browsing the web, you come across a word that you wish to drill into memory, highlight the word, right-click, and select \'Learn2Spell\'.' },
 { word: 'this', definition:'You can also add words manually with the input box above.' },
@@ -141,10 +145,14 @@ var loadFunction = function(){
 
 var runArray = function (){
     if (wordObject.length<=0) {
-        $('h2').text("");
+        $('h2').empty();
         
     } else {  
-        $('h2').html(wordObject[i].word);
+        $("h2").empty();
+            for ( var d = 0; d < wordObject[0].word.length; d=d+1 ){    
+            $('h2').append("<h7>"+wordObject[0].word.substring(d, d+1)+"</h7>");
+            }
+            $('h2 h7:nth-child('+(1)+')').css({ "border": "1px solid black" });
         $(".defBox h5").text("");
         if (document.getElementById("check2").checked===true){
 
@@ -168,19 +176,24 @@ var deleteLI = function (XX) {
         };
 
 var editLI = function (TT){
-bootbox.prompt("edit definition", function(defItem) {                
-  if (defItem === null) {                                             
+bodyPress = false;
+bootbox.prompt("edit definition", function(defItem) {           
+  if (defItem === null) {   
+    bodyPress = true; 
+    textValue = "";
     return;                              
   } else {
     wordObject[TT-1]= { word: wordObject[TT-1].word, definition: defItem };
     chrome.storage.sync.set({"myValue": wordObject}); /////save
-    runArray();                        
+    runArray();
+    bodyPress = true; 
+    textValue = "";
+                         
   }
 });
 };
 
 var loadBackgroundList = function (){
-console.log(activeList);
 if (activeList===1){
   var WOB = chrome.extension.getBackgroundPage().wordObjectB;
 } else if (activeList===2) {
@@ -279,7 +292,8 @@ $("#optionsButton").click(function() {
 
 $("#hideButton").click(function() {
   $('.wordlist-container').toggle();
-  runArray();
+ // runArray();
+ // textValue = "";
 
 });
 
@@ -330,25 +344,35 @@ $('body').on('click',  "li", function (ev) {
   var editListNo = clicked.attr("edit-id");
   console.log(editListNo);
   if (editListNo==="1"){
+      bodyPress = false; 
       bootbox.prompt("Rename List 1", function(r1) {                
-        if (r1 === null) {                                             
+        if (r1 === null) {  
+          bodyPress = true; 
+          textValue = "";                                           
           return;                              
         } else {
           $("#list1").html(r1);
           result1=r1;
           chrome.storage.sync.set({"result1Value": result1}); //////// save  
-          chrome.extension.getBackgroundPage().clf1(r1,result2);                      
+          chrome.extension.getBackgroundPage().clf1(r1,result2);
+          bodyPress = true; 
+          textValue = "";                       
         }
       });
   } else if (editListNo==="2"){
+      bodyPress = false; 
       bootbox.prompt("Rename List 2", function(r2) {                
-        if (r2 === null) {                                             
+        if (r2 === null) {   
+          bodyPress = true; 
+          textValue = "";                                           
           return;                              
         } else {
           $("#list2").html(r2);
           result2=r2;
           chrome.storage.sync.set({"result2Value": result2}); //////// save 
-          chrome.extension.getBackgroundPage().clf1(result1,r2);                        
+          chrome.extension.getBackgroundPage().clf1(result1,r2); 
+          bodyPress = true; 
+          textValue = "";                        
         }
       });
 
@@ -397,42 +421,52 @@ $('body').on('click',  ".icon-remove", function (ev) {
 
 $('body').on('dblclick',  "td", function (ev) {
     var clicked=$(ev.currentTarget);
+   
     editLI(clicked.attr("data-id"));
     runArray();  
   chrome.storage.sync.set({"myValue": wordObject}); //////// save
+
 });
 
 
 $('body').on('dblclick',  ".defBox", function () {
+bodyPress = false; 
 bootbox.prompt("edit definition", function(defItem) {                
-  if (defItem === null) {                                             
+  if (defItem === null) { 
+    bodyPress = true; 
+    textValue = "";                                             
     return;                              
   } else {
     wordObject[0]= { word: wordObject[0].word, definition: defItem };
     chrome.storage.sync.set({"myValue": wordObject}); /////save
-    runArray();                        
+    runArray();    
+    bodyPress = true; 
+    textValue = "";                      
   }
 });
 });
 
 });
 
-$(document).ready(function(){  
 
-$('#spellbox').focus();
-$("#spellbox").keypress(function (e) {   /// need keypress for french characters . backspace needs fixing
+$(document).keypress(function (e) {   /// need keypress for french characters . backspace needs fixing
+  if(bodyPress===true){
     $('.wordlist-container').hide();
     $('.optionsBox').hide();
-   // $('#spellbox').hide();
+   
 
     var c = String.fromCharCode(e.which);
 
     //process the single character or
-    var textValue = $("#spellbox").val();
-    var fulltext = textValue + c;
+    
+    textValue=textValue+c;
+
+    
+    //var textValue = $("#spellbox").val();
+    var fulltext = textValue;
     //process the full text
     var lowText = fulltext.toLowerCase();
-    console.log(lowText);
+    //console.log(lowText);
 
     $("h2").empty();
     
@@ -440,7 +474,8 @@ $("#spellbox").keypress(function (e) {   /// need keypress for french characters
     
     $('h2').append("<h7>"+wordObject[0].word.substring(d, d+1)+"</h7>");
     }
-
+    
+    $('h2 h7:nth-child('+(lowText.length+1)+')').css({ "border": "1px solid black" });
     if (e.which === 8) {
       fulltext = textValue.substring(0, fulltext.length-2);
 
@@ -458,6 +493,7 @@ $("#spellbox").keypress(function (e) {   /// need keypress for french characters
 
     if (lowText=== wordObject[i].word.substring(0,lowText.length)) {
       $('h2 h7:nth-child(-n+'+lowText.length+')').css({backgroundColor: '#5bd642'});
+     
 
       if (document.getElementById("check1").checked!==true){
       $('h2 h7:nth-child(n+'+(lowText.length+1)+')').css({color: 'white'}); /////////////////////////////////////////// show word while typing. 
@@ -467,7 +503,8 @@ $("#spellbox").keypress(function (e) {   /// need keypress for french characters
 
     else if (e.which === 32 && lowText === wordObject[0].word+" "){
       //console.log("spalde");
-      document.getElementById("spellbox").value = "";
+      $('h2 h7:nth-child('+(1)+')').css({ "border": "1px solid black" });
+      textValue = "";
      //return false;
     // oneStep(); when blanked space repeats word
      //runArray();
@@ -480,7 +517,8 @@ $("#spellbox").keypress(function (e) {   /// need keypress for french characters
 
 
      oneStep();
-     document.getElementById("spellbox").value = "";
+     
+     textValue = "";
 
      if (document.getElementById("check3").checked===true){ 
            $.getJSON("http://apifree.forvo.com/action/word-pronunciations/format/json/word/"+wordObject[0].word+"/order/rate-desc/limit/1/key/aad01d7956b025335a7b9d89ab0ef826/", function(jd) {
@@ -504,11 +542,15 @@ $("#spellbox").keypress(function (e) {   /// need keypress for french characters
       $('h2 > h7').animate({backgroundColor: '#e01432'}).delay(40).animate({backgroundColor: '#ffffff'});
       //$("h2").empty();   ///// causing problem
       //runArray();
-     document.getElementById("spellbox").value = "";
+     
+     $('h2 h7:nth-child(n+'+(1)+')').css({"border": "1px solid white" });  // clear existing border. need a better method
+     $('h2 h7:nth-child('+(1)+')').css({ "border": "1px solid black" });
+     textValue = "";
      return false;
     }
+    }
 });
-});
+
 
 /*  
 
