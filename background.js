@@ -1,8 +1,4 @@
-chrome.browserAction.onClicked.addListener(function(activeTab)
-{
-    var newURL = "index.html";
-    chrome.tabs.create({ url: newURL });
-});
+
 
 
 // manifest.json required to restore the popup menu
@@ -85,6 +81,29 @@ chrome.storage.sync.set({"myValueB": wordObjectB});///save
 chrome.storage.sync.set({"myValueB2": wordObjectB2});///save
 };
 
+function openTab(filename)
+{
+  var myid = chrome.i18n.getMessage("@@extension_id");
+  chrome.windows.getCurrent(
+  function(win)
+  {
+    chrome.tabs.query({'windowId': win.id},
+    function(tabArray)
+    {
+      for(var i in tabArray)
+      {
+        if(tabArray[i].url == "chrome-extension://" + myid + "/" + filename)
+        {
+          // console.log("already opened");
+          chrome.tabs.update(tabArray[i].id, {active: true});
+          return;
+        }
+      }
+      chrome.tabs.create({url:chrome.extension.getURL(filename)});
+    });
+  });
+}
+
 runArrayB();
 var wikiDefineShortB ="word not found - double click here to add definition";
 var baseURL = 'http://en.wiktionary.org';
@@ -110,7 +129,24 @@ wikiDefineShortB = jQuery.trim(wikiDefineB).substring(0, 500)  /////// shortenin
    // chrome.storage.sync.set({"myValueB": wordObjectB}); /////save
   });
 }
+
+
+
+
 $(document).ready(function() {
+
+chrome.browserAction.onClicked.addListener(function(activeTab){
+var tabs = chrome.extension.getViews({type: "tab"});
+var newURL = "index.html";
+  if(tabs[0]===undefined){
+    chrome.tabs.create({ url: newURL });
+  } else {
+    openTab("index.html");
+  }
+});
+
+
+
   $('#pagetitle').hide();
   $('#word').change(function() {
     var page = this.value;

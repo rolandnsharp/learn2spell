@@ -24,10 +24,14 @@ var result1 = "List 1";
 
 var result2 = "List 2";
 
+
+
+
+
+
 chrome.storage.sync.get("CK2",
-   function(res1) {
-    console.log(res1.CK2+"jj") 
-    if (res1.CK2==="false"){
+   function(res) {
+    if (res.CK2==="false"){
     document.getElementById("check2").checked=false;
    } else {
     document.getElementById("check2").checked=true;
@@ -37,9 +41,7 @@ chrome.storage.sync.get("CK2",
 chrome.storage.sync.get("result1Value", //// load saved data. 
     function(res1) {
     if (res1.result1Value === undefined){
-        
         console.log("nothin saved 1");
-        
     } else {
     result1=res1.result1Value;
     $("#list1").html(result1);
@@ -198,7 +200,23 @@ runArray();
 };
 
 $(document).ready(function () {   
-loadFunction();    
+loadFunction(); 
+
+
+chrome.browserAction.onClicked.addListener(function(activeTab){
+var tabs = chrome.extension.getViews({type: "tab"});
+var newURL = "index.html";
+  if(tabs[0]===undefined){
+    chrome.tabs.create({ url: newURL });
+    //return;
+  } else {
+    
+          
+          chrome.tabs.update(AT[0], {active: true});
+
+  }
+});
+
 
 $("#check2").change(function() {
     if(this.checked) {
@@ -214,13 +232,6 @@ $("#check2").change(function() {
     }
 });
 
-/*if (localStorage.getItem('check2') === "true") {
-        console.log("its checked");
-        document.getElementById("check2").checked=true;
-    } else {
-        document.getElementById("check2").checked=false;
-    }*/
- 
     $('#noi').text(iterations);
     $("#plusOne").click(function() {
     iterations = iterations +1;
@@ -313,10 +324,7 @@ $('body').on('click',  "li", function (ev) {
           $("#list1").html(r1);
           result1=r1;
           chrome.storage.sync.set({"result1Value": result1}); //////// save  
-          chrome.extension.getBackgroundPage().clf1(r1,result2);  
-       // chrome.extension.getBackgroundPage().result1= result1;  
-        //  chrome.extension.getBackgroundPage().clf1(result1);   
-         // chrome.extension.getBackgroundPage().clf1(result1,result2);                      
+          chrome.extension.getBackgroundPage().clf1(r1,result2);                      
         }
       });
   } else if (editListNo==="2"){
@@ -327,15 +335,9 @@ $('body').on('click',  "li", function (ev) {
           $("#list2").html(r2);
           result2=r2;
           chrome.storage.sync.set({"result2Value": result2}); //////// save 
-          chrome.extension.getBackgroundPage().clf1(result1,r2);
-
-         // chrome.extension.getBackgroundPage().result2=result2; 
-        //  chrome.extension.getBackgroundPage().clf2();   
-       // chrome.extension.getBackgroundPage().clf1(result1,result2);                          
+          chrome.extension.getBackgroundPage().clf1(result1,r2);                        
         }
       });
-
-  
 
   } else if (editListNo==="1d") {
         bootbox.confirm("Are you sure you want to delete List 1?", function(result) {
@@ -346,7 +348,6 @@ $('body').on('click',  "li", function (ev) {
            // $("#button2div").hide();
     }); 
   }
-
 });
 
 $("#reverseButton").click(function() {
