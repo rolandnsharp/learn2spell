@@ -194,6 +194,7 @@ bootbox.prompt("edit definition", function(defItem) {
 };
 
 var loadBackgroundList = function (){
+
 if (activeList===1){
   var WOB = chrome.extension.getBackgroundPage().wordObjectB;
 } else if (activeList===2) {
@@ -454,19 +455,10 @@ $(document).keypress(function (e) {   /// need keypress for french characters . 
     $('.wordlist-container').hide();
     $('.optionsBox').hide();
    
-
     var c = String.fromCharCode(e.which);
-
-    //process the single character or
-    
     textValue=textValue+c;
-
-    
-    //var textValue = $("#spellbox").val();
     var fulltext = textValue;
-    //process the full text
     var lowText = fulltext.toLowerCase();
-    //console.log(lowText);
 
     $("h2").empty();
     
@@ -543,7 +535,7 @@ $(document).keypress(function (e) {   /// need keypress for french characters . 
       //$("h2").empty();   ///// causing problem
       //runArray();
      
-     $('h2 h7:nth-child(n+'+(1)+')').css({"border": "1px solid white" });  // clear existing border. need a better method
+     $('h2 h7:nth-child(n+'+(1)+')').css({"border": "0px solid white" });  // clear existing border. need a better method
      $('h2 h7:nth-child('+(1)+')').css({ "border": "1px solid black" });
      textValue = "";
      return false;
@@ -603,8 +595,13 @@ function showPage(page,text) {
     chrome.storage.sync.set({"myValue": wordObject}); /////save
   });
 }
+
+
 $(document).ready(function() {
   $('#pagetitle').hide();
+    $('input[type="text"]').focus(function() { //if input is focused
+     bodyPress = false; 
+    });
   $('#word').change(function() {
     var page = this.value.toLowerCase(); /////////// maybe change this later
     $('#loading').html('...please wait...');
@@ -618,10 +615,16 @@ $(document).ready(function() {
                                               runArray();
                                               chrome.storage.sync.set({"myValue": wordObject}); /////save
                                               document.getElementById("word").value = "";
+                                              bodyPress = true; ///////////////////////////////find better way to return to h2
+                                              textValue = "";
+                                              $('#word').blur();
                                           } else {
                                             showPage(page,json.parse.text['*']);
                                             $('#wikiInfo').html("<div></div>");
                                             document.getElementById("word").value = "";
+                                            bodyPress = true; 
+                                            textValue = "";
+                                            $('#word').blur();
                                           }
     });
   });
