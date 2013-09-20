@@ -87,7 +87,7 @@ chrome.storage.sync.get("myValue1", //// load saved data.
         console.log("nothin saved 1");
         
     } else {
-    wordObject1=val1.myValue1;
+    wordObject1=JSON.parse(val1.myValue1);
 
     }   
   });
@@ -98,7 +98,7 @@ chrome.storage.sync.get("myValue2", //// load saved data.
         chrome.storage.sync.set({"myValue2": wordObject2});
         console.log("nothin saved 2");
     } else {
-    wordObject2=val2.myValue2;
+    wordObject2= JSON.parse(val2.myValue2);
 
     }   
   });
@@ -125,19 +125,20 @@ chrome.storage.sync.get("myValueAL", //// load saved active list data.
 var oneStep = function () {  
    var shifted = wordObject.shift();
    wordObject[wordObject.length] = shifted;
-   chrome.storage.sync.set({"myValue": wordObject});//
+   chrome.storage.sync.set({"myValue": JSON.stringify(wordObject)});//
 };
 
 var loadFunction = function(){
     chrome.storage.sync.get("myValue", //// load saved data. 
     function(val) {
     if (val.myValue === undefined){
-        chrome.storage.sync.set({"myValue": wordObject});
+        chrome.storage.sync.set({"myValue": JSON.stringify(wordObject)});
         loadBackgroundList();
         runArray();
     } else {
-    wordObject=val.myValue;
-    console.log(wordObject[0]);
+    wordObject=JSON.parse(val.myValue);
+   // var xxt = new Date(wordObject[1].date);
+   // console.log(Date(wordObject[1].date));
     runArray();
     console.log(wordObject);
     loadBackgroundList();
@@ -145,18 +146,13 @@ var loadFunction = function(){
     }   
   });
  }; 
-
+var today = new Date();
 var runArray = function (){
 
 
-
-   // if (wordObject[0].date!==Object && wordObject[0].date>today){
-    //  oneStep();
-
-
- // }
-
-
+while (new Date(wordObject[0].date)>today){
+  oneStep();
+} 
 
 
     if (wordObject.length<=0) {
@@ -176,13 +172,14 @@ var runArray = function (){
         };    
     $(".wordlist-table tbody").empty();
 for ( var z = 0; z < wordObject.length; z=z+1 ){  
-     /* if (wordObject[z].date!==Object && wordObject[z].date>today){
-        console.log("yes");
-      }else{*/
+      if (new Date(wordObject[z].date)>today){
+        
+        $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td data-id='" + (z+1) + "'>"+wordObject[z].definition+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "' class=\"icon-remove\"></i><i sound-id='" +(z+1)+ "' class=\"icon-volume-up\"></i>xxxxxxxx</td></tr>" );
+      }else{
             $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td data-id='" + (z+1) + "'>"+wordObject[z].definition+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "' class=\"icon-remove\"></i><i sound-id='" +(z+1)+ "' class=\"icon-volume-up\"></i></td></tr>" );
-         //   }
+            }
   }
-    chrome.storage.sync.set({"myValue": wordObject});///save
+    chrome.storage.sync.set({"myValue": JSON.stringify(wordObject)});///save
 };
 
 var deleteLI = function (XX) {
@@ -203,7 +200,7 @@ bootbox.prompt("edit definition", function(defItem) {
     return;                              
   } else {
     wordObject[TT-1]= { word: wordObject[TT-1].word, definition: defItem };
-    chrome.storage.sync.set({"myValue": wordObject}); /////save
+    chrome.storage.sync.set({"myValue": JSON.stringify(wordObject)}); /////save
     runArray();
     bodyPress = true; 
     textValue = "";
@@ -230,7 +227,7 @@ while (WOB.length > 1)
   WOB.splice(WOB.length-1);
   }
 runArray();
-chrome.storage.sync.set({"myValue": wordObject});///save
+chrome.storage.sync.set({"myValue": JSON.stringify(wordObject)});///save
 
 if (activeList===1){
   chrome.extension.getBackgroundPage().wordObjectB=[ { word: 'test', definition:'front to back test deffinition' } ];
@@ -292,6 +289,7 @@ $('body').on('click',  ".icon-volume-up", function (ev) {
 
 $("#optionsButton").click(function() {
   $('.optionsBox').toggle();
+  runArray();
 });
 
 $("#hideButton").click(function() {
@@ -309,7 +307,7 @@ $("#list1").click(function() {
   chrome.storage.sync.set({"myValueAL": activeList}); //////// save AL
   
   wordObject2=wordObject;
-  chrome.storage.sync.set({"myValue2": wordObject2}); //////// save
+  chrome.storage.sync.set({"myValue2": JSON.stringify(wordObject2)}); //////// save
   
   wordObject=wordObject1;
   loadBackgroundList();
@@ -328,7 +326,7 @@ $("#list2").click(function() {
   chrome.storage.sync.set({"myValueAL": activeList}); //////// save AL
   
   wordObject1=wordObject;
-  chrome.storage.sync.set({"myValue1": wordObject1}); //////// save
+  chrome.storage.sync.set({"myValue1": JSON.stringify(wordObject1)}); //////// save
 
   wordObject=wordObject2;
   loadBackgroundList();
@@ -400,14 +398,14 @@ $('body').on('click',  ".icon-arrow-right", function (ev) {   /// transfer word 
 
   }
   runArray();  
-  chrome.storage.sync.set({"myValue": wordObject}); //////// save///////////////////////////////
+  chrome.storage.sync.set({"myValue": JSON.stringify(wordObject)}); //////// save///////////////////////////////
 });
 */
 $('body').on('click',  ".icon-remove", function (ev) {
     var clicked=$(ev.currentTarget);
   deleteLI(clicked.attr("data-id"));
   runArray();  
-  chrome.storage.sync.set({"myValue": wordObject}); //////// save
+  chrome.storage.sync.set({"myValue": JSON.stringify(wordObject)}); //////// save
 });
 
 $('body').on('dblclick',  "td", function (ev) {
@@ -415,7 +413,7 @@ $('body').on('dblclick',  "td", function (ev) {
    
     editLI(clicked.attr("data-id"));
     runArray();  
-  chrome.storage.sync.set({"myValue": wordObject}); //////// save
+  chrome.storage.sync.set({"myValue": JSON.stringify(wordObject)}); //////// save
 
 });
 
@@ -429,7 +427,7 @@ bootbox.prompt("edit definition", function(defItem) {
     return;                              
   } else {
     wordObject[0]= { word: wordObject[0].word, definition: defItem };
-    chrome.storage.sync.set({"myValue": wordObject}); /////save
+    chrome.storage.sync.set({"myValue": JSON.stringify(wordObject)}); /////save
     runArray();    
     bodyPress = true; 
     textValue = "";                      
@@ -447,8 +445,7 @@ bootbox.prompt("edit definition", function(defItem) {
     var myDate=new Date();
     myDate.setDate(myDate.getDate()+7);
     wordObject[0].date= myDate;
-    chrome.storage.sync.set({"myValue": wordObject}); /////save
-    console.log(wordObject);
+    chrome.storage.sync.set({"myValue": JSON.stringify(wordObject)}); /////save
     runArray();
     $('#myModal').modal('hide');
    });
@@ -457,7 +454,8 @@ bootbox.prompt("edit definition", function(defItem) {
     var myDate=new Date();
     myDate.setDate(myDate.getDate()+30);
     wordObject[0].date= myDate;
-    chrome.storage.sync.set({"myValue": wordObject}); /////save
+
+    chrome.storage.sync.set({"myValue": JSON.stringify(wordObject)}); /////save
     runArray();
     $('#myModal').modal('hide');
    });
@@ -622,7 +620,7 @@ function showPage(page,text) {
                           .trim(this) + "...";
     wordObject[wordObject.length]= { word: page, definition: wikiDefineShort };
     runArray();
-    chrome.storage.sync.set({"myValue": wordObject}); /////save
+    chrome.storage.sync.set({"myValue": JSON.stringify(wordObject)}); /////save
   });
 }
 
@@ -643,7 +641,7 @@ $(document).ready(function() {
                                             console.log("word not found");
                                             wordObject[wordObject.length]= { word: page, definition: "word not found - double click here to add definition" };
                                               runArray();
-                                              chrome.storage.sync.set({"myValue": wordObject}); /////save
+                                              chrome.storage.sync.set({"myValue": JSON.stringify(wordObject)}); /////save
                                               document.getElementById("word").value = "";
                                               bodyPress = true; ///////////////////////////////find better way to return to h2
                                               textValue = "";
