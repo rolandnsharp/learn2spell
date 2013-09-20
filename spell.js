@@ -1,4 +1,4 @@
-
+var today = new Date();
 var i = 0;
 var x = 0;
 var iterations = 1;
@@ -137,13 +137,28 @@ var loadFunction = function(){
         runArray();
     } else {
     wordObject=val.myValue;
+    console.log(wordObject[0]);
     runArray();
+    console.log(wordObject);
     loadBackgroundList();
+    console.log(wordObject);
     }   
   });
  }; 
 
 var runArray = function (){
+
+
+
+   // if (wordObject[0].date!==Object && wordObject[0].date>today){
+    //  oneStep();
+
+
+ // }
+
+
+
+
     if (wordObject.length<=0) {
         $('h2').empty();
         
@@ -152,7 +167,7 @@ var runArray = function (){
             for ( var d = 0; d < wordObject[0].word.length; d=d+1 ){    
             $('h2').append("<h7>"+wordObject[0].word.substring(d, d+1)+"</h7>");
             }
-            $('h2 h7:nth-child('+(1)+')').css({ "border": "1px solid black" });
+            $('h2 h7:nth-child('+(1)+')').css({ "border": "1px dotted black" });
         $(".defBox h5").text("");
         if (document.getElementById("check2").checked===true){
 
@@ -160,9 +175,13 @@ var runArray = function (){
         }
         };    
     $(".wordlist-table tbody").empty();
-for ( var z = 0; z < wordObject.length; z=z+1 ){    
-    $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td data-id='" + (z+1) + "'>"+wordObject[z].definition+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "' class=\"icon-remove\"></i><i sound-id='" +(z+1)+ "' class=\"icon-volume-up\"></i></td></tr>" );
-    }
+for ( var z = 0; z < wordObject.length; z=z+1 ){  
+     /* if (wordObject[z].date!==Object && wordObject[z].date>today){
+        console.log("yes");
+      }else{*/
+            $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td data-id='" + (z+1) + "'>"+wordObject[z].definition+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "' class=\"icon-remove\"></i><i sound-id='" +(z+1)+ "' class=\"icon-volume-up\"></i></td></tr>" );
+         //   }
+  }
     chrome.storage.sync.set({"myValue": wordObject});///save
 };
 
@@ -255,22 +274,6 @@ $("#check3").change(function() {
     }
 });
 
-    $('#noi').text(iterations);
-    $("#plusOne").click(function() {
-    iterations = iterations +1;
-    $('#noi').text(iterations);
-    var x = 0;
-});
-    $("#minusOne").click(function() {
-        if (iterations<=2){
-            iterations = 2;
-            var x = 0;
-        }
-    iterations = iterations -1;
-    $('#noi').text(iterations);
-    var x = 0;
-});
-
 $('body').on('click',  ".icon-volume-up", function (ev) {
   var clicked=$(ev.currentTarget);
    $.getJSON("http://apifree.forvo.com/action/word-pronunciations/format/json/word/"+wordObject[clicked.attr("sound-id")-1].word+"/order/rate-desc/limit/1/key/aad01d7956b025335a7b9d89ab0ef826/", function(jd) {
@@ -293,13 +296,6 @@ $("#optionsButton").click(function() {
 
 $("#hideButton").click(function() {
   $('.wordlist-container').toggle();
- // runArray();
- // textValue = "";
-
-});
-
-$("#createList").click(function() {
-  prompt("Enter list name");
 });
 
 $("#list1").click(function() {
@@ -388,12 +384,6 @@ $('body').on('click',  "li", function (ev) {
   }
 });
 
-$("#reverseButton").click(function() {
-  wordObject = wordObject.reverse();
-  chrome.storage.sync.set({"myValue": wordObject}); //////// save
-  runArray();
-});
-
 /*
 $('body').on('click',  ".icon-arrow-right", function (ev) {   /// transfer word between list button
     var clicked=$(ev.currentTarget);
@@ -447,7 +437,44 @@ bootbox.prompt("edit definition", function(defItem) {
 });
 });
 
+
+   $("#button1").click(function() {
+    console.log("111");
+    $('#myModal').modal('hide');
+   });
+
+   $("#button2").click(function() {
+    var myDate=new Date();
+    myDate.setDate(myDate.getDate()+7);
+    wordObject[0].date= myDate;
+    chrome.storage.sync.set({"myValue": wordObject}); /////save
+    console.log(wordObject);
+    runArray();
+    $('#myModal').modal('hide');
+   });
+
+   $("#button3").click(function() {
+    var myDate=new Date();
+    myDate.setDate(myDate.getDate()+30);
+    wordObject[0].date= myDate;
+    chrome.storage.sync.set({"myValue": wordObject}); /////save
+    runArray();
+    $('#myModal').modal('hide');
+   });
+   $("#button4").click(function() {
+    console.log("44444");
+    wordObject.shift();
+    runArray();
+    $('#myModal').modal('hide');
+   });
+ 
+
+
 });
+
+
+
+
 
 
 $(document).keypress(function (e) {   /// need keypress for french characters . backspace needs fixing
@@ -467,8 +494,12 @@ $(document).keypress(function (e) {   /// need keypress for french characters . 
     $('h2').append("<h7>"+wordObject[0].word.substring(d, d+1)+"</h7>");
     }
     
-    $('h2 h7:nth-child('+(lowText.length+1)+')').css({ "border": "1px solid black" });
-    if (e.which === 8) {
+    $('h2 h7:nth-child('+(lowText.length+1)+')').css({ "border": "1px dotted black" });
+    
+   /* if (e.which === 8) {
+      
+      console.log("fulltext");
+
       fulltext = textValue.substring(0, fulltext.length-2);
 
       console.log(fulltext);
@@ -481,21 +512,20 @@ $(document).keypress(function (e) {   /// need keypress for french characters . 
               //runArray();
              // document.getElementById("spellbox").value = "";
            }
-    }
+    }*/
 
     if (lowText=== wordObject[i].word.substring(0,lowText.length)) {
       $('h2 h7:nth-child(-n+'+lowText.length+')').css({backgroundColor: '#5bd642'});
      
-
       if (document.getElementById("check1").checked!==true){
-      $('h2 h7:nth-child(n+'+(lowText.length+1)+')').css({color: 'white'}); /////////////////////////////////////////// show word while typing. 
+      $('h2 h7:nth-child(n+'+(lowText.length+1)+')').css({color: 'white'}); ////////////////////////////////// show word while typing. 
       }
 
     } 
 
     else if (e.which === 32 && lowText === wordObject[0].word+" "){
       //console.log("spalde");
-      $('h2 h7:nth-child('+(1)+')').css({ "border": "1px solid black" });
+      $('h2 h7:nth-child('+(1)+')').css({ "border": "1px dotted black" });
       textValue = "";
      //return false;
     // oneStep(); when blanked space repeats word
@@ -505,8 +535,6 @@ $(document).keypress(function (e) {   /// need keypress for french characters . 
     
     else if (e.which === 13 && lowText.substring(0,lowText.length-1) === wordObject[0].word){
      //return false;
-
-
 
      oneStep();
      
@@ -528,15 +556,17 @@ $(document).keypress(function (e) {   /// need keypress for french characters . 
      }      
      runArray();
      return false;
-    } 
+    } else if (e.which === 8){
+      console.log("kjfdkslfj");
+    }
 
     else {
       $('h2 > h7').animate({backgroundColor: '#e01432'}).delay(40).animate({backgroundColor: '#ffffff'});
       //$("h2").empty();   ///// causing problem
       //runArray();
      
-     $('h2 h7:nth-child(n+'+(1)+')').css({"border": "0px solid white" });  // clear existing border. need a better method
-     $('h2 h7:nth-child('+(1)+')').css({ "border": "1px solid black" });
+     $('h2 h7:nth-child(n+'+(1)+')').css({"border": "0px solid white" });  // clear existing borders
+     $('h2 h7:nth-child('+(1)+')').css({ "border": "1px dotted black" });
      textValue = "";
      return false;
     }
