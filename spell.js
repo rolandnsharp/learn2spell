@@ -452,10 +452,11 @@ bootbox.prompt("edit definition", function(defItem) {
 });
 
 
-   $("#button1").click(function() {
+    $("#button1").click(function() {
     oneStep();
     runArray();
     $('#myModal').modal('hide');
+    return;
    });
 
    $("#button2").click(function() {
@@ -465,37 +466,33 @@ bootbox.prompt("edit definition", function(defItem) {
     chrome.storage.sync.set({"myValue": JSON.stringify(wordObject)}); /////save
     runArray();
     $('#myModal').modal('hide');
+    return;
    });
 
    $("#button3").click(function() {
     var myDate=new Date();
     myDate.setDate(myDate.getDate()+30);
     wordObject[0].date= myDate;
-
     chrome.storage.sync.set({"myValue": JSON.stringify(wordObject)}); /////save
     runArray();
     $('#myModal').modal('hide');
+    return;
    });
+
    $("#button4").click(function() {
     wordObject.shift();
     runArray();
     $('#myModal').modal('hide');
-   });
- 
-
+    return;
+   }); 
 
 });
-
-
-
-
-
 
 $(document).keypress(function (e) {   /// need keypress for french characters . backspace needs fixing
   if(bodyPress===true){
     $('.wordlist-container').hide();
     $('.optionsBox').hide();
-    
+
     var c = String.fromCharCode(e.which);
     textValue=textValue+c;
     var fulltext = textValue;
@@ -554,6 +551,10 @@ $(document).keypress(function (e) {   /// need keypress for french characters . 
               wordObject[0].score= 0;
               console.log(wordObject[0].score);
               $('#myModal').modal('show');
+              bodyPress = false;
+              
+
+
             }
           }
           
@@ -578,14 +579,12 @@ $(document).keypress(function (e) {   /// need keypress for french characters . 
               wordObject[0].score= 0;
               console.log(wordObject[0].score);
               $('#myModal').modal('show');
+              bodyPress = false;
             }
           }
 
      oneStep();
      
-     
-
-
      //if (document.getElementById("check3").checked===true){ 
      //      console.log("sing it");
      //}      
@@ -607,7 +606,36 @@ $(document).keypress(function (e) {   /// need keypress for french characters . 
      textValue = "";
      return false;
     }
+    } 
+
+    else if(bodyPress===false){
+  
+
+   if (e.which === 49){
+      console.log("one");
+      $('#button1').click();
+      bodyPress = true;
+      return;
     }
+    if (e.which === 50){
+      console.log("two");
+      $('#button2').click();
+      bodyPress = true;
+      return;
+    }
+    if (e.which === 51){
+      console.log("three");
+      $('#button3').click();
+      bodyPress = true;
+     return;
+    }
+    if (e.which === 52){
+      console.log("four");
+      $('#button4').click();
+      bodyPress = true;
+     return;
+    }
+  }
 });
 
 
