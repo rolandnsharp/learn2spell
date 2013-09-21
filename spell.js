@@ -93,7 +93,6 @@ chrome.storage.sync.get("myValueAL", //// load saved active list data.
     if (valAL.myValueAL === undefined){
         return;
     } else {
-    console.log(valAL.myValueAL);
     if (valAL.myValueAL===1){
       activeList=1;
     } else if (valAL.myValueAL===2){
@@ -454,7 +453,8 @@ bootbox.prompt("edit definition", function(defItem) {
 
 
    $("#button1").click(function() {
-    console.log("111");
+    oneStep();
+    runArray();
     $('#myModal').modal('hide');
    });
 
@@ -477,7 +477,6 @@ bootbox.prompt("edit definition", function(defItem) {
     $('#myModal').modal('hide');
    });
    $("#button4").click(function() {
-    console.log("44444");
     wordObject.shift();
     runArray();
     $('#myModal').modal('hide');
@@ -542,7 +541,22 @@ $(document).keypress(function (e) {   /// need keypress for french characters . 
       //console.log("spalde");
       $('h2 h7:nth-child('+(1)+')').css({ "border": "1px dotted black" });
       textValue = "";
+          
+          if (wordObject[0].score===undefined){
+          wordObject[0].score= 1;
+          console.log(wordObject[0].score);
+          return;
+          } else {
+            wordObject[0].score= wordObject[0].score + 1;
+            console.log(wordObject[0].score);
 
+            if (wordObject[0].score>=4){
+              wordObject[0].score= 0;
+              console.log(wordObject[0].score);
+              $('#myModal').modal('show');
+            }
+          }
+          
      //return false;
     // oneStep(); when blanked space repeats word
      //runArray();
@@ -551,18 +565,30 @@ $(document).keypress(function (e) {   /// need keypress for french characters . 
     
     else if (e.which === 13 && lowText.substring(0,lowText.length-1) === wordObject[0].word){
      //return false;
+     textValue = "";
+              if (wordObject[0].score===undefined){
+          wordObject[0].score= 1;
+          console.log(wordObject[0].score);
+          return;
+          } else {
+            wordObject[0].score= wordObject[0].score + 1;
+            console.log(wordObject[0].score);
 
+            if (wordObject[0].score>=4){
+              wordObject[0].score= 0;
+              console.log(wordObject[0].score);
+              $('#myModal').modal('show');
+            }
+          }
 
      oneStep();
      
-     textValue = "";
+     
 
 
-     if (document.getElementById("check3").checked===true){ 
-           
-           console.log("sing it");
-           
-     }      
+     //if (document.getElementById("check3").checked===true){ 
+     //      console.log("sing it");
+     //}      
      runArray();
      return false;
     } else if (e.which === 8){
@@ -573,6 +599,8 @@ $(document).keypress(function (e) {   /// need keypress for french characters . 
       $('h2 > h7').animate({backgroundColor: '#e01432'}).delay(40).animate({backgroundColor: '#ffffff'});
       //$("h2").empty();   ///// causing problem
       //runArray();
+
+      wordObject[0].score= 0;
      
      $('h2 h7:nth-child(n+'+(1)+')').css({"border": "0px solid white" });  // clear existing borders
      $('h2 h7:nth-child('+(1)+')').css({ "border": "1px dotted black" });
