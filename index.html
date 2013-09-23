@@ -73,7 +73,7 @@
   <button id="plusOne" class="btn" type="button">+1</button>-->
 
 </div>
-<div class="optionsBox">
+<!--<div class="optionsBox">
 </br>
 <h6>After word is typed, press Enter to go to next word or Spacebar to repeat word.</h6>
 <input id="check1" type="checkbox" > Show spelling word while typing       
@@ -83,7 +83,7 @@
 <input id="check3" type="checkbox" > Play audio on next word
 </br>
 <input id="check4" type="checkbox" > Show date word in list
-</div>
+</div>-->
 <!--<button id="reverseButton" class="btn btn-inverse" type="button">reverse list order</button>-->
 
 
@@ -158,16 +158,38 @@
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-    <h3 id="myModalLabel">Modal header</h3>
+    <h3 id="myModalLabel">Congratulations!</h3>
   </div>
   <div class="modal-body">
-    <p>one fine body</p>
+    <p>Congratulations! You correctly spelled the word '<span id="pWord"></span>' four times in a row.</p>
+    <p>You can now choose to keep this word in your active list, Hide the word of a week or a month, or delete the word permentaly</p>
+    <p>Hint: You can use the number keys to make your selection.</p>
+    <p>Hint: You can see hidden words by selecting the option in Spanner menu.</p>
   </div>
   <div class="modal-footer">
     <button id="button1" class="btn btn-primary">1. Keep Word</button>
     <button id="button2" class="btn btn-primary">2. One Week</button>
     <button id="button3" class="btn btn-primary">3. One Month</button>
     <button id="button4" class="btn btn-primary">4. Delete Word</button>
+  </div>
+</div>
+
+<div id="optionsModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+    <h3 id="myModalLabel">Options</h3>
+  </div>
+  <div class="modal-body">
+    <input id="check1" type="checkbox" > Show spelling word while typing       
+</br>
+<input id="check2" type="checkbox" > Show definition
+</br>
+<input id="check3" type="checkbox" > Play audio on next word
+</br>
+<input id="check4" type="checkbox" > Show hidden words
+  </div>
+  <div class="modal-footer">
+ <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
   </div>
 </div>
 

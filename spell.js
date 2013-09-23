@@ -28,12 +28,13 @@ var result1 = "List 1";
 
 var result2 = "List 2";
 
+
 chrome.storage.sync.get("CK1",
    function(res) {
-    if (res.CK1==="false"){
-    document.getElementById("check1").checked=false;
-   } else {
+    if (res.CK1==="true"){
     document.getElementById("check1").checked=true;
+   } else {
+    document.getElementById("check1").checked=false;
    }
   });
 
@@ -48,19 +49,19 @@ chrome.storage.sync.get("CK2",
 
 chrome.storage.sync.get("CK3",
    function(res) {
-    if (res.CK3==="false"){
-    document.getElementById("check3").checked=false;
-   } else {
+    if (res.CK3==="true"){
     document.getElementById("check3").checked=true;
+   } else {
+    document.getElementById("check3").checked=false;
    }
   });
 
 chrome.storage.sync.get("CK4",
    function(res) {
-    if (res.CK4==="false"){
-    document.getElementById("check4").checked=false;
-   } else {
+    if (res.CK4==="true"){
     document.getElementById("check4").checked=true;
+   } else {
+    document.getElementById("check4").checked=false;
    }
   });
 
@@ -151,11 +152,12 @@ chrome.storage.sync.get("myValue2", //// load saved data.
  }; 
 
 var runArray = function (){
-
+var isActiveTableEmpty=true;
 for ( var v = 0; v < wordObject.length; v=v+1 ){
-  if (new Date(wordObject[0].date)>today){  
+
+  if (new Date(wordObject[0].date)>today){ 
   oneStep();
-} 
+  }
 }
 
 
@@ -177,15 +179,26 @@ for ( var v = 0; v < wordObject.length; v=v+1 ){
         };    
     $(".wordlist-table tbody").empty();
 for ( var z = 0; z < wordObject.length; z=z+1 ){  
+      
       if (new Date(wordObject[z].date)>today){
+
         if (document.getElementById("check4").checked===true){
-        $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td data-id='" + (z+1) + "'>"+wordObject[z].definition+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "' class=\"icon-remove\"></i><i sound-id='" +(z+1)+ "' class=\"icon-volume-up\"></i>"+jQuery.trim(new Date(wordObject[z].date)).substring(0, 10)+"</td></tr>" );
-           }
+        $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td data-id='" + (z+1) + "'>"+wordObject[z].definition+"</td><td>"+jQuery.trim(new Date(wordObject[z].date)).substring(4, 10)+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "' class=\"icon-remove\"></i><i sound-id='" +(z+1)+ "' class=\"icon-volume-up\"></i></td></tr>" );
+          
+         }  
       }else{
             $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td data-id='" + (z+1) + "'>"+wordObject[z].definition+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "' class=\"icon-remove\"></i><i sound-id='" +(z+1)+ "' class=\"icon-volume-up\"></i></td></tr>" );
-            }
+            isActiveTableEmpty=false;
+          }
   }
-    chrome.storage.sync.set({"myValue": JSON.stringify(wordObject)});///save
+    
+  //  chrome.storage.sync.set({"myValue": JSON.stringify(wordObject)});///save
+  //var isTableEmpty = $(".wordlist-table tbody").html();
+  //console.log(isTableEmpty);
+  if (isActiveTableEmpty===true){
+    $(".defBox h5").empty();
+    $("h2").empty();
+  }
 };
 
 var deleteLI = function (XX) {
@@ -304,7 +317,14 @@ $('body').on('click',  ".icon-volume-up", function (ev) {
 });
 
 $("#optionsButton").click(function() {
-  $('.optionsBox').toggle();
+   $('#optionsModal').modal('show');
+   bodyPress = false;
+   $('#optionsModal').on('hidden', function () {
+      
+      bodyPress = true;
+      runArray();
+
+  })
   runArray();
 });
 
@@ -449,8 +469,7 @@ bootbox.prompt("edit definition", function(defItem) {
     textValue = "";                      
   }
 });
-});
-
+}); 
 
     $("#button1").click(function() {
     oneStep();
@@ -551,7 +570,15 @@ $(document).keypress(function (e) {   /// need keypress for french characters . 
               wordObject[0].score= 0;
               console.log(wordObject[0].score);
               $('#myModal').modal('show');
-              bodyPress = false;
+              $('#myModal').on('shown', function () {
+                $('#pWord').text(wordObject[0].word).css('font-weight', 'bold');
+                bodyPress = false;
+              })
+              $('#myModal').on('hide', function () {
+                bodyPress = true;
+              })
+              
+              return;
               
 
 
@@ -570,7 +597,7 @@ $(document).keypress(function (e) {   /// need keypress for french characters . 
               if (wordObject[0].score===undefined){
           wordObject[0].score= 1;
           console.log(wordObject[0].score);
-          return;
+          //return;
           } else {
             wordObject[0].score= wordObject[0].score + 1;
             console.log(wordObject[0].score);
@@ -579,17 +606,38 @@ $(document).keypress(function (e) {   /// need keypress for french characters . 
               wordObject[0].score= 0;
               console.log(wordObject[0].score);
               $('#myModal').modal('show');
-              bodyPress = false;
+              $('#myModal').on('shown', function () {
+                $('#pWord').text(wordObject[0].word).css('font-weight', 'bold');
+                bodyPress = false;
+              })
+              $('#myModal').on('hide', function () {
+                bodyPress = true;
+                
+              })
+              return;
+              
+              
             }
           }
 
      oneStep();
      
-     //if (document.getElementById("check3").checked===true){ 
-     //      console.log("sing it");
-     //}      
+     if (document.getElementById("check3").checked===true){ 
+           $.getJSON("http://apifree.forvo.com/action/word-pronunciations/format/json/word/"+wordObject[0].word+"/order/rate-desc/limit/1/key/aad01d7956b025335a7b9d89ab0ef826/", function(jd) {
+                    var song =jd.items[0].pathmp3;
+                    var audioElement = document.createElement('audio');
+               audioElement.setAttribute("preload", "auto");
+               audioElement.autobuffer = true;
+               var source1 = document.createElement('source');
+               source1.type= 'audio/mp3';
+               source1.src= song;
+               audioElement.appendChild(source1);
+               audioElement.load;
+               audioElement.play();
+             });
+     }      
      runArray();
-     return false;
+     return;
     } else if (e.which === 8){
       console.log("kjfdkslfj");
     }
