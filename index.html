@@ -98,16 +98,52 @@
             </div>
             <h2 ></h2>
             </br>
-            <div class="defBox"><h5></h5></div>
+          <div id="defBoxBox" class="alert alert-info"> <div class="defBox" ><h5></h5></div></div> 
             
-       <button id="hideButton" class="btn btn-inverse btn-block" type="button" style="margin-top: 0px;">
-                        Show/Hide List
+  <!--     -->
+
+
+
+
+
+                    <div class="navbar navbar-inverse">
+
+            <div class="navbar-inner">
+            <form class="navbar-search pull-left">
+                  <input id="word" type="text" class="search-query" placeholder="Add word - Press Enter">
+                </form>
+        <div class="container" style="width: 800px;">
+                
+               
+                                         
+              <button id="hideButton" class="btn btn-inverse " type="button" style="position:relative; right:-300px; top:0px;">
+                        <i class="icon-white icon-chevron-down"></i>
                     </button>
+                    <div class="pull-right">
+
+                   
+                
+              <h4 class="scoreBoxBox" style="position:relative; right:30px; top:0px; color:white;"><p><span class="scoreBox" ></span> times in a row!</p></h4>
+               <!--   <a id="createList" href="#" class="btn btn-inverse">Create List <i class="icon-white icon-plus-sign"></i></a> -->
+                </div>   
+      
+
+        </div>
+
+            </div>
+
+        </div>
                     
+
+
+
+
+
+
   
                     <div class="wordlist-container" >
-          <!--  <h3>Word List</h3>-->
-                  
+
+                    
 
 
 
@@ -122,9 +158,9 @@
   
  
 </div> <div id="licenseinfo" style="font-size:small; display:none;">
-    Modified original content <a id='sourceurl'>from Wiktionary</a>.
+    Modified original content .
     
-  </div><input placeholder="Search Wikionary - Press Enter" type="text" id="word">
+  </div>
 
   
             <table class="table wordlist-table">
@@ -151,6 +187,7 @@
 
 <div id="wikiInfo"></div>
 <p class="forvo" ><a href="http://www.forvo.com/">Pronunciations by Forvo</a></p>
+<a id='sourceurl'>Definitions from Wiktionary</a>
    
 <!-- Button to trigger
 <a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a>   modal -->
@@ -161,10 +198,10 @@
     <h3 id="myModalLabel">Congratulations!</h3>
   </div>
   <div class="modal-body">
-    <p>Congratulations! You correctly spelled the word '<span id="pWord"></span>' four times in a row.</p>
-    <p>You can now choose to keep this word in your active list, Hide the word of a week or a month, or delete the word permentaly</p>
+     <p>Congratulations! You have correctly spelled the word '<span id="pWord"></span>' four times in a row.</p>
+    <p>You may now choose to keep this word in your active list, hide it of a week, hide it for a month, or delete the word permanently</p>
     <p>Hint: You can use the number keys to make your selection.</p>
-    <p>Hint: You can see hidden words by selecting the option in Spanner menu.</p>
+    <p>Hint 2: You can see hidden words by selecting the option in Spanner menu.</p>
   </div>
   <div class="modal-footer">
     <button id="button1" class="btn btn-primary">1. Keep Word</button>

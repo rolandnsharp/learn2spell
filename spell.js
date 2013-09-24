@@ -1,7 +1,7 @@
 var today = new Date();
 var i = 0;
 var x = 0;
-var iterations = 1;
+var iterations = 4;
 
 var textValue = ""; 
 
@@ -153,14 +153,13 @@ chrome.storage.sync.get("myValue2", //// load saved data.
 
 var runArray = function (){
 var isActiveTableEmpty=true;
+
 for ( var v = 0; v < wordObject.length; v=v+1 ){
 
   if (new Date(wordObject[0].date)>today){ 
   oneStep();
   }
 }
-
-
 
     if (wordObject.length<=0) {
         $('h2').empty();
@@ -169,12 +168,19 @@ for ( var v = 0; v < wordObject.length; v=v+1 ){
         $("h2").empty();
             for ( var d = 0; d < wordObject[0].word.length; d=d+1 ){    
             $('h2').append("<h7>"+wordObject[0].word.substring(d, d+1)+"</h7>");
+            if (wordObject[0].score===0){
+                   $('.scoreBox').html(wordObject[0].score);
+                 } else {
+                  $('.scoreBox').html(wordObject[0].score);
+                 }
             }
             $('h2 h7:nth-child('+(1)+')').css({ "border": "1px dotted black" });
+        $("#defBoxBox").hide();
         $(".defBox h5").text("");
         if (document.getElementById("check2").checked===true){
 
-          $(".defBox h5").text(wordObject[0].definition);
+          $(".defBox h5").text(wordObject[0].definition);        //////def box needs refining
+          $("#defBoxBox").show();
         }
         };    
     $(".wordlist-table tbody").empty();
@@ -184,20 +190,22 @@ for ( var z = 0; z < wordObject.length; z=z+1 ){
 
         if (document.getElementById("check4").checked===true){
         $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td data-id='" + (z+1) + "'>"+wordObject[z].definition+"</td><td>"+jQuery.trim(new Date(wordObject[z].date)).substring(4, 10)+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "' class=\"icon-remove\"></i><i sound-id='" +(z+1)+ "' class=\"icon-volume-up\"></i></td></tr>" );
-          
+         $('.wordlist-table tbody tr:nth-child('+(z+1)+')').attr("class", "error");  
          }  
       }else{
             $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td data-id='" + (z+1) + "'>"+wordObject[z].definition+"</td><td>"+"<i id=\"deleteLI" + (z+1) + "\" data-id='" + (z+1) + "' class=\"icon-remove\"></i><i sound-id='" +(z+1)+ "' class=\"icon-volume-up\"></i></td></tr>" );
             isActiveTableEmpty=false;
+           // $('.wordlist-table tbody tr:nth-child('+(z+1)+')').attr("class", "success");   
           }
   }
     
   //  chrome.storage.sync.set({"myValue": JSON.stringify(wordObject)});///save
-  //var isTableEmpty = $(".wordlist-table tbody").html();
-  //console.log(isTableEmpty);
+
   if (isActiveTableEmpty===true){
+    $("#defBoxBox").hide();
     $(".defBox h5").empty();
     $("h2").empty();
+    $('.wordlist-container').show();
   }
 };
 
@@ -273,10 +281,13 @@ $("#check1").change(function() {
 $("#check2").change(function() {
     if(this.checked) {
            chrome.storage.sync.set({"CK2": "true"});///save
+            $("#defBoxBox").show();
             $(".defBox h5").text(wordObject[0].definition);
     } else if (this.checked!==true){
             chrome.storage.sync.set({"CK2": "false"});///save
             $(".defBox h5").text("");
+            $("#defBoxBox").hide();
+            
     }
 });
 
@@ -294,6 +305,7 @@ $("#check4").change(function() {
     if(this.checked) {
            chrome.storage.sync.set({"CK4": "true"});///save
            runArray();
+           $('.wordlist-container').show();
     } else if (this.checked!==true){
             chrome.storage.sync.set({"CK4": "false"});///save
             runArray();
@@ -330,6 +342,7 @@ $("#optionsButton").click(function() {
 
 $("#hideButton").click(function() {
   $('.wordlist-container').toggle();
+
 });
 
 $("#list1").click(function() {
@@ -506,11 +519,12 @@ bootbox.prompt("edit definition", function(defItem) {
    }); 
 
 });
-
+$(document).ready(function() {
 $(document).keypress(function (e) {   /// need keypress for french characters . backspace needs fixing
   if(bodyPress===true){
     $('.wordlist-container').hide();
-    $('.optionsBox').hide();
+
+
 
     var c = String.fromCharCode(e.which);
     textValue=textValue+c;
@@ -560,21 +574,22 @@ $(document).keypress(function (e) {   /// need keypress for french characters . 
           
           if (wordObject[0].score===undefined){
           wordObject[0].score= 1;
-          console.log(wordObject[0].score);
+          //$('.scoreBox').html("<h1>"+wordObject[0].score+"<h1>");
           return;
           } else {
             wordObject[0].score= wordObject[0].score + 1;
-            console.log(wordObject[0].score);
+           // $('.scoreBox').html("<h1>"+wordObject[0].score+"<h1>");
 
-            if (wordObject[0].score>=4){
+            if (wordObject[0].score>=iterations){
               wordObject[0].score= 0;
-              console.log(wordObject[0].score);
+              $('.scoreBox').html(iterations);
               $('#myModal').modal('show');
               $('#myModal').on('shown', function () {
                 $('#pWord').text(wordObject[0].word).css('font-weight', 'bold');
                 bodyPress = false;
               })
               $('#myModal').on('hide', function () {
+
                 bodyPress = true;
               })
               
@@ -596,21 +611,22 @@ $(document).keypress(function (e) {   /// need keypress for french characters . 
      textValue = "";
               if (wordObject[0].score===undefined){
           wordObject[0].score= 1;
-          console.log(wordObject[0].score);
+         // $('.scoreBox').html("<h1>"+wordObject[0].score+"<h1>");
           //return;
           } else {
             wordObject[0].score= wordObject[0].score + 1;
-            console.log(wordObject[0].score);
+        //    $('.scoreBox').html("<h1>"+wordObject[0].score+"<h1>");
 
-            if (wordObject[0].score>=4){
+            if (wordObject[0].score>=iterations){
               wordObject[0].score= 0;
-              console.log(wordObject[0].score);
+              $('.scoreBox').html(iterations);
               $('#myModal').modal('show');
               $('#myModal').on('shown', function () {
                 $('#pWord').text(wordObject[0].word).css('font-weight', 'bold');
                 bodyPress = false;
               })
               $('#myModal').on('hide', function () {
+
                 bodyPress = true;
                 
               })
@@ -648,6 +664,7 @@ $(document).keypress(function (e) {   /// need keypress for french characters . 
       //runArray();
 
       wordObject[0].score= 0;
+     // $('.scoreBox').html("<h1>"+wordObject[0].score+"<h1>");
      
      $('h2 h7:nth-child(n+'+(1)+')').css({"border": "0px solid white" });  // clear existing borders
      $('h2 h7:nth-child('+(1)+')').css({ "border": "1px dotted black" });
@@ -739,8 +756,7 @@ function showPage(page,text) {
   });
 }
 
-
-$(document).ready(function() {
+//$(document).ready(function() {
   $('#pagetitle').hide();
     $('input[type="text"]').focus(function() { //if input is focused
      bodyPress = false; 
@@ -772,5 +788,4 @@ $(document).ready(function() {
     });
   });
 });
-
 
