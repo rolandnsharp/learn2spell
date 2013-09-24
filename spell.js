@@ -1,3 +1,5 @@
+
+
 var today = new Date();
 var i = 0;
 var x = 0;
@@ -168,11 +170,8 @@ for ( var v = 0; v < wordObject.length; v=v+1 ){
         $("h2").empty();
             for ( var d = 0; d < wordObject[0].word.length; d=d+1 ){    
             $('h2').append("<h7>"+wordObject[0].word.substring(d, d+1)+"</h7>");
-            if (wordObject[0].score===0){
-                   $('.scoreBox').html(wordObject[0].score);
-                 } else {
-                  $('.scoreBox').html(wordObject[0].score);
-                 }
+           $('.scoreBox').html(wordObject[0].score);
+
             }
             $('h2 h7:nth-child('+(1)+')').css({ "border": "1px dotted black" });
         $("#defBoxBox").hide();
@@ -603,6 +602,7 @@ $(document).keypress(function (e) {   /// need keypress for french characters . 
      //return false;
     // oneStep(); when blanked space repeats word
      //runArray();
+     $('.scoreBox').html(wordObject[0].score);
      return false;
     } 
     
@@ -755,15 +755,28 @@ function showPage(page,text) {
     chrome.storage.sync.set({"myValue": JSON.stringify(wordObject)}); /////save
   });
 }
-
+//$('#word').css({backgroundColor: 'gray'});
+   //  $('#word').css({ "border": "1px solid black" });
+    //  $('#word').css({ "color": "black" });
 //$(document).ready(function() {
   $('#pagetitle').hide();
     $('input[type="text"]').focus(function() { //if input is focused
      bodyPress = false; 
+     //$('#word').css({backgroundColor: 'white'});
     });
+
+     $('input[type="text"]').blur(function() { //if input is blured
+     bodyPress = true; 
+    // $('#word').css({backgroundColor: 'gray'});
+    // $('#word').css({ "border": "1px solid black" });
+     
+    });
+
+
   $('#word').change(function() {
     var page = this.value.toLowerCase(); /////////// maybe change this later
-    $('#loading').html('...please wait...');
+    document.getElementById("word").value = "";
+    $('#word').attr("placeholder","loading...");
     $.getJSON(baseURL+'/w/api.php?action=parse&format=json&prop=text|revid|displaytitle&page='+page,
     function(json) {
                                           $('#loading').html('');
@@ -774,16 +787,18 @@ function showPage(page,text) {
                                               runArray();
                                               chrome.storage.sync.set({"myValue": JSON.stringify(wordObject)}); /////save
                                               document.getElementById("word").value = "";
-                                              bodyPress = true; ///////////////////////////////find better way to return to h2
+                                              $('#word').attr("placeholder","Add word - Press Enter");
+                                           //   bodyPress = true; ///////////////////////////////find better way to return to h2
                                               textValue = "";
-                                              $('#word').blur();
+                                            //  $('#word').blur();
                                           } else {
                                             showPage(page,json.parse.text['*']);
                                             $('#wikiInfo').html("<div></div>");
                                             document.getElementById("word").value = "";
-                                            bodyPress = true; 
+                                            $('#word').attr("placeholder","Add word - Press Enter");
+                                            //bodyPress = true; 
                                             textValue = "";
-                                            $('#word').blur();
+                                           // $('#word').blur();
                                           }
     });
   });
