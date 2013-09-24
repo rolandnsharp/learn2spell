@@ -21,7 +21,7 @@ var wordObject1 = [
 ];
 
 var wordObject2 = [
-{ word: 'lsit2', definition:'This is your second list. Use it for a second language you may be studying or for storing words you have already learnt. You can rename your lists with the option in the dropdown menu.  ' }
+{ word: 'list 2', definition:'This is your second list. Use it for a second language you may be studying or for storing words you have already learnt. You can rename your lists with the option in the dropdown menu.  ' }
 ];
 
 var activeList = 0;
@@ -580,7 +580,7 @@ $(document).keypress(function (e) {   /// need keypress for french characters . 
            // $('.scoreBox').html("<h1>"+wordObject[0].score+"<h1>");
 
             if (wordObject[0].score>=iterations){
-              wordObject[0].score= 0;
+              
               $('.scoreBox').html(iterations);
               $('#myModal').modal('show');
               $('#myModal').on('shown', function () {
@@ -588,7 +588,7 @@ $(document).keypress(function (e) {   /// need keypress for french characters . 
                 bodyPress = false;
               })
               $('#myModal').on('hide', function () {
-
+                wordObject[0].score= 0;
                 bodyPress = true;
               })
               
@@ -618,7 +618,7 @@ $(document).keypress(function (e) {   /// need keypress for french characters . 
         //    $('.scoreBox').html("<h1>"+wordObject[0].score+"<h1>");
 
             if (wordObject[0].score>=iterations){
-              wordObject[0].score= 0;
+             // wordObject[0].score= 0;
               $('.scoreBox').html(iterations);
               $('#myModal').modal('show');
               $('#myModal').on('shown', function () {
@@ -626,7 +626,7 @@ $(document).keypress(function (e) {   /// need keypress for french characters . 
                 bodyPress = false;
               })
               $('#myModal').on('hide', function () {
-
+                wordObject[0].score= 0;
                 bodyPress = true;
                 
               })
@@ -664,7 +664,7 @@ $(document).keypress(function (e) {   /// need keypress for french characters . 
       //runArray();
 
       wordObject[0].score= 0;
-     $('.scoreBox').html(wordObject[0].score);
+      $('.scoreBox').html(wordObject[0].score);
      
      $('h2 h7:nth-child(n+'+(1)+')').css({"border": "0px solid white" });  // clear existing borders
      $('h2 h7:nth-child('+(1)+')').css({ "border": "1px dotted black" });
@@ -673,10 +673,18 @@ $(document).keypress(function (e) {   /// need keypress for french characters . 
     }
     } 
 
-    else if(bodyPress===false){
-  
+   
+});
 
-   if (e.which === 49){
+
+$('#myModal').on('shown', function () {
+         $(document).keypress(function (e) {
+
+
+ if(bodyPress===false && wordObject[0].score===iterations){      
+  console.log( wordObject[0].score);
+
+   if (e.which === 49 ){
       console.log("one");
       $('#button1').click();
       bodyPress = true;
@@ -701,8 +709,10 @@ $(document).keypress(function (e) {   /// need keypress for french characters . 
      return;
     }
   }
-});
 
+
+});
+});
 
 /*  
 
