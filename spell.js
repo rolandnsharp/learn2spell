@@ -664,7 +664,7 @@ $(document).keypress(function (e) {   /// need keypress for french characters . 
       //runArray();
 
       wordObject[0].score= 0;
-     // $('.scoreBox').html("<h1>"+wordObject[0].score+"<h1>");
+     $('.scoreBox').html(wordObject[0].score);
      
      $('h2 h7:nth-child(n+'+(1)+')').css({"border": "0px solid white" });  // clear existing borders
      $('h2 h7:nth-child('+(1)+')').css({ "border": "1px dotted black" });
