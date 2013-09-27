@@ -531,6 +531,9 @@ bootbox.prompt("edit definition", function(defItem) {
 });
 $(document).ready(function() {
 $(document).keypress(function (e) {   /// need keypress for french characters . backspace needs fixing
+  if(wordObject.length<=0){
+    return;
+  }
   if(bodyPress===true){
     $('.wordlist-container').hide();
 
