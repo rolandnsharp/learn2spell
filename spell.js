@@ -10,10 +10,12 @@ var textValue = "";
 var bodyPress = true;
 
 var wordObject = [
-{ word: 'read', definition:'Using Learn2Spell is easy. If, while browsing the web, you come across a word that you wish to drill into memory, highlight the word, right-click, and select \'Learn2Spell\'.' },
-{ word: 'this', definition:'You can also add words manually with the input box above.' },
-{ word: 'before', definition:'After your word is added to this list, it will automatically take a definition from Wiktionary. If you are not given a definition or are unhappy with the one given, double-click the definition text to add your own.' },
-{ word: 'starting', definition:'After you have some words in the list that you wish to drill, start using the touch-typing area. Touch-typing is recommended for drilling words as it utilizes your muscle memory.' },
+{ word: 'read me', definition:'Using Learn2Spell is easy. If, while browsing the web, you come across a word that you wish to drill into memory, highlight the word, right-click, and select \'Learn2Spell\'.' },
+{ word: 'read me', definition:'You can also add words manually with the input box above.' },
+{ word: 'read me', definition:'After your word is added to this list, it will automatically take a definition from Wiktionary. If you are not given a definition or are unhappy with the one given, double-click the definition text to add your own.' },
+{ word: 'read me', definition:'After you have some words in the list that you wish to drill, start using the touch-typing area. Touch-typing is recommended for drilling words as it utilizes your muscle memory.' },
+{ word: 'read me', definition:'After you correctly spell a word four times consecutively a menu will appear giving you options on what you can do next with the word.'},
+{ word: 'read me', definition:'Now you can delete these list \'words\' and add your own.'},
 ];
 
 var wordObject1 = [
@@ -484,10 +486,13 @@ bootbox.prompt("edit definition", function(defItem) {
 }); 
 
     $("#button1").click(function() {
+    wordObject[0].score= 0;
     oneStep();
     runArray();
+    bodyPress = true;
     $('#myModal').modal('hide');
-    return;
+    
+    //return;
    });
 
    $("#button2").click(function() {
@@ -496,7 +501,9 @@ bootbox.prompt("edit definition", function(defItem) {
     wordObject[0].date= myDate;
     chrome.storage.sync.set({"myValue": JSON.stringify(wordObject)}); /////save
     runArray();
+    bodyPress = true;
     $('#myModal').modal('hide');
+    wordObject[0].score= 0;
     return;
    });
 
@@ -506,13 +513,17 @@ bootbox.prompt("edit definition", function(defItem) {
     wordObject[0].date= myDate;
     chrome.storage.sync.set({"myValue": JSON.stringify(wordObject)}); /////save
     runArray();
+    bodyPress = true;
     $('#myModal').modal('hide');
+    wordObject[0].score= 0;
     return;
    });
 
    $("#button4").click(function() {
     wordObject.shift();
+    bodyPress = true;
     runArray();
+    chrome.storage.sync.set({"myValue": JSON.stringify(wordObject)}); /////save
     $('#myModal').modal('hide');
     return;
    }); 
@@ -586,11 +597,8 @@ $(document).keypress(function (e) {   /// need keypress for french characters . 
               $('#myModal').on('shown', function () {
                 $('#pWord').text(wordObject[0].word).css('font-weight', 'bold');
                 bodyPress = false;
-              })
-              $('#myModal').on('hide', function () {
-                wordObject[0].score= 0;
-                bodyPress = true;
-              })
+              });
+              
               
               return;
               
@@ -625,11 +633,7 @@ $(document).keypress(function (e) {   /// need keypress for french characters . 
                 $('#pWord').text(wordObject[0].word).css('font-weight', 'bold');
                 bodyPress = false;
               })
-              $('#myModal').on('hide', function () {
-                wordObject[0].score= 0;
-                bodyPress = true;
-                
-              })
+              
               return;
               
               
@@ -800,7 +804,7 @@ function showPage(page,text) {
                                               $('#word').attr("placeholder","Add word - Press Enter");
                                            //   bodyPress = true; ///////////////////////////////find better way to return to h2
                                               textValue = "";
-                                            //  $('#word').blur();
+                                              $('#word').blur();
                                           } else {
                                             showPage(page,json.parse.text['*']);
                                             $('#wikiInfo').html("<div></div>");
@@ -808,7 +812,7 @@ function showPage(page,text) {
                                             $('#word').attr("placeholder","Add word - Press Enter");
                                             //bodyPress = true; 
                                             textValue = "";
-                                           // $('#word').blur();
+                                            $('#word').blur();
                                           }
     });
   });
