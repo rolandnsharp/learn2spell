@@ -1,5 +1,3 @@
-
-
 var today = new Date();
 var i = 0;
 var x = 0;
@@ -10,8 +8,8 @@ var textValue = "";
 var bodyPress = true;
 
 var wordObject = [
-{ word: 'start typing', definition:'Using Learn2Spell is easy. If, while browsing the web, you come across a word that you wish to drill into memory, highlight the word, right-click, and select \'Learn2Spell\'.' },
-{ word: 'read', definition:'You can also add words manually with the input box above.' },
+{ word: 'start', definition:'Using Learn2Spell is easy. If, while browsing the web, you come across a word that you wish to drill into memory, highlight the word, right-click, and select \'Learn2Spell\'.' },
+{ word: 'typing', definition:'You can also add words manually with the input box above.' },
 { word: 'then', definition:'After your word is added to this list, it will automatically take a definition from Wiktionary. If you are not given a definition or are unhappy with the one given, double-click the definition text to add your own.' },
 { word: 'add', definition:'After you have some words in the list that you wish to drill, start using the touch-typing area. Touch-typing is recommended for drilling words as it utilizes your muscle memory.' },
 { word: 'your', definition:'After you correctly spell a word four times consecutively a menu will appear giving you options on what you can do next with the word.'},

@@ -6,9 +6,10 @@ html body {
 
 .forvo {
 	position: relative;
-	left: 10px;
+	text-align: center;
 	bottom: 5px;
 }
+
 
 
 .icon-volume-up:hover{
