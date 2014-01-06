@@ -10,12 +10,12 @@ var textValue = "";
 var bodyPress = true;
 
 var wordObject = [
-{ word: 'read me', definition:'Using Learn2Spell is easy. If, while browsing the web, you come across a word that you wish to drill into memory, highlight the word, right-click, and select \'Learn2Spell\'.' },
-{ word: 'read me', definition:'You can also add words manually with the input box above.' },
-{ word: 'read me', definition:'After your word is added to this list, it will automatically take a definition from Wiktionary. If you are not given a definition or are unhappy with the one given, double-click the definition text to add your own.' },
-{ word: 'read me', definition:'After you have some words in the list that you wish to drill, start using the touch-typing area. Touch-typing is recommended for drilling words as it utilizes your muscle memory.' },
-{ word: 'read me', definition:'After you correctly spell a word four times consecutively a menu will appear giving you options on what you can do next with the word.'},
-{ word: 'read me', definition:'Now you can delete these list \'words\' and add your own.'},
+{ word: 'start typing', definition:'Using Learn2Spell is easy. If, while browsing the web, you come across a word that you wish to drill into memory, highlight the word, right-click, and select \'Learn2Spell\'.' },
+{ word: 'read', definition:'You can also add words manually with the input box above.' },
+{ word: 'then', definition:'After your word is added to this list, it will automatically take a definition from Wiktionary. If you are not given a definition or are unhappy with the one given, double-click the definition text to add your own.' },
+{ word: 'add', definition:'After you have some words in the list that you wish to drill, start using the touch-typing area. Touch-typing is recommended for drilling words as it utilizes your muscle memory.' },
+{ word: 'your', definition:'After you correctly spell a word four times consecutively a menu will appear giving you options on what you can do next with the word.'},
+{ word: 'own', definition:'Now you can delete these list \'words\' and add your own.'},
 ];
 
 var wordObject1 = [
@@ -175,7 +175,7 @@ for ( var v = 0; v < wordObject.length; v=v+1 ){
            $('.scoreBox').html(wordObject[0].score);
 
             }
-            $('h2 h7:nth-child('+(1)+')').css({ "border": "1px dotted black" });
+            $('h2 h7:nth-child('+(1)+')').css({ "border": "1px dotted black" }).fadeIn(1000).fadeOut(1000).fadeIn(1000).fadeOut(1000).fadeIn(1000).fadeOut(1000).fadeIn(1000).fadeOut(1000).fadeIn(1000).fadeOut(1000).fadeIn(1000).fadeOut(1000).fadeIn(1000).fadeOut(1000).fadeIn(1000).fadeOut(1000).fadeIn(1000).fadeOut(1000).fadeIn(1000);
         $("#defBoxBox").hide();
         $(".defBox h5").text("");
         if (document.getElementById("check2").checked===true){
@@ -674,7 +674,7 @@ $(document).keypress(function (e) {   /// need keypress for french characters . 
       $('.scoreBox').html(wordObject[0].score);
      
      $('h2 h7:nth-child(n+'+(1)+')').css({"border": "0px solid white" });  // clear existing borders
-     $('h2 h7:nth-child('+(1)+')').css({ "border": "1px dotted black" });
+     $('h2 h7:nth-child('+(1)+')').css({ "border": "1px dotted black" }).fadeIn(1000).fadeOut(1000).fadeIn(1000).fadeOut(1000).fadeIn(1000).fadeOut(1000).fadeIn(1000).fadeOut(1000).fadeIn(1000).fadeOut(1000).fadeIn(1000).fadeOut(1000).fadeIn(1000).fadeOut(1000).fadeIn(1000).fadeOut(1000).fadeIn(1000).fadeOut(1000).fadeIn(1000);
      textValue = "";
      return false;
     }

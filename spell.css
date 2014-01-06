@@ -5,7 +5,7 @@ html body {
 }
 
 .forvo {
-	position: absolute;
+	position: relative;
 	left: 10px;
 	bottom: 5px;
 }
