@@ -1,243 +1,243 @@
 <!DOCTYPE html>
-    <head>
-        <title>
-            Learn 2 Spell
-        </title>
-        <link rel='stylesheet' type='text/css' href='spell.css' />
-        <link rel='stylesheet' type='text/css' href="bootstrap.min.css" />
-        <script src='jquery-1.8.3.min.js'></script>
-        <script src='bootstrap.min.js'></script>
-        <script src='bootbox.min.js'></script>
-        
-        <script src='jquery.animate-colors-min.js'>
-                
-        </script>
-        <script type='text/javascript' src='spell.js'>               
-        </script>
-    </head>    
-    <body>
-        <div class="navbar navbar-inverse navbar-static-top">
 
-            <div class="navbar-inner">
-        <div class="container" style="width: 1170px;">
+<head>
+    <title>
+        Learn 2 Spell
+    </title>
+    <link rel='stylesheet' type='text/css' href='spell.css' />
+    <link rel='stylesheet' type='text/css' href="bootstrap.min.css" />
+    <script src='jquery-1.8.3.min.js'></script>
+    <script src='bootstrap.min.js'></script>
+    <script src='bootbox.min.js'></script>
+
+    <script src='jquery.animate-colors-min.js'>
+    </script>
+    <script type='text/javascript' src='spell.js'>
+    </script>
+</head>
+
+<body>
+    <div class="navbar navbar-inverse navbar-static-top">
+
+        <div class="navbar-inner">
+            <div class="container" style="width: 1170px;">
                 <a class="brand" href="/index.html">Learn2Spell</a>
-                                         
-              <div id="button1div" class="btn-group">
-                <button id="list1" class="btn btn-primary" type="button" disabled="true">List 1</button>
-                <a id="list1d" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" disabled="true"><span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li edit-id="1"><a href="#"><i class="icon-pencil" ></i> Rename</a></li>
-              <!--    <li edit-id="1d" ><a href="#"><i class="icon-trash"></i> Delete</a></li> -->
-                </ul>
-              </div>
-              <div id="button2div" class="btn-group">
-                <button id="list2" class="btn btn-primary" type="button">List 2</button>
-                <a id="list2d" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li edit-id="2"><a href="#"><i class="icon-pencil" ></i> Rename</a></li>
-                <!--  <li edit-id="2d" ><a href="#"><i class="icon-trash"></i> Delete</a></li> -->
-                </ul>
-              </div>
 
-           <div class="pull-right">
-
-                        <a href="https://chrome.google.com/webstore/detail/learn-2-spell/bajhagkohgdkapnbflodncdgmpfhkolc/reviews" style="position:absolute; right:30px; top:10px;">Feedback</a>
-               
-                <button id="optionsButton" class="btn btn-inverse" style="position:absolute; right:200px;"><i class="icon-white icon-wrench"></i></button>
-                
-              
-               <!--   <a id="createList" href="#" class="btn btn-inverse">Create List <i class="icon-white icon-plus-sign"></i></a> -->
-                </div>   
-
-        </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="container">
-            <div class="row" style="margin-top: 40px;">
-                <div class="span12 ">
-                    
-                            <div  style="float: right;">
-                             
-
-
-<h6>After word is typed, press Enter to go to next word or Spacebar to repeat word.</h6>
-<div class="input-prepend input-append">
-
-<!--  <span class="add-on">Repeat</span>
-   <span id="noi" class="add-on"></span>
-  <button id="minusOne" class="btn" type="button">-1</button>
-  <button id="plusOne" class="btn" type="button">+1</button>-->
-
-</div>
-
-<!--<div class="optionsBox">
-</br>
-<h6>After word is typed, press Enter to go to next word or Spacebar to repeat word.</h6>
-<input id="check1" type="checkbox" > Show spelling word while typing       
-</br>
-<input id="check2" type="checkbox" > Show definition
-</br>
-<input id="check3" type="checkbox" > Play audio on next word
-</br>
-<input id="check4" type="checkbox" > Show date word in list
-</div>-->
-<!--<button id="reverseButton" class="btn btn-inverse" type="button">reverse list order</button>-->
-
-
-
-                            </div>
-
-
-                            <br />
-                            <div  id="defTextArea"></div>
-                          
+                <div id="button1div" class="btn-group">
+                    <button id="list1" class="btn btn-primary" type="button" disabled="true">List 1</button>
+                    <a id="list1d" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" disabled="true">
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li edit-id="1"><a href="#"><i class="icon-pencil" ></i> Rename</a>
+                        </li>
+                        <!--    <li edit-id="1d" ><a href="#"><i class="icon-trash"></i> Delete</a></li> -->
+                    </ul>
                 </div>
+                <div id="button2div" class="btn-group">
+                    <button id="list2" class="btn btn-primary" type="button">List 2</button>
+                    <a id="list2d" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li edit-id="2"><a href="#"><i class="icon-pencil" ></i> Rename</a>
+                        </li>
+                        <!--  <li edit-id="2d" ><a href="#"><i class="icon-trash"></i> Delete</a></li> -->
+                    </ul>
+                </div>
+
+                <div class="pull-right">
+
+                    <a href="https://chrome.google.com/webstore/detail/learn-2-spell/bajhagkohgdkapnbflodncdgmpfhkolc/reviews" style="position:absolute; right:30px; top:10px;">Feedback</a>
+
+                    <button id="optionsButton" class="btn btn-inverse" style="position:absolute; right:200px;"><i class="icon-white icon-wrench"></i>
+                    </button>
+
+
+                    <!--   <a id="createList" href="#" class="btn btn-inverse">Create List <i class="icon-white icon-plus-sign"></i></a> -->
+                </div>
+
             </div>
-            <h2 ></h2>
-            </br>
-          <div id="defBoxBox" class="alert alert-info"> <div class="defBox" ><h5></h5></div></div> 
-            
-  <!--     -->
+
+        </div>
+
+    </div>
+
+
+    <div class="container">
+        <div class="row" style="margin-top: 40px;">
+            <div class="span12 ">
+
+                <div style="float: right;">
+
+
+
+                    <h6>After word is typed, press Enter to go to next word or Spacebar to repeat word.</h6>
+                
+
+
+
+
+                </div>
+
+
+                <br />
+                <div id="defTextArea"></div>
+
+            </div>
+        </div>
+        <h2></h2>
+        </br>
+        <div id="defBoxBox" class="alert alert-info">
+            <div class="defBox">
+                <h5></h5>
+            </div>
+        </div>
+
+        <!--     -->
 
 
 
 
 
-                    <div class="navbar navbar-inverse">
+        <div class="navbar navbar-inverse">
 
             <div class="navbar-inner">
-            
-                  <input id="word" type="text" class="navbar-search pull-left search-query" placeholder="Add word - Press Enter" >
-               
-        <div class="container" style="width: 800px;">
-                
-               
-                                         
-              <button id="hideButton" class="btn btn-inverse " type="button" style="position:relative; right:-300px; top:0px;">
+
+                <input id="word" type="text" class="navbar-search pull-left search-query" placeholder="Add word - Press Enter">
+
+                <div class="container" style="width: 800px;">
+
+
+
+                    <button id="hideButton" class="btn btn-inverse " type="button" style="position:relative; right:-300px; top:0px;">
                         <i class="icon-white icon-chevron-down"></i>
                     </button>
                     <div class="pull-right">
 
-                   
-                
-              <h4 class="scoreBoxBox" style="position:relative; right:30px; top:0px; color:white;"><p><span class="scoreBox" ></span> times in a row!</p></h4>
-               <!--   <a id="createList" href="#" class="btn btn-inverse">Create List <i class="icon-white icon-plus-sign"></i></a> -->
-                </div>   
-      
 
-        </div>
+
+                        <h4 class="scoreBoxBox" style="position:relative; right:30px; top:0px; color:white;">
+                            <p>
+                                <span class="scoreBox"></span>times in a row!</p>
+                        </h4>
+                        <!--   <a id="createList" href="#" class="btn btn-inverse">Create List <i class="icon-white icon-plus-sign"></i></a> -->
+                    </div>
+
+
+                </div>
 
             </div>
 
         </div>
-                    
 
 
 
 
 
 
-  
-                    <div class="wordlist-container" >
-
-                    
 
 
+        <div class="wordlist-container">
 
-                    <div class="input-append">
-             
-                        </button>
 
-                    </div><div> 
-<!--<div id="loading"></div>
+
+
+
+            <div class="input-append">
+
+                </button>
+
+            </div>
+            <div>
+                <!--<div id="loading"></div>
   <h1 id='pagetitle'></h1>-->
-  
-  
- 
-</div> <!--<div id="licenseinfo" style="font-size:small; display:none;">
+
+
+
+            </div>
+            <!--<div id="licenseinfo" style="font-size:small; display:none;">
     Modified original content .
     
   </div>-->
 
-  
-            <table class="table wordlist-table">
-              <thead>
-                <tr>
-                  <th>Word</th>
-                  <th>Definition</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-              </tbody>
-            </table>
-          </div>
 
+            <table class="table wordlist-table">
+                <thead>
+                    <tr>
+                        <th>Word</th>
+                        <th>Definition</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
         </div>
 
+    </div>
 
 
-            </div>
-        <span style="display: none;" id="inputHiddenSpan" class="add-on">
-        </span>
+
+    </div>
+    <span style="display: none;" id="inputHiddenSpan" class="add-on">
+    </span>
 
 
-<div id="wikiInfo"></div>
-<p class="forvo" ><a href="http://www.forvo.com/">Pronunciations by Forvo</a> - <a href='http://www.wiktionary.org/'>Definitions from Wiktionary</a></p>
+    <div id="wikiInfo"></div>
+    <p class="forvo"><a href="http://www.forvo.com/">Pronunciations by Forvo</a> - <a href='http://www.wiktionary.org/'>Definitions from Wiktionary</a>
+    </p>
 
 
-   
-<!-- Button to trigger
+
+    <!-- Button to trigger
 <a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a>   modal -->
 
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-    <h3 id="myModalLabel">Congratulations!</h3>
-  </div>
-  <div class="modal-body">
-     <p>Congratulations! You have correctly spelled the word '<span id="pWord"></span>' four times in a row.</p>
-    <p>You may now choose to keep this word in your active list, hide it of a week, hide it for a month, or delete the word permanently</p>
-    <p>Hint: You can use the number keys to make your selection.</p>
-    <p>Hint 2: You can see hidden words by selecting the option in Spanner menu.</p>
-  </div>
-  <div class="modal-footer">
-    <button id="button1" class="btn btn-primary">1. Keep Word</button>
-    <button id="button2" class="btn btn-primary">2. One Week</button>
-    <button id="button3" class="btn btn-primary">3. One Month</button>
-    <button id="button4" class="btn btn-primary">4. Delete Word</button>
-  </div>
-</div>
+    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+            <h3 id="myModalLabel">Congratulations!</h3>
+        </div>
+        <div class="modal-body">
+            <p>Congratulations! You have correctly spelled the word '
+                <span id="pWord"></span>' four times in a row.</p>
+            <p>You may now choose to keep this word in your active list, hide it of a week, hide it for a month, or delete the word permanently</p>
+            <p>Hint: You can use the number keys to make your selection.</p>
+            <p>Hint 2: You can see hidden words by selecting the option in Spanner menu.</p>
+        </div>
+        <div class="modal-footer">
+            <button id="button1" class="btn btn-primary">1. Keep Word</button>
+            <button id="button2" class="btn btn-primary">2. One Week</button>
+            <button id="button3" class="btn btn-primary">3. One Month</button>
+            <button id="button4" class="btn btn-primary">4. Delete Word</button>
+        </div>
+    </div>
 
-<div id="optionsModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-    <h3 id="myModalLabel">Options</h3>
-  </div>
-  <div class="modal-body">
-    <input id="check1" type="checkbox" > Show spelling word while typing       
-</br>
-<input id="check2" type="checkbox" > Show definition
-</br>
-<input id="check3" type="checkbox" > Play audio on next word
-</br>
-<input id="check4" type="checkbox" > Show hidden words
-  </div>
-  <div class="modal-footer">
- <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-  </div>
-</div>
-
-
-
+    <div id="optionsModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+            <h3 id="myModalLabel">Options</h3>
+        </div>
+        <div class="modal-body">
+            <input id="check1" type="checkbox">Show spelling word while typing
+            </br>
+            <input id="check2" type="checkbox">Show definition
+            </br>
+            <input id="check3" type="checkbox">Play audio on next word
+            </br>
+            <input id="check4" type="checkbox">Show hidden words
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        </div>
+    </div>
 
 
 
 
-    </body>
+
+
+
+</body>
 
 </html>
