@@ -184,7 +184,6 @@ var runArray = function() {
     var isActiveTableEmpty = true;
 
     for (var v = 0; v < wordObject.length; v = v + 1) {
-
         if (new Date(wordObject[0].date) > today) {
             oneStep();
         }
@@ -207,7 +206,7 @@ var runArray = function() {
         $(".defBox h5").text("");
         if (document.getElementById("check2").checked === true) {
 
-            $(".defBox h5").text(wordObject[0].definition); //////def box needs refining
+            $(".defBox h5").text(wordObject[0].definition); 
             $("#defBoxBox").show();
         }
     };
@@ -217,17 +216,15 @@ var runArray = function() {
         if (new Date(wordObject[z].date) > today) {
 
             if (document.getElementById("check4").checked === true) {
-                $(".wordlist-table tbody").append("<tr><td>" + wordObject[z].word + "</td><td data-id='" + (z + 1) + "'>" + wordObject[z].definition + "</td><td>" + jQuery.trim(new Date(wordObject[z].date)).substring(4, 10) + "</td><td>" + "<i id=\"deleteLI" + (z + 1) + "\" data-id='" + (z + 1) + "' class=\"icon-remove\"></i><i sound-id='" + (z + 1) + "' class=\"icon-volume-up\"></i></td></tr>");
-                $('.wordlist-table tbody tr:nth-child(' + (z + 1) + ')').attr("class", "error");
+                $(".wordlist-table tbody").append("<tr><td>" + wordObject[z].word+"</td><td data-id='"+(z+1)+"'>"+wordObject[z].definition+"</td><td>"+jQuery.trim(new Date(wordObject[z].date)).substring(4, 10)+"</td><td>"+"<i id=\"deleteLI"+(z+1)+"\" data-id='"+(z+1)+"' class=\"icon-remove\"></i><i sound-id='"+(z+1)+"' class=\"icon-volume-up\"></i></td></tr>");
+                $('.wordlist-table tbody tr:nth-child('+(z+1)+')').attr("class", "error");
             }
         } else {
-            $(".wordlist-table tbody").append("<tr><td>" + wordObject[z].word + "</td><td data-id='" + (z + 1) + "'>" + wordObject[z].definition + "</td><td>" + "<i id=\"deleteLI" + (z + 1) + "\" data-id='" + (z + 1) + "' class=\"icon-remove\"></i><i sound-id='" + (z + 1) + "' class=\"icon-volume-up\"></i></td></tr>");
+            $(".wordlist-table tbody").append("<tr><td>"+wordObject[z].word+"</td><td data-id='"+(z+1)+"'>"+wordObject[z].definition+"</td><td>"+"<i id=\"deleteLI"+(z+1)+"\" data-id='"+(z+1)+"' class=\"icon-remove\"></i><i sound-id='"+(z+1)+"' class=\"icon-volume-up\"></i></td></tr>");
             isActiveTableEmpty = false;
-            // $('.wordlist-table tbody tr:nth-child('+(z+1)+')').attr("class", "success");   
         }
     }
 
-    //  chrome.storage.sync.set({"myValue": JSON.stringify(wordObject)});///save
 
     if (isActiveTableEmpty === true) {
         $("#defBoxBox").hide();
@@ -269,10 +266,7 @@ var editLI = function(TT) {
 };
 
 var loadBackgroundList = function() {
-
     if (activeList === 1) {
-        var WOB = chrome.extension.getBackgroundPage().wordObjectB;
-    } else if (activeList === 2) {
         var WOB = chrome.extension.getBackgroundPage().wordObjectB2;
     } else {
         var WOB = chrome.extension.getBackgroundPage().wordObjectB;
@@ -310,7 +304,6 @@ var loadBackgroundList = function() {
 
 $(document).ready(function() {
     loadFunction();
-    //$('.optionsBox').hide();
 
     $("#check1").change(function() {
         if (this.checked) {
@@ -337,7 +330,6 @@ $(document).ready(function() {
             }); ///save
             $(".defBox h5").text("");
             $("#defBoxBox").hide();
-
         }
     });
 
@@ -390,16 +382,10 @@ $(document).ready(function() {
         $('#optionsModal').modal('show');
         bodyPress = false;
         $('#optionsModal').on('hidden', function() {
-
             bodyPress = true;
             runArray();
-
         })
         runArray();
-    });
-
-    $("#optionsButton").click(function() {
-
     });
 
     $("#hideButton").click(function() {
@@ -505,25 +491,6 @@ $(document).ready(function() {
         }
     });
 
-    /*
-$('body').on('click',  ".icon-arrow-right", function (ev) {   /// transfer word between list button
-    var clicked=$(ev.currentTarget);
-    var transID = clicked.attr("trans-id");
-    if (activeList===1) {
-    wordObject2[wordObject2.length]=wordObject[transID-1];
-    deleteLI(clicked.attr("trans-id")); 
-    chrome.storage.sync.set({"myValue2": wordObject2}); //////// save
-
-    } else if (activeList===2){
-    wordObject1[wordObject1.length]=wordObject[transID-1];
-    deleteLI(clicked.attr("trans-id")); 
-    chrome.storage.sync.set({"myValue1": wordObject1}); //////// save
-
-  }
-  runArray();  
-  chrome.storage.sync.set({"myValue": JSON.stringify(wordObject)}); //////// save///////////////////////////////
-});
-*/
     $('body').on('click', ".icon-remove", function(ev) {
         var clicked = $(ev.currentTarget);
         deleteLI(clicked.attr("data-id"));
@@ -625,8 +592,6 @@ $(document).ready(function() {
         if (bodyPress === true) {
             $('.wordlist-container').hide();
 
-
-
             var c = String.fromCharCode(e.which);
             textValue = textValue + c;
             var fulltext = textValue;
@@ -642,7 +607,6 @@ $(document).ready(function() {
             $('h2 h7:nth-child(' + (lowText.length + 1) + ')').css({
                 "border": "1px dotted black"
             });
-
 
 
             if (lowText === wordObject[i].word.substring(0, lowText.length)) {
@@ -680,30 +644,21 @@ $(document).ready(function() {
                             bodyPress = false;
                         });
 
-
                         return;
-
-
 
                     }
                 }
 
-                //return false;
-                // oneStep(); when blanked space repeats word
-                //runArray();
                 $('.scoreBox').html(wordObject[0].score);
                 return false;
             } else if (e.which === 13 && lowText.substring(0, lowText.length - 1) === wordObject[0].word) {
-                //return false;
                 textValue = "";
                 if (wordObject[0].score === undefined) {
                     wordObject[0].score = 1;
-                    // $('.scoreBox').html("<h1>"+wordObject[0].score+"<h1>");
-                    //return;
+   
                 } else {
                     wordObject[0].score = wordObject[0].score + 1;
-                    //    $('.scoreBox').html("<h1>"+wordObject[0].score+"<h1>");
-
+  
                     if (wordObject[0].score >= iterations) {
                         // wordObject[0].score= 0;
                         $('.scoreBox').html(iterations);
@@ -714,8 +669,6 @@ $(document).ready(function() {
                         })
 
                         return;
-
-
                     }
                 }
 
@@ -769,7 +722,6 @@ $(document).ready(function() {
     $('#myModal').on('shown', function() {
         $(document).keypress(function(e) {
 
-
             if (bodyPress === false && wordObject[0].score === iterations) {
                 console.log(wordObject[0].score);
 
@@ -799,11 +751,8 @@ $(document).ready(function() {
                 }
             }
 
-
         });
     });
-
-
 
     var baseURL = 'http://en.wiktionary.org';
 
@@ -817,7 +766,7 @@ $(document).ready(function() {
         $('#wikiInfo').children("ol:lt(1)").attr('', ///////////////////////// change number of drfinitions eg verb and noun
 
             function() { //console.log(this);
-                //this.children("li:nth-child(-n+2)");   no longer works now wikiDefine is a variable 
+        
                 $(" ol li ul").detach();
                 $(" ol li ul").detach();
                 var wikiDefine = this.textContent;
@@ -833,26 +782,18 @@ $(document).ready(function() {
                 }); /////save
             });
     }
-    //$('#word').css({backgroundColor: 'gray'});
-    //  $('#word').css({ "border": "1px solid black" });
-    //  $('#word').css({ "color": "black" });
-    //$(document).ready(function() {
+
     $('#pagetitle').hide();
     $('input[type="text"]').focus(function() { //if input is focused
         bodyPress = false;
-        //$('#word').css({backgroundColor: 'white'});
     });
 
     $('input[type="text"]').blur(function() { //if input is blured
         bodyPress = true;
-        // $('#word').css({backgroundColor: 'gray'});
-        // $('#word').css({ "border": "1px solid black" });
-
     });
 
-
     $('#word').change(function() {
-        var page = this.value.toLowerCase(); /////////// maybe change this later
+        var page = this.value.toLowerCase(); 
         document.getElementById("word").value = "";
         $('#word').attr("placeholder", "loading...");
         $.getJSON(baseURL + '/w/api.php?action=parse&format=json&prop=text|revid|displaytitle&page=' + page,
@@ -871,7 +812,6 @@ $(document).ready(function() {
                     }); /////save
                     document.getElementById("word").value = "";
                     $('#word').attr("placeholder", "Add word - Press Enter");
-                    //   bodyPress = true; ///////////////////////////////find better way to return to h2
                     textValue = "";
                     $('#word').blur();
                 } else {
@@ -879,7 +819,6 @@ $(document).ready(function() {
                     $('#wikiInfo').html("<div></div>");
                     document.getElementById("word").value = "";
                     $('#word').attr("placeholder", "Add word - Press Enter");
-                    //bodyPress = true; 
                     textValue = "";
                     $('#word').blur();
                 }
